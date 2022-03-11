@@ -6,7 +6,7 @@
 #    By: potero-d <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/07 12:55:48 by potero-d          #+#    #+#              #
-#    Updated: 2022/03/11 12:00:06 by potero-d         ###   ########.fr        #
+#    Updated: 2022/03/11 13:38:15 by potero-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ RM = rm -f
 
 $(NAME): $(OBJS)
 		@make -C $(LIBFT_PATH) --silent
-		gcc -o $(NAME) $(OBJS) -I./libft -L./libft -lft -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include -lreadline
+		gcc -o $(NAME) $(OBJS) -I./libft -L./libft -lft  -I/Users/$(USER)/.brew/opt/readline/include -lreadline
 
 all: $(NAME)  
 

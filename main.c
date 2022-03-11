@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/11 12:59:44 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/03/11 13:40:41 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "minishell.h"
+
+void	leaks(void)
+{
+	system("leaks minishell");
+}
 
 int	min_stop(char *str)
 {
@@ -40,6 +45,7 @@ int	main(void)
 	int		i;
 	int		stop;
 
+	atexit(leaks);
 	stop = 1;
 	while (stop != 0)
 	{
@@ -54,6 +60,7 @@ int	main(void)
 			free(argv[i]);
 			i++;
 		}
+		free(argv);
 		free(str);
 	}
 	return (0);
