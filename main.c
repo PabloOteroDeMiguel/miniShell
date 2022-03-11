@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/11 12:39:01 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/03/11 12:59:44 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,22 @@ int	min_stop(char *str)
 int	main(void)
 {
 	char	*str;
-	char	**split;
+	char	**argv;
 	int		i;
 	int		stop;
 
 	stop = 1;
 	while (stop != 0)
 	{
-		str = readline("Minishell$ ");
+		str = readline("\033[;33mMinishell$\033[0m ");
 		if (min_stop(str) == 0)
 			stop = 0;
-		split = ft_split(str, ' ');
+		argv = ft_split(str, ' ');
 		i = 0;
-		while (split[i])
+		while (argv[i])
 		{
-			printf("%s\n", split[i]);
-			free(split[i]);
+			printf("%s\n", argv[i]);
+			free(argv[i]);
 			i++;
 		}
 		free(str);
