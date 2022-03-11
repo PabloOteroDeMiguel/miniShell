@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/07 13:29:51 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/03/11 12:05:34 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,14 @@
 
 # include<unistd.h>
 # include<stdlib.h>
-# include "pipex/inc/pipex.h"
+# include<stdio.h>
+# include<readline/readline.h>
+# include<readline/history.h>
+//# include "pipex/inc/pipex.h"
 # include "libft.h"
 
 /*Main*/
-int	main(int argc, char *argv[]);
+//int	main(int argc, char *argv[]);
+int	main(void);
 
 #endif

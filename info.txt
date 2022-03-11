@@ -1,0 +1,13 @@
+Si no funciona readline() hy que instalar brew:
+
+
+rm -rf $HOME/.brew && git clone --depth=1 https://github.com/Homebrew/brew $HOME/.brew && echo 'export PATH=$HOME/.brew/bin:$PATH' >> $HOME/.zshrc && source $HOME/.zshrc && brew update
+
+
+y poner en Makefile:
+
+%.o:%.c
+			$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I$(INCS) -I/Users/$(USER)/.brew/opt/readline/include
+
+$(NAME):	$(OBJS)
+			$(CC) $(CFLAGS) $(OBJS) -I$(INCS) -o $(NAME) -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include -lreadline
