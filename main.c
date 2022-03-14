@@ -6,13 +6,10 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/11 13:40:41 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/03/14 14:05:27 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
 #include "minishell.h"
 
 void	leaks(void)
@@ -45,14 +42,17 @@ int	main(void)
 	int		i;
 	int		stop;
 
+	argv = NULL;
 	atexit(leaks);
 	stop = 1;
 	while (stop != 0)
 	{
 		str = readline("\033[;33mMinishell$\033[0m ");
+	//	min_quotes(str, argv);
 		if (min_stop(str) == 0)
 			stop = 0;
-		argv = ft_split(str, ' ');
+		if (argv == 0)
+			argv = ft_split(str, ' ');
 		i = 0;
 		while (argv[i])
 		{

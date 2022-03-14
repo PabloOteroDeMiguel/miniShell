@@ -6,11 +6,11 @@
 #    By: potero-d <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/07 12:55:48 by potero-d          #+#    #+#              #
-#    Updated: 2022/03/11 13:38:15 by potero-d         ###   ########.fr        #
+#    Updated: 2022/03/14 11:23:52 by potero-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = main.c
+SRCS = main.c min_argv.c
 
 LIBFT_PATH = libft/
 
