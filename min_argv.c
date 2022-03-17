@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 11:10:35 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/17 13:43:00 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/03/17 15:48:14 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	read_str(t_argv *argv, char *str)
 	printf("-> %d double quote\n", argv->d_quote);
 	printf("-> %d pipe\n", argv->pipe);
 }
+//leer cuaderno
 /*
 int	check_pipe(t_argv *argv, char *str, int	pipes)
 {
