@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/17 13:43:05 by potero-d         ###   ########.fr       */
+/*   Created: 2022/03/17 11:30:19 by potero-d          #+#    #+#             */
+/*   Updated: 2022/03/17 12:42:01 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
-# include<unistd.h>
-# include<stdlib.h>
-# include<stdio.h>
-# include<readline/readline.h>
-# include<readline/history.h>
-//# include "pipex/inc/pipex.h"
-# include "libft.h"
-# include "structs.h"
+# include "minishell.h"
 
-/*Main*/
-//int	main(int argc, char *argv[]);
-int	main(void);
-
-/*Argv*/
-void	read_str(t_argv *argv, char *str);
+typedef struct s_argv
+{
+	char	**arg;
+	int		s_quote;
+	int		d_quote;
+	int		pipe;
+}	t_argv;
 
 #endif

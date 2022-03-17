@@ -6,37 +6,42 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 11:10:35 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/14 14:05:32 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/03/17 13:43:00 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	min_quotes(char *str, char **argv)
+void	read_str(t_argv *argv, char *str)
 {
-	int	db_q;
-	int	sg_q;
-	int i;
+	int	i;
 
 	i = 0;
-	db_q = 0;
-	sg_q = 0;	
+	argv->s_quote = 0;
+	argv->d_quote = 0;
+	argv->pipe = 0;
 	while (str[i])
 	{
 		if (str[i] == 34)
-		{
-			argv = ft_split(str, 34);
-			db_q++;
-			break ;
-		}
-		else if (str[i] == 39)
-		{
-			sg_q++;
-			argv = ft_split(str, 39);
-		}
-		i++;
+			argv->d_quote += 1;
+		 else if (str[i] == 39)
+			argv->s_quote += 1;
+		 else if (str[i] == '|')
+			 argv->pipe += 1;
+		 i++;
 	}
-//	printf("-> %d single quotes\n", sg_q);
-//	printf("-> %d double quotes\n", db_q);
-	return (0);
+	printf("Inpout:\n"),
+	printf("-> %d single quote\n", argv->s_quote);
+	printf("-> %d double quote\n", argv->d_quote);
+	printf("-> %d pipe\n", argv->pipe);
 }
+/*
+int	check_pipe(t_argv *argv, char *str, int	pipes)
+{
+	int	i;
+	int	pipe;
+	int	quote;
+
+	i = 0;
+	pipe = 0
+*/
