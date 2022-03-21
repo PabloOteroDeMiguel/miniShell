@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/21 12:16:36 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/03/21 13:55:03 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,13 @@ int	main(void)
 	char	*str;
 	t_argv	argv;
 	int		stop;
+	int		w;
 
 	atexit(leaks);
 	stop = 1;
 	while (stop != 0)
 	{
+		w = 0;
 		str = readline("\033[;33mMinishell$\033[0m ");
 		if (min_stop(str) == 0)
 			stop = 0;
@@ -53,6 +55,13 @@ int	main(void)
 		printf("-> %d words\n", argv.words);
 		argv.arg = ft_calloc(argv.words, 1);
 		arguments(&argv, str);
+		//while (argv.arg[w] != '\0')
+		while (w < argv.words)
+		{
+			free(argv.arg[w]);
+			w++;
+		}
+		w = 0;
 		free_arg_str(str, &argv);
 		//free(str);
 	}
