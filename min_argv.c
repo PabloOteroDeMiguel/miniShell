@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 11:10:35 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/17 15:48:14 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/03/21 09:51:01 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,23 @@ void	read_str(t_argv *argv, char *str)
 	printf("-> %d pipe\n", argv->pipe);
 }
 //leer cuaderno
-/*
-int	check_pipe(t_argv *argv, char *str, int	pipes)
+int	words(char *str)
 {
 	int	i;
-	int	pipe;
-	int	quote;
+	int	w;
 
 	i = 0;
-	pipe = 0
-*/
+	w = 0;
+	while (str[i] == ' ')
+		i++;
+	if (str[i])
+		w++;
+	while (str[i + 1])
+	{
+		if (str[i] == ' ' && str[i + 1] != ' ')
+			w++;
+		i++;
+	}
+	//printf("-> %d words\n", w);
+	return (w);
+}

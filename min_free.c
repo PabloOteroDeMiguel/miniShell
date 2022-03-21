@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structs.h                                          :+:      :+:    :+:   */
+/*   min_free.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/17 11:30:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/21 09:53:17 by potero-d         ###   ########.fr       */
+/*   Created: 2022/03/21 09:51:07 by potero-d          #+#    #+#             */
+/*   Updated: 2022/03/21 10:37:14 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTS_H
-# define STRUCTS_H
+#include "minishell.h"
 
-# include "minishell.h"
-
-typedef struct s_argv
+void	free_arg_str(char *str, t_argv *argv)
 {
-	char	**arg;
-	int		s_quote;
-	int		d_quote;
-	int		pipe;
-	int		words;
-}	t_argv;
+	int	i;
 
-#endif
+	i = 0;
+/*	while (argv->arg[i] != '\0')
+	{
+		free(argv->arg);
+		printf("free %d\n", i);
+		i++;
+	}*/
+	free(argv->arg);
+	free(str);
+}

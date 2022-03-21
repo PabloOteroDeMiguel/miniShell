@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/17 13:43:05 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/03/21 09:55:38 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,9 @@ int	main(void);
 
 /*Argv*/
 void	read_str(t_argv *argv, char *str);
+int		words(char *str);
+
+/*Free*/
+void	free_arg_str(char *str, t_argv *argv);
 
 #endif

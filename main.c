@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/21 09:31:25 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/03/21 10:37:16 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,11 @@ int	main(void)
 		if (min_stop(str) == 0)
 			stop = 0;
 		read_str(&argv, str);
-		if(argv.pipe != 0)
-		{
-			if (argv.d_quote > 0 || argv.s_qute > 0)
-			{
-				check_pipe(&argv, str, arg);
-			}
-		}
-		free(str);
+		argv.words = words(str);
+		printf("-> %d words\n", argv.words);
+		argv.arg = ft_calloc(argv.words, 1);
+		free_arg_str(str, &argv);
+		//free(str);
 	}
-
 	return (0);
 }
