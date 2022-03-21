@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/21 10:37:16 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/03/21 12:16:36 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	main(void)
 		argv.words = words(str);
 		printf("-> %d words\n", argv.words);
 		argv.arg = ft_calloc(argv.words, 1);
+		arguments(&argv, str);
 		free_arg_str(str, &argv);
 		//free(str);
 	}

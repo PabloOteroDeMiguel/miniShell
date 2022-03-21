@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 11:10:35 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/21 09:51:01 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/03/21 12:16:40 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	read_str(t_argv *argv, char *str)
 	printf("-> %d double quote\n", argv->d_quote);
 	printf("-> %d pipe\n", argv->pipe);
 }
-//leer cuaderno
+
 int	words(char *str)
 {
 	int	i;
@@ -53,6 +53,73 @@ int	words(char *str)
 			w++;
 		i++;
 	}
-	//printf("-> %d words\n", w);
 	return (w);
 }
+
+void	arguments(t_argv *argv, char *str)
+{
+	int	i;
+	int len;
+	int	w;
+
+	i = 0;
+	w = 0;
+//	len = 0;
+//	while (str[i] == ' ')
+//		i++;
+	while (str[i])
+	{
+		len = 0;
+		if (str[i] == 39)
+		{
+			len++;
+			while (str[len] != 39 && str[len])
+				len++;
+			argv->arg[w] = ft_substr(str, i + 1, len - 1);
+			i = i + len ;
+			w++;
+			len = 0;
+		}
+		else if (str[i] == 34)
+		{
+			len++;
+			while (str[len] != 34 && str[len])
+			{
+				len++;
+			}
+			argv->arg[w] = ft_substr(str, i + 1, len - 1);
+			i = i + len ;
+			w++;
+			len = 0;
+		}
+		else if (str[i] == '|')
+		{
+			len++;
+			while (str[len] != '|' && str[len])
+				len++;
+			argv->arg[w] = ft_substr(str, i + 1, len - 1);
+			i = i + len ;
+			w++;
+			len = 0;
+		}
+		else if (str[i] != 34 && str[i] != 39 && str[i] != '|')
+		{
+			while (str[len] != 34 && str[i] != 39 && str[i] != '|' && str[len])
+				len++;
+			argv->arg[w] = ft_substr(str, i, len);
+			i = i + len;
+			w++;
+			len = 0;
+		}
+		if (str[i + 1])
+			i++;
+	}
+	w = 0;
+	while (argv->arg[w] != '\0')
+	{
+		printf("arg[%d]->%s\n", w, argv->arg[w]);
+		w++;
+	}
+}
+
+
