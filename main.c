@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/21 13:55:03 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/03/28 13:12:15 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	main(void)
 		argv.arg = ft_calloc(argv.words, 1);
 		arguments(&argv, str);
 		//while (argv.arg[w] != '\0')
+		printf("-> %d argv\n", argv.words);
 		while (w < argv.words)
 		{
 			free(argv.arg[w]);
