@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/28 13:12:15 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/03/28 13:57:37 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ int	main(void)
 		str = readline("\033[;33mMinishell$\033[0m ");
 		if (min_stop(str) == 0)
 			stop = 0;
-		read_str(&argv, str);
+	//	read_str(&argv, str);
 		argv.words = words(str);
-		printf("-> %d words\n", argv.words);
+	//	printf("-> %d words\n", argv.words);
 		argv.arg = ft_calloc(argv.words, 1);
 		arguments(&argv, str);
 		//while (argv.arg[w] != '\0')
