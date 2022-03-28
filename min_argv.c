@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 11:10:35 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/28 13:11:32 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/03/28 13:27:48 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,23 +65,18 @@ void	arguments(t_argv *argv, char *str)
 
 	i = 0;
 	w = 0;
-//	len = 0;
-//	while (str[i] == ' ')
-//		i++;
 	while (str[i])
 	{
-		printf("str[%d]->%c\n", i, str[i]);
+		while (str[i] == ' ')
+			i++;
 		len = 0;
 		if (str[i] == 39)
 		{
-			printf("i->%d\n", i);
 			len++;
 			while (str[i + len] != 39 && str[i + len])
 				len++;
-			printf("len->%d\n", len);
 			argv->arg[w] = ft_substr(str, i + 1, len - 1);
 			i = i + len ;
-			printf("i+len->%d\n", i);
 			w++;
 			len = 0;
 		}
@@ -105,7 +100,6 @@ void	arguments(t_argv *argv, char *str)
 			w++;
 			len = 0;
 		}
-		//else if (str[i] != 34 && str[i] != 39 && str[i] != '|' && str[i])
 		else
 		{
 			while (str[i + len] != 34 && str[i + len] != 39 && str[i + len] != '|' && str[i + len])
@@ -121,9 +115,7 @@ void	arguments(t_argv *argv, char *str)
 	argv->words = w;
 	while (p < w)
 	{
-		printf("%d\n", p);
 		printf("arg[%d]->%s\n", p, argv->arg[p]);
-		printf("%d\n", p);
 		p++;
 	}
 }
