@@ -6,7 +6,7 @@
 /*   By: potero <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 12:31:47 by potero            #+#    #+#             */
-/*   Updated: 2022/03/29 16:23:36 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/03/29 17:35:53 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ int	lstsize(t_argv *argv)
 	return (i);
 }
 
-t_argv	*lstlast(t_argv *lst)
+t_argv	*lstlast(t_argv *argv)
 {
 	t_argv	*aux;
 
-	aux = lst;
-	if (!lst)
+	aux = argv;
+	if (!argv)
 		return (0);
 	while (aux->next != 0)
 		aux = aux->next;
@@ -56,18 +56,14 @@ t_argv	*lstlast(t_argv *lst)
 void	lst_add_back(t_argv **argv, t_argv *new)
 {
 	t_argv	*aux;
-
+	
 	if (*argv)
 	{
 		aux = lstlast(*argv);
 		aux->next = new;
-		printf("2\n");
 	}
 	else
-	{
 		*argv = new;
-		printf("1\n");
-	}
 }
 
 void	add_front(t_argv **argv, t_argv *new)
