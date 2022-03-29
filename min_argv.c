@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 11:10:35 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/28 13:57:34 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/03/29 16:44:02 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ int	words(char *str)
 	return (w);
 }
 
-void	arguments(t_argv *argv, char *str)
+void	arguments(t_argv **argv, char *str)
 {
-	int	i;
-	int len;
-	int	w;
-	int p;
+	int		i;
+	int 	len;
+	int		w;
+	char	*aux;
 
 	i = 0;
 	w = 0;
@@ -75,7 +75,11 @@ void	arguments(t_argv *argv, char *str)
 			len++;
 			while (str[i + len] != 39 && str[i + len])
 				len++;
-			argv->arg[w] = ft_substr(str, i + 1, len - 1);
+			aux = ft_substr(str, i + 1, len - 1);
+			printf("aux->%s\n", aux);
+			lst_add_back(argv, lstnew(aux));
+			print_list(argv);
+			free(aux);
 			i = i + len ;
 			w++;
 			len = 0;
@@ -85,7 +89,11 @@ void	arguments(t_argv *argv, char *str)
 			len++;
 			while (str[i + len] != 34 && str[i + len])
 				len++;
-			argv->arg[w] = ft_substr(str, i + 1, len - 1);
+			aux = ft_substr(str, i + 1, len - 1);
+			printf("aux->%s\n", aux);
+			lst_add_back(argv, lstnew(aux));
+			print_list(argv);
+			free(aux);
 			i = i + len ;
 			w++;
 			len = 0;
@@ -95,7 +103,11 @@ void	arguments(t_argv *argv, char *str)
 			len++;
 			while (str[i + len] != '|' && str[i + len])
 				len++;
-			argv->arg[w] = ft_substr(str, i + 1, len - 1);
+			aux = ft_substr(str, i + 1, len - 1);
+			printf("aux->%s\n", aux);
+			lst_add_back(argv, lstnew(aux));
+			print_list(argv);
+			free(aux);
 			i = i + len ;
 			w++;
 			len = 0;
@@ -104,20 +116,18 @@ void	arguments(t_argv *argv, char *str)
 		{
 			while (str[i + len] != 34 && str[i + len] != 39 && str[i + len] != '|' && str[i + len])
 				len++;
-			argv->arg[w] = ft_substr(str, i, len);
+			aux = ft_substr(str, i, len);
+			printf("aux->%s\n", aux);
+			lst_add_back(argv, lstnew(aux));
+			print_list(argv);
+			free(aux);
 			i = i + len - 1;
 			w++;
 			len = 0;
 		}
 		i++;
 	}
-	p = 0;
-	argv->words = w;
-	while (p < w)
-	{
-		printf("arg[%d]->%s\n", p, argv->arg[p]);
-		p++;
-	}
+//	free(aux);
 }
 
 

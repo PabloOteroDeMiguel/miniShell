@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/21 12:16:43 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/03/29 16:38:32 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,22 @@
 
 /*Main*/
 //int	main(int argc, char *argv[]);
-int	main(void);
+int		main(void);
+void	print_list(t_argv **argv);
 
 /*Argv*/
 void	read_str(t_argv *argv, char *str);
 int		words(char *str);
-void	arguments(t_argv *argv, char *str);
+void	arguments(t_argv **argv, char *str);
 
 /*Free*/
 void	free_arg_str(char *str, t_argv *argv);
+
+/*List*/
+t_argv	*lstnew(char *str);
+int		lstsize(t_argv *argv);
+t_argv	*lstlast(t_argv *lst);
+void	lst_add_back(t_argv **argv, t_argv *new);
+void	add_front(t_argv **argv, t_argv *new);
 
 #endif
