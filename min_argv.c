@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 11:10:35 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/30 13:52:24 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/03/30 15:15:58 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,10 @@ void	arguments(t_argv **argv, char *str)
 			w++;
 			len = 0;
 		}
-		else if (str[i] == '|')
+		else if (str[i] == 124)
 		{
 			len++;
-			while (str[i + len] != '|' && str[i + len])
+			while (str[i + len] != 124 && str[i + len])
 				len++;
 			lst_add_back(argv, lstnew(ft_substr(str, i + 1, len - 1), 0));
 			i = i + len ;
@@ -101,7 +101,7 @@ void	arguments(t_argv **argv, char *str)
 		}
 		else
 		{
-			while (str[i + len] != 34 && str[i + len] != 39 && str[i + len] != '|' && str[i + len])
+			while (str[i + len] != 34 && str[i + len] != 39 && str[i + len] != 124 && str[i + len])
 				len++;
 			lst_add_back(argv, lstnew(ft_substr(str, i, len), 0 ));
 			i = i + len - 1;

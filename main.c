@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/30 13:51:31 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/03/30 15:05:26 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,12 @@ int	main(void)
 	t_argv	**argv;
 	int		stop;
 	int		w;
-
+//	char	**spl;
+	
+/*	spl = ft_split("   3 espacios   mas", ' ');
+	printf("%s\n", spl[0]);
+	printf("%s\n", spl[1]);
+	printf("%s\n", spl[2]);*/
 	atexit(leaks);
 	stop = 1;
 	argv = malloc(sizeof(t_argv *));
