@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/29 17:45:55 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/03/30 13:51:31 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@ int	min_stop(char *str)
 	return (0);
 }
 
+void	min_builtins(char *str, t_argv **argv)
+{
+	if ((ft_strncmp(str, "echo", 4) == 0) || (ft_strncmp(str, "ECHO", 4) == 0))
+		min_echo(argv);
+}
+
 int	main(void)
 {
 	char	*str;
@@ -50,10 +56,15 @@ int	main(void)
 		w = 0;
 		*argv = NULL;
 		str = readline("\033[;33mMinishell$\033[0m ");
-		if (min_stop(str) == 0)
+		if (ft_strcmp(str, "exit") == 0)
 			stop = 0;
+		/*if (min_stop(str) == 0)
+			stop = 0;*/
+		add_history(str);
 		arguments(argv, str);
+		min_split(argv);
 		print_list(argv);
+		min_builtins(str, argv);
 		free_arg_str(str, *argv);
 	}
 	free(argv);
@@ -65,12 +76,20 @@ void	print_list(t_argv **argv)
 {
 	t_argv	*aux;
 	int		w;
+	int		i;
 
 	w = 0;
 	aux = *argv;
 	while (aux)
 	{
-		printf("arg[%d]->%p->%s\n", w, aux, aux->arg);
+		i = 0;
+		//printf("arg[%d]->%p->%s\n", w, aux, aux->arg);
+		printf("arg[%d]->%s\n", w, aux->arg);
+		while (aux->split[i])
+		{
+			printf("\ts[%d]->%s\n", i, aux->split[i]);
+			i++;
+		}
 		w++;
 		aux = aux->next;
 	}
