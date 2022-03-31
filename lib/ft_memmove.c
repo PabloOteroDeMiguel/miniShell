@@ -1,44 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   min_builtins.c                                     :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/30 11:13:18 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/31 11:38:53 by potero-d         ###   ########.fr       */
+/*   Created: 2021/09/20 09:24:47 by potero-d          #+#    #+#             */
+/*   Updated: 2021/09/20 14:47:00 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include<string.h>
 
-void	min_echo(t_argv **argv)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	t_argv	*aux;
-	int		i;
-	
-	aux = *argv;
-	if	(ft_strcmp(aux->split[0], "echo") == 0)
+	size_t	i;
+	char	*s1;
+	char	*s2;
+
+	s1 = (char *)dst;
+	s2 = (char *)src;
+	i = 0;
+	if (dst == src)
+		return (dst);
+	if (dst > src)
 	{
-		if (aux->split[1])
+		while (len > 0)
 		{
-			if (ft_strcmp(aux->split[1], "-n") == 0)
-				i = 2;
-			else
-				i = 1;
-			while (aux->split[i])
-			{
-				printf("%s ", aux->split[i]);
-				i++;
-			}
-			aux = aux->next;
-			while (aux)
-			{
-				printf("%s", aux->arg);
-				aux = aux->next;
-			}
+			len--;
+			s1[len] = s2[len];
 		}
 	}
-
+	while (i < len)
+	{
+		s1[i] = s2[i];
+		i++;
+	}
+	return (dst);
 }
-

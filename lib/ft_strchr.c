@@ -1,44 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   min_builtins.c                                     :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/30 11:13:18 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/31 11:38:53 by potero-d         ###   ########.fr       */
+/*   Created: 2021/09/15 09:40:23 by potero-d          #+#    #+#             */
+/*   Updated: 2021/09/21 09:13:57 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include"libft.h"
 
-void	min_echo(t_argv **argv)
+char	*ft_strchr(const char *str, int c)
 {
-	t_argv	*aux;
-	int		i;
-	
-	aux = *argv;
-	if	(ft_strcmp(aux->split[0], "echo") == 0)
+	size_t	i;
+
+	i = 0;
+	while (i <= ft_strlen(str))
 	{
-		if (aux->split[1])
-		{
-			if (ft_strcmp(aux->split[1], "-n") == 0)
-				i = 2;
-			else
-				i = 1;
-			while (aux->split[i])
-			{
-				printf("%s ", aux->split[i]);
-				i++;
-			}
-			aux = aux->next;
-			while (aux)
-			{
-				printf("%s", aux->arg);
-				aux = aux->next;
-			}
-		}
+		if (str[i] == (unsigned char)c)
+			return ((char *)(&str[i]));
+		i++;
 	}
-
+	if (c == '\0')
+		return (0);
+	return (0);
 }
-

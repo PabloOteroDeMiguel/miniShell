@@ -1,44 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   min_builtins.c                                     :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/30 11:13:18 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/31 11:38:53 by potero-d         ###   ########.fr       */
+/*   Created: 2021/09/20 09:46:50 by potero-d          #+#    #+#             */
+/*   Updated: 2021/09/21 08:53:00 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include"libft.h"
 
-void	min_echo(t_argv **argv)
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	t_argv	*aux;
-	int		i;
-	
-	aux = *argv;
-	if	(ft_strcmp(aux->split[0], "echo") == 0)
+	size_t	i;
+	size_t	j;
+	size_t	z;
+
+	z = ft_strlen(dst);
+	j = ft_strlen(dst);
+	i = 0;
+	if ((z < dstsize - 1) && dstsize > 0)
 	{
-		if (aux->split[1])
+		while ((j < dstsize - 1) && (src[i] != '\0'))
 		{
-			if (ft_strcmp(aux->split[1], "-n") == 0)
-				i = 2;
-			else
-				i = 1;
-			while (aux->split[i])
-			{
-				printf("%s ", aux->split[i]);
-				i++;
-			}
-			aux = aux->next;
-			while (aux)
-			{
-				printf("%s", aux->arg);
-				aux = aux->next;
-			}
+			dst[j] = src[i];
+			i++;
+			j++;
 		}
+		dst[j] = '\0';
 	}
-
+	if (z >= dstsize)
+		z = dstsize;
+	return (z + ft_strlen(src));
 }
-

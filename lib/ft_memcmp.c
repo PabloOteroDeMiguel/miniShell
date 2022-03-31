@@ -1,44 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   min_builtins.c                                     :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/30 11:13:18 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/31 11:38:53 by potero-d         ###   ########.fr       */
+/*   Created: 2021/09/16 14:01:27 by potero-d          #+#    #+#             */
+/*   Updated: 2021/09/20 12:53:52 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include<string.h>
 
-void	min_echo(t_argv **argv)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	t_argv	*aux;
-	int		i;
-	
-	aux = *argv;
-	if	(ft_strcmp(aux->split[0], "echo") == 0)
+	size_t			i;
+	unsigned char	*str1;
+	unsigned char	*str2;
+
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
+	i = 0;
+	while (i < n)
 	{
-		if (aux->split[1])
-		{
-			if (ft_strcmp(aux->split[1], "-n") == 0)
-				i = 2;
-			else
-				i = 1;
-			while (aux->split[i])
-			{
-				printf("%s ", aux->split[i]);
-				i++;
-			}
-			aux = aux->next;
-			while (aux)
-			{
-				printf("%s", aux->arg);
-				aux = aux->next;
-			}
-		}
+		if (str1[i] != str2[i])
+			return (str1[i] - str2[i]);
+		i++;
 	}
-
+	return (0);
 }
-

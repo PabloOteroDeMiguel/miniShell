@@ -1,44 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   min_builtins.c                                     :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/30 11:13:18 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/31 11:38:53 by potero-d         ###   ########.fr       */
+/*   Created: 2021/09/20 09:22:20 by potero-d          #+#    #+#             */
+/*   Updated: 2022/03/31 10:37:59 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include<string.h>
+#include"libft.h"
 
-void	min_echo(t_argv **argv)
+char	*ft_strnstr(const char *str, const char *nstr, size_t len)
 {
-	t_argv	*aux;
-	int		i;
-	
-	aux = *argv;
-	if	(ft_strcmp(aux->split[0], "echo") == 0)
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	if (nstr[0] == '\0')
+		return ((char *)(str));
+	while ((i < len) && (str[i] != '\0'))
 	{
-		if (aux->split[1])
+		if (nstr[j] == str[i])
 		{
-			if (ft_strcmp(aux->split[1], "-n") == 0)
-				i = 2;
-			else
-				i = 1;
-			while (aux->split[i])
-			{
-				printf("%s ", aux->split[i]);
-				i++;
-			}
-			aux = aux->next;
-			while (aux)
-			{
-				printf("%s", aux->arg);
-				aux = aux->next;
-			}
+			j++;
+			if (j == ft_strlen(nstr))
+				return ((char *)(&str[i - j + 1]));
 		}
+		else
+		{
+			i = i - j;
+			j = 0;
+		}
+		i++;
 	}
-
+	return (0);
 }
-

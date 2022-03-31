@@ -1,44 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   min_builtins.c                                     :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/30 11:13:18 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/31 11:38:53 by potero-d         ###   ########.fr       */
+/*   Created: 2021/08/19 08:12:23 by potero-d          #+#    #+#             */
+/*   Updated: 2021/09/23 13:49:15 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include<unistd.h>
 
-void	min_echo(t_argv **argv)
+void	ft_putnbr_fd(int n, int fd)
 {
-	t_argv	*aux;
-	int		i;
-	
-	aux = *argv;
-	if	(ft_strcmp(aux->split[0], "echo") == 0)
+	unsigned int	a;
+	char			c;
+
+	if (n < 0)
 	{
-		if (aux->split[1])
-		{
-			if (ft_strcmp(aux->split[1], "-n") == 0)
-				i = 2;
-			else
-				i = 1;
-			while (aux->split[i])
-			{
-				printf("%s ", aux->split[i]);
-				i++;
-			}
-			aux = aux->next;
-			while (aux)
-			{
-				printf("%s", aux->arg);
-				aux = aux->next;
-			}
-		}
+		write(fd, "-", 1);
+		n = n * -1;
 	}
-
+	a = n;
+	if (a == 0)
+	{
+		write(fd, "0", 1);
+	}
+	if (a > 0 && a < 10)
+	{
+		c = a + 48;
+		write(fd, &c, 1);
+	}
+	if (a >= 10)
+	{
+		ft_putnbr_fd((a / 10), fd);
+		c = (a % 10 + 48);
+		write(fd, &c, 1);
+	}
 }
-
