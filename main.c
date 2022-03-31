@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/31 16:00:54 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/03/31 16:23:34 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,41 +17,20 @@ void	leaks(void)
 	system("leaks minishell");
 }
 
-int	min_stop(char *str)
+void	min_builtins(char *str, t_data *data)
 {
-	if (ft_strlen(str) != 4)
-		return (1);
-	else
-	{
-		if (str[0] != 'e')
-			return (1);
-		else if (str[1] != 'x')
-			return (1);
-		else if (str[2] != 'i')
-			return (1);
-		else if (str[3] != 't')
-			return (1);
-	}
-	return (0);
-}
-
-void	min_builtins(char *str, t_argv **argv)
-{
-	t_argv *aux;
-
-	aux = *argv;
 	if ((ft_strncmp(str, "echo", 4) == 0) || (ft_strncmp(str, "ECHO", 4) == 0))
-		min_echo(argv);
-	else if (ft_strcmp(aux->split[0], "pwd") == 0 || ft_strcmp(aux->split[0], "PWD") == 0)
+		min_echo(data->argv);
+	else if (ft_strcmp(str, "pwd") == 0 || ft_strcmp(str, "PWD") == 0)
 		printf("%s\n", getenv("PWD"));
+	else if (ft_strcmp(str, "env") == 0 || ft_strcmp(str, "ENV") == 0)
+		print_env(data->myenv);
 }
 
 int	main(int argc, char **argv2, char **envp)
-//int	main(void)
 {
 	char	*str;
-	t_argv	**argv;
-	t_myenv	**myenv;
+	t_data	data;
 	int		stop;
 	int		w;
 	
@@ -62,33 +41,29 @@ int	main(int argc, char **argv2, char **envp)
 	argv2 = 0;
 	atexit(leaks);
 	stop = 1;
-	argv = malloc(sizeof(t_argv *));
-	myenv = malloc(sizeof(t_myenv *));
-	*myenv = 0;
-	min_getenv(envp, myenv);
-	print_env(myenv);
+	data.argv = malloc(sizeof(t_argv *));
+	data.myenv = malloc(sizeof(t_myenv *));
+	*data.myenv = 0;
+	min_getenv(envp, data.myenv);
 	while (stop != 0)
 	{
 		w = 0;
-		*argv = NULL;
+		*data.argv = NULL;
 		str = readline("\033[;33mMinishell$\033[0m ");
 		if (ft_strcmp(str, "exit") == 0)
 			stop = 0;
-		/*if (min_stop(str) == 0)
-			stop = 0;*/
 		add_history(str);
-		arguments(argv, str);
-		min_split(argv);
-		print_list(argv);
-		min_builtins(str, argv);
-		free_arg_str(str, *argv);
+		arguments(data.argv, str);
+		min_split(data.argv);
+		print_list(data.argv);
+		min_builtins(str, &data);
+		free_arg_str(str, *data.argv);
 	}
-	free_env(*myenv);
-	free(myenv);
-	free(argv);
+	free_env(*data.myenv);
+	free(data.myenv);
+	free(data.argv);
 	return (0);
 }
-
 
 void	print_list(t_argv **argv)
 {
@@ -102,7 +77,6 @@ void	print_list(t_argv **argv)
 	{
 		i = 0;
 		//printf("arg[%d]->%p->%s\n", w, aux, aux->arg);
-		
 		printf("arg[%d]->%s\n", w, aux->arg);
 		while (aux->split[i])
 		{
