@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/31 11:45:13 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/03/31 12:24:29 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,13 @@ int	min_stop(char *str)
 
 void	min_builtins(char *str, t_argv **argv)
 {
+	t_argv *aux;
+
+	aux = *argv;
 	if ((ft_strncmp(str, "echo", 4) == 0) || (ft_strncmp(str, "ECHO", 4) == 0))
 		min_echo(argv);
+	else if (ft_strcmp(aux->split[0], "pwd") == 0 || ft_strcmp(aux->split[0], "PWD") == 0)
+		printf("%s\n", getenv("PWD"));
 }
 
 int	main(void)
