@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/31 11:38:50 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/03/31 11:45:13 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	print_list(t_argv **argv)
 	{
 		i = 0;
 		//printf("arg[%d]->%p->%s\n", w, aux, aux->arg);
+		
 		printf("arg[%d]->%s\n", w, aux->arg);
 		while (aux->split[i])
 		{
