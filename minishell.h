@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/31 14:11:22 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/03/31 16:00:51 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	min_split(t_argv **argv);
 
 /*Free*/
 void	free_arg_str(char *str, t_argv *argv);
+void	free_env(t_myenv *myenv);
 
 /*List*/
 t_argv	*lstnew(char *str, int q);
@@ -46,5 +47,12 @@ void	add_front(t_argv **argv, t_argv *new);
 
 /*Builtins*/
 void	min_echo(t_argv **argv);
+
+/*Env*/
+t_myenv	*envnew(char *str);
+t_myenv	*envlast(t_myenv *myenv);
+void	env_add_back(t_myenv **myenv, t_myenv *new);
+void	min_getenv(char **envp, t_myenv **myenv);
+void	print_env(t_myenv **env);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 09:51:07 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/30 14:43:10 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/03/31 16:00:43 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,19 @@ void	free_arg_str(char *str, t_argv *argv)
 	}
 	free(argv);
 	free(str);
+}
+
+void	free_env(t_myenv *myenv)
+{
+	t_myenv	*aux;
+
+	aux = myenv;
+	while (myenv)
+	{
+		aux = myenv->next;
+		free(myenv->key);
+		free(myenv);
+		myenv = aux;
+	}
+	free(myenv);
 }

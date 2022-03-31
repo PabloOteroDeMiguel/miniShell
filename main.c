@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/31 14:11:25 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/03/31 16:00:54 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,7 @@ void	min_builtins(char *str, t_argv **argv)
 	if ((ft_strncmp(str, "echo", 4) == 0) || (ft_strncmp(str, "ECHO", 4) == 0))
 		min_echo(argv);
 	else if (ft_strcmp(aux->split[0], "pwd") == 0 || ft_strcmp(aux->split[0], "PWD") == 0)
-	{
 		printf("%s\n", getenv("PWD"));
-		printf("%s\n", getenv("ITERM_SESSION_ID"));
-	}
 }
 
 int	main(int argc, char **argv2, char **envp)
@@ -54,7 +51,7 @@ int	main(int argc, char **argv2, char **envp)
 {
 	char	*str;
 	t_argv	**argv;
-//	t_myenv	**myenv;
+	t_myenv	**myenv;
 	int		stop;
 	int		w;
 	
@@ -66,8 +63,10 @@ int	main(int argc, char **argv2, char **envp)
 	atexit(leaks);
 	stop = 1;
 	argv = malloc(sizeof(t_argv *));
-//	myenv = malloc(sizeof(t_myenv *));
-//	myenv = 0;
+	myenv = malloc(sizeof(t_myenv *));
+	*myenv = 0;
+	min_getenv(envp, myenv);
+	print_env(myenv);
 	while (stop != 0)
 	{
 		w = 0;
@@ -84,6 +83,8 @@ int	main(int argc, char **argv2, char **envp)
 		min_builtins(str, argv);
 		free_arg_str(str, *argv);
 	}
+	free_env(*myenv);
+	free(myenv);
 	free(argv);
 	return (0);
 }
