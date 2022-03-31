@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/30 13:49:43 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/03/31 14:11:22 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include "structs.h"
 
 /*Main*/
-//int	main(int argc, char *argv[]);
-int		main(void);
+//int		main(void);
+//int		main(int argc, char **argv2, char **envp);
 void	print_list(t_argv **argv);
 void	min_builtins(char *str, t_argv **argv);
 

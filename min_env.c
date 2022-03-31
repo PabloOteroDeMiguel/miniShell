@@ -1,38 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structs.h                                          :+:      :+:    :+:   */
+/*   min_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/17 11:30:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/31 14:06:56 by potero-d         ###   ########.fr       */
+/*   Created: 2022/03/31 13:42:58 by potero-d          #+#    #+#             */
+/*   Updated: 2022/03/31 14:11:27 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTS_H
-# define STRUCTS_H
-
-# include "minishell.h"
-
-typedef struct s_argv
+void	min_getenv(char **envp, t_myenv *myenv)
 {
-	char			*arg;
-	char			**split;
-	int				quote;
-//	int				d_quote;
-//	int				pipe;
-//	int				words;
-//	struct s_myenv	*myenv;
-	struct s_argv	*next;
-}	t_argv;
 
-typedef struct s_myenv
-{
-	char			*key;
-	char			*value;
-
-	struct s_myenv	*next;
-} t_myenv;
-
-#endif

@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/31 12:24:29 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/03/31 14:11:25 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,31 @@ void	min_builtins(char *str, t_argv **argv)
 	if ((ft_strncmp(str, "echo", 4) == 0) || (ft_strncmp(str, "ECHO", 4) == 0))
 		min_echo(argv);
 	else if (ft_strcmp(aux->split[0], "pwd") == 0 || ft_strcmp(aux->split[0], "PWD") == 0)
+	{
 		printf("%s\n", getenv("PWD"));
+		printf("%s\n", getenv("ITERM_SESSION_ID"));
+	}
 }
 
-int	main(void)
+int	main(int argc, char **argv2, char **envp)
+//int	main(void)
 {
 	char	*str;
 	t_argv	**argv;
+//	t_myenv	**myenv;
 	int		stop;
 	int		w;
 	
+	if (envp)
+		;
+	if (argc > 1) 
+		exit(1);
+	argv2 = 0;
 	atexit(leaks);
 	stop = 1;
 	argv = malloc(sizeof(t_argv *));
+//	myenv = malloc(sizeof(t_myenv *));
+//	myenv = 0;
 	while (stop != 0)
 	{
 		w = 0;
