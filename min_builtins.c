@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:13:18 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/31 13:42:44 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/04/01 11:54:53 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	min_echo(t_argv **argv)
 	else
 	{
 		aux = aux->next;
-		if (ft_strcmp(aux->arg, "-n") == 0)
+		if (aux && (ft_strcmp(aux->arg, "-n") == 0))
 		{
 			n = 1;
 			aux = aux->next;
