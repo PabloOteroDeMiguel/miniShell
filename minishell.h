@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/04 12:29:11 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/04/04 12:47:25 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,8 @@ void	print_env(t_myenv **env);
 /*Cd*/
 void	min_cd(t_data *data);
 void	change_pwd(t_myenv **myenv);
+
+/*Export*/
+void	min_export(t_data *data);
 
 #endif
