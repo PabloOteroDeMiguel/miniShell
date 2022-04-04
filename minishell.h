@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/31 16:16:51 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/04/04 10:34:44 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	add_front(t_argv **argv, t_argv *new);
 
 /*Builtins*/
 void	min_echo(t_argv **argv);
+void	min_pwd(t_myenv **myenv);
 
 /*Env*/
 t_myenv	*envnew(char *str);
@@ -54,5 +55,8 @@ t_myenv	*envlast(t_myenv *myenv);
 void	env_add_back(t_myenv **myenv, t_myenv *new);
 void	min_getenv(char **envp, t_myenv **myenv);
 void	print_env(t_myenv **env);
+
+/*Cd*/
+void	min_cd(t_data *data);
 
 #endif

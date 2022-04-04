@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/01 11:26:49 by potero           ###   ########.fr       */
+/*   Updated: 2022/04/04 10:45:02 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,17 @@ void	leaks(void)
 
 void	min_builtins(char *str, t_data *data)
 {
-	if ((ft_strncmp(str, "echo", 4) == 0) || (ft_strncmp(str, "ECHO", 4) == 0))
+	t_argv	*argv;
+
+	argv = *data->argv;
+	if ((ft_strcmp(argv->split[0], "echo") == 0) || (ft_strncmp(str, "ECHO", 4) == 0))
 		min_echo(data->argv);
 	else if (ft_strcmp(str, "pwd") == 0 || ft_strcmp(str, "PWD") == 0)
-		printf("%s\n", getenv("PWD"));
+		min_pwd(data->myenv);
 	else if (ft_strcmp(str, "env") == 0 || ft_strcmp(str, "ENV") == 0)
 		print_env(data->myenv);
+	else if	(ft_strcmp(argv->split[0], "cd") == 0)
+		min_cd(data);
 }
 
 int	main(int argc, char **argv2, char **envp)

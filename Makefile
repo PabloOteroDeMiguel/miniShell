@@ -6,12 +6,12 @@
 #    By: potero-d <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/07 12:55:48 by potero-d          #+#    #+#              #
-#    Updated: 2022/03/31 15:31:15 by potero-d         ###   ########.fr        #
+#    Updated: 2022/04/04 10:34:24 by potero-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS = main.c min_argv.c min_lst.c min_builtins.c\
-	   min_free.c min_env.c
+	   min_free.c min_env.c min_cd.c
 
 LIBFT_PATH = libft/
 

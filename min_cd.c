@@ -1,39 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structs.h                                          :+:      :+:    :+:   */
+/*   min_cd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/17 11:30:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/04 10:34:14 by potero-d         ###   ########.fr       */
+/*   Created: 2022/04/04 10:15:16 by potero-d          #+#    #+#             */
+/*   Updated: 2022/04/04 10:45:04 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTS_H
-# define STRUCTS_H
+#include "minishell.h"
 
-# include "minishell.h"
-
-typedef struct s_argv
+void	min_cd(t_data *data)
 {
-	char			*arg;
-	char			**split;
-	int				quote;
-	struct s_argv	*next;
-}	t_argv;
+	char	*buff;
+	t_argv	*argv;
 
-typedef struct s_myenv
-{
-	char			*key;
-	char			*value;
-	struct s_myenv	*next;
-} t_myenv;
-
-typedef struct s_data
-{
-	struct s_myenv	**myenv;
-	struct s_argv	**argv;
-} t_data;
-
-#endif
+	argv = *data->argv;
+	printf("%s\n", argv->split[0]);
+	buff = getcwd(NULL, 200);
+	printf("%s\n", buff);
+}
