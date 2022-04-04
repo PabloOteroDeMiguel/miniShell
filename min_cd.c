@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 10:15:16 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/04 10:45:04 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/04/04 11:42:39 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,34 @@
 
 void	min_cd(t_data *data)
 {
-	char	*buff;
 	t_argv	*argv;
+	t_myenv	*myenv;
 
+	myenv = *data->myenv;
+	while (ft_strcmp(myenv->key, "HOME") != 0)
+		myenv = myenv->next;
 	argv = *data->argv;
-	printf("%s\n", argv->split[0]);
+	if (argv->split[1] == 0 && argv->next == 0)
+		chdir(myenv->value);
+	else if (argv->split[1] != 0)
+		chdir(argv->split[1]);
+	else if (argv->split[1] == 0 &&  argv->next != 0)
+	{
+		argv = argv->next;
+		chdir(argv->split[0]);
+	}
+	change_pwd(data->myenv);
+}
+
+void	change_pwd(t_myenv **myenv)
+{
+	char	*buff;
+	t_myenv	*aux;
+
+	aux = *myenv;
+	while (ft_strcmp(aux->key, "PWD") != 0)
+		aux = aux->next;
 	buff = getcwd(NULL, 200);
-	printf("%s\n", buff);
+	aux->value = buff;
+	free(buff);
 }
