@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/04 11:25:40 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/04/04 12:29:11 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 //int		main(void);
 //int		main(int argc, char **argv2, char **envp);
 void	print_list(t_argv **argv);
-void	min_builtins(char *str, t_data *data);
+int		min_builtins(char *str, t_data *data);
 
 /*Argv*/
 void	read_str(t_argv *argv, char *str);

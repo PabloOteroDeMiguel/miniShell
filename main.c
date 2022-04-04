@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/04 11:42:43 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/04/04 12:29:07 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	leaks(void)
 	system("leaks minishell");
 }
 
-void	min_builtins(char *str, t_data *data)
+int	min_builtins(char *str, t_data *data)
 {
 	t_argv	*argv;
 
@@ -30,6 +30,9 @@ void	min_builtins(char *str, t_data *data)
 		print_env(data->myenv);
 	else if	(ft_strcmp(argv->split[0], "cd") == 0)
 		min_cd(data);
+	else if (ft_strcmp(argv->split[0], "exit") == 0)
+			return (0);
+	return (1);
 }
 
 int	main(int argc, char **argv2, char **envp)
@@ -55,13 +58,18 @@ int	main(int argc, char **argv2, char **envp)
 		w = 0;
 		*data.argv = NULL;
 		str = readline("\033[;33mMinishell$\033[0m ");
-		if (ft_strcmp(str, "exit") == 0)
-			stop = 0;
-		add_history(str);
-		arguments(data.argv, str);
-		min_split(data.argv);
-		//print_list(data.argv);
-		min_builtins(str, &data);
+		if (!str)
+		{
+			printf("exit\n");
+			exit(0);
+		}
+		if (str  && ft_strlen(str) > 0)
+		{
+			add_history(str);
+			arguments(data.argv, str);
+			min_split(data.argv);
+			stop = min_builtins(str, &data);
+		}
 		free_arg_str(str, *data.argv);
 	}
 	free_env(*data.myenv);
