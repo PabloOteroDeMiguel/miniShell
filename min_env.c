@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:42:58 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/04 14:03:13 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/04/05 11:56:05 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,15 @@
 t_myenv	*envnew(char *str)
 {
 	t_myenv	*element;
+	char	*aux;
 
 	element = malloc(sizeof(t_myenv));
+	aux = getenv(str);
 	if (!element)
 		return (NULL);
 	element->key = str;
-	element->value = getenv(str);
+	element->value = ft_strdup(aux);
+	//element->value = aux;
 	element->next = NULL;
 	return (element);
 }

@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 12:44:20 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/04 14:03:17 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/04/05 11:59:48 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,45 @@ t_myenv *export_new(char *str)
 	if (!element)
 		return (NULL);
 	i = 0;
-	aux = ft_strchr(str, '=');
+	aux = ft_strchr(str, '=') + 1;
 	if (aux != 0)
 	{
 		while (str[i] != '=')
 			i++;
 		element->key = ft_substr(str, 0, i);
-		element->value = aux;
+		element->value = (ft_strdup(aux));
 		element->next = NULL;
 	}
 	else
 		return (NULL);
 	return (element);
+}
+
+int	exist_key(char *str, t_myenv *myenv)
+{
+	t_myenv	*aux;
+	char	*key;
+	char	*value;
+	int		i;
+
+	i = 0;
+	while (str[i] != '=')
+		i++;
+	key = ft_substr(str, 0, i);
+	value  = ft_strchr(str, '=') + 1;
+	aux = myenv;
+	while (aux)
+	{
+		if (ft_strcmp(aux->key, key) == 0)
+		{
+			aux->value = (ft_strdup(value));
+			free(key);
+			return (1);
+		}
+		aux = aux->next;
+	}
+	free(key);
+	return (0);
 }
 
 void	min_export(t_data *data)
@@ -47,19 +74,23 @@ void	min_export(t_data *data)
 	argv = *data->argv;
 	while (argv->split[i])
 	{
-		env_add_back(&myenv, export_new(argv->split[i]));
+		if (exist_key(argv->split[i], myenv) == 0)
+			env_add_back(&myenv, export_new(argv->split[i]));
 		i++;
 	}
 	if (argv->next != 0)
-		argv = argv->next;
-	while (argv)
 	{
-		i = 0;
-		while (argv->split[i])
-		{
-			env_add_back(&myenv, export_new(argv->split[i]));
-			i++;
-		}
 		argv = argv->next;
+		while (argv)
+		{
+			i = 0;
+			while (argv->split[i])
+			{
+				if (exist_key(argv->split[i], myenv) == 0)
+					env_add_back(&myenv, export_new(argv->split[i]));
+				i++;
+			}
+			argv = argv->next;
+		}
 	}
 }
