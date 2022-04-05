@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/05 12:01:21 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/04/05 13:32:48 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@
 # include "structs.h"
 
 /*Main*/
-//int		main(void);
-//int		main(int argc, char **argv2, char **envp);
+int		main(int argc, char **argv2, char **envp);
 void	print_list(t_argv **argv);
 int		min_builtins(char *str, t_data *data);
 
@@ -64,5 +63,8 @@ void	change_pwd(t_myenv **myenv);
 void	min_export(t_data *data);
 t_myenv	*export_new(char *str);
 int		exist_key(char *key, t_myenv *myenv);
+
+/*Unset*/
+void	min_unset(t_data *data);
 
 #endif

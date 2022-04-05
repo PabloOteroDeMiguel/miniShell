@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/05 12:07:32 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/04/05 13:29:01 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	min_builtins(char *str, t_data *data)
 		min_cd(data);
 	else if (ft_strcmp(argv->split[0], "export") == 0)
 		min_export(data);
+	else if	(ft_strcmp(argv->split[0], "unset") == 0)
+		min_unset(data);
 	else if (ft_strcmp(argv->split[0], "exit") == 0)
 	{
 			printf("exit\n");
