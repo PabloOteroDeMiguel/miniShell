@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 10:15:16 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/04 15:32:53 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/04/05 12:04:55 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	min_cd(t_data *data)
 		chdir(myenv->value);
 	else if (argv->split[1] != 0)
 		chdir(argv->split[1]);
-	else if (argv->split[1] == 0 &&  argv->next != 0)
+	else if (argv->split[1] == 0 && argv->next != 0)
 	{
 		argv = argv->next;
 		chdir(argv->split[0]);

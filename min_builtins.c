@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:13:18 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/04 12:44:03 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/04/05 12:05:22 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	min_echo(t_argv **argv)
 	t_argv	*aux;
 	int		i;
 	int		n;
-	
+
 	n = 0;
 	aux = *argv;
 	if (aux->split[1])
@@ -68,4 +68,3 @@ void	min_pwd(t_myenv	**myenv)
 		aux = aux->next;
 	printf("%s\n", aux->value);
 }
-
