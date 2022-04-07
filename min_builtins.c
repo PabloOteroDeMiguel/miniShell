@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:13:18 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/07 11:00:01 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/04/07 12:40:37 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,16 @@ void	min_echo(t_argv **argv)
 		aux = aux->next;
 		while (aux)
 		{
-			printf("%s", aux->arg);
+			i = 0;
+			while (aux->split[i])
+			{
+				printf("%s", aux->split[i]);
+				i++;
+				if (aux->split[i] != 0)
+					printf(" ");
+			}
+			if (aux->next != 0)
+				printf(" ");
 			aux = aux->next;
 		}
 	}
@@ -54,7 +63,16 @@ void	min_echo(t_argv **argv)
 		}
 		while (aux)
 		{
-			printf("%s", aux->arg);
+			i = 0;
+			while (aux->split[i])
+			{
+				printf("%s", aux->split[i]);
+				i++;
+				if (aux->split[i] != 0)
+					printf(" ");
+			}	
+			if (aux->next != 0)
+				printf(" ");
 			aux = aux->next;
 		}
 	}

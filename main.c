@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/07 12:11:49 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/04/07 12:40:40 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,9 @@ int	main(int argc, char **argv2, char **envp)
 			add_history(str);
 			arguments(data.argv, str);
 			min_split(data.argv);
+			print_list(data.argv);
 			expand(&data);
-		//	print_list(data.argv);
+			print_list(data.argv);
 			stop = min_builtins(str, &data);
 		}
 		free_arg_str(str, *data.argv);
