@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 12:32:48 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/05 13:56:20 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/04/05 19:06:08 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,20 @@ void	min_unset(t_myenv **myenv, t_argv *argv)
 	while (argv->split[i])
 	{
 		aux = *myenv;
-		while (aux)
+		aux2 = *myenv;
+		while (aux2)
 		{
-			if (ft_strcmp(argv->split[i], aux->key) == 0)
+			if (ft_strcmp(argv->split[i], aux2->next->key) == 0)
 			{
+				aux = aux->next;
 				free(aux->key);
 				free(aux->value);
-				aux2 = aux->next;
+				aux2->next = aux->next;
 				free(aux);
-				aux = aux2;
+				break ;
 			}
-			if (aux)
-				aux = aux->next;
+			aux = aux->next;
+			aux2 = aux2->next;
 		}
 		i++;
 	}
@@ -46,18 +48,20 @@ void	min_unset(t_myenv **myenv, t_argv *argv)
 			while (argv->split[i])
 			{
 				aux = *myenv;
-				while (aux)
+				aux2 = *myenv;
+				while (aux2)
 				{
-					if (ft_strcmp(argv->split[i], aux->key) == 0)
+					if (ft_strcmp(argv->split[i], aux2->next->key) == 0)
 					{
+						aux = aux->next;
 						free(aux->key);
 						free(aux->value);
-						aux2 = aux->next;
+						aux2->next = aux->next;
 						free(aux);
-						aux = aux2;
+						break ;
 					}
-					if (aux)
-						aux = aux->next;
+					aux = aux->next;
+					aux2 = aux2->next;
 				}
 				i++;
 			}

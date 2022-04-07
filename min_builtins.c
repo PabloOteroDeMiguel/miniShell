@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:13:18 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/05 12:05:22 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/04/07 11:00:01 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	min_echo(t_argv **argv)
 {
 	t_argv	*aux;
+//	char	*print;
 	int		i;
 	int		n;
 
@@ -31,8 +32,10 @@ void	min_echo(t_argv **argv)
 			i = 1;
 		while (aux->split[i])
 		{
-			printf("%s ", aux->split[i]);
+			printf("%s", aux->split[i]);
 			i++;
+			if (aux->split[i] != 0)
+				printf(" ");
 		}
 		aux = aux->next;
 		while (aux)

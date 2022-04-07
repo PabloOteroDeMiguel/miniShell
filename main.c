@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/05 13:56:22 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/04/07 10:59:59 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ int	min_builtins(char *str, t_data *data)
 		min_export(data);
 	else if	(ft_strcmp(argv->split[0], "unset") == 0)
 		min_unset(data->myenv, *data->argv);
+	//else if (ft_strcmp(argv->split[0], "./minishell") == 0)
+	//	execve("minishell", 0, 0);
+
 	else if (ft_strcmp(argv->split[0], "exit") == 0)
 	{
 			printf("exit\n");
@@ -64,7 +67,7 @@ int	main(int argc, char **argv2, char **envp)
 	{
 		w = 0;
 		*data.argv = NULL;
-		str = readline("\033[;33mMinishell$\033[0m ");
+		str = readline("\033[;33mMinishell\033[0m$ ");
 		if (!str)
 		{
 			printf("exit\n");
@@ -75,7 +78,7 @@ int	main(int argc, char **argv2, char **envp)
 			add_history(str);
 			arguments(data.argv, str);
 			min_split(data.argv);
-		//	print_list(data.argv);
+			//print_list(data.argv);
 			stop = min_builtins(str, &data);
 		}
 		free_arg_str(str, *data.argv);
