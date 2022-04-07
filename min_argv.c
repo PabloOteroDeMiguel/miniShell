@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 11:10:35 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/05 12:11:35 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/04/07 11:11:41 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	arguments(t_argv **argv, char *str)
 			len++;
 			while (str[i + len] != 34 && str[i + len])
 				len++;
-			lst_add_back(argv, lstnew(ft_substr(str, i + 1, len - 1), 1));
+			lst_add_back(argv, lstnew(ft_substr(str, i + 1, len - 1), 2));
 			i = i + len ;
 			w++;
 			len = 0;
