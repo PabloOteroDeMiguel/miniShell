@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 11:13:41 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/08 16:15:39 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/04/08 16:50:08 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,17 @@ char	*change_str(char *str, t_myenv **myenv)
 	{
 		if (ft_strcmp(key, aux->key) == 0)
 		{
+		//	printf("key->%s\n", key);
 			aux1 = ft_strjoin(sub, aux->value);
+		//	printf("aux->%s\n", aux1);
 			free(sub);
-			print = ft_strjoin(aux1, quote);
+			if (quote != 0)
+				print = ft_strjoin(aux1, quote);
+			else
+				print = ft_strdup(aux1);
 			free(aux1);
 			free(quote);
+		//	printf("pri->%s\n", print);
 			return (print);
 		}
 		aux = aux->next;
