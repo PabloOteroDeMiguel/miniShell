@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/08 14:42:33 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/04/08 15:40:51 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	min_builtins(char *str, t_data *data)
 	t_argv	*argv;
 
 	argv = *data->argv;
+	if (argv->split[0] == 0)
+		return (1);
 	if ((ft_strcmp(argv->split[0], "echo") == 0) || (ft_strncmp(str, "ECHO", 4) == 0))
 		min_echo(data->argv);
 	else if (ft_strcmp(str, "pwd") == 0 || ft_strcmp(str, "PWD") == 0)
@@ -52,8 +54,6 @@ int	main(int argc, char **argv2, char **envp)
 	int		stop;
 	int		w;
 	
-//	if (envp)
-//		;
 	if (argc > 1) 
 		exit(1);
 	argv2 = 0;
@@ -108,12 +108,12 @@ void	print_list(t_argv **argv)
 		i = 0;
 		//printf("arg[%d]->%p->%s\n", w, aux, aux->arg);
 		printf("arg[%d]->%s\n", w, aux->arg);
+		if (aux->split[i] == 0)
+			return ;
 		while (aux->split[i])
 		{
-			printf("aqui si\n");
 			printf("\ts[%d]->%s\n", i, aux->split[i]);
-			printf("aqui no\n");
-			printf("\ts[%d]->%p\n", i, aux->split[i]);
+		//	printf("\ts[%d]->%p\n", i, aux->split[i]);
 			i++;
 		}
 		w++;
