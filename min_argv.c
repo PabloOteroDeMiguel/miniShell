@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 11:10:35 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/07 11:11:41 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/04/08 14:42:29 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void	min_split(t_argv **argv)
 		else
 		{
 			aux->split = malloc(sizeof(char *) * 2);
-			aux->split[0] = aux->arg;
+			aux->split[0] = ft_strdup(aux->arg);
 			aux->split[1] = NULL;
 		}
 		aux = aux->next;

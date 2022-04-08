@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 11:13:41 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/07 12:30:04 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/04/08 14:41:40 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ char	*change_str(char *str, t_myenv **myenv)
 		}
 		aux = aux->next;
 	}
+	free(sub);
 	return (0);
 }
 
@@ -44,6 +45,7 @@ void	expand(t_data *data)
 	t_argv	*argv;
 	int		i;
 	char	*aux;
+	int		j;
 
 	argv = *data->argv;
 
@@ -55,10 +57,26 @@ void	expand(t_data *data)
 			if (ft_strchr(argv->split[i], '$') != 0 && argv->quote != 1)
 			{
 				aux = change_str(argv->split[i], data->myenv);
-				free(argv->split[i]);
-				argv->split[i] = ft_strdup(aux);
-				free(aux);
-			}
+				if (aux != 0)
+				{	
+					free(argv->split[i]);
+					argv->split[i] = ft_strdup(aux);
+					free(aux);
+				}
+				else
+				{
+					j = i;
+					while (argv->split[j + 1])
+					{
+						free(argv->split[j]);
+						argv->split[j] = ft_strdup(argv->split[j + 1]);
+						j++;
+					}
+					free(argv->split[j]);
+					argv->split[j] = 0;
+				}
+				i--;
+			}	
 			i++;
 		}
 		argv = argv->next;

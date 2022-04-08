@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/07 13:55:51 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/04/08 14:42:33 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ int	main(int argc, char **argv2, char **envp)
 		printf("\033[;33m");
 		//str = readline("\033[;33mMinishell$ \033[0m");
 		str = readline("Minishell$ ");
-		//printf("\033[0m");
-		printf("\033[0;32m");
+		printf("\033[0m");
+		//printf("\033[0;32m");
 		if (!str)
 		{
 			printf("exit\n");
@@ -82,9 +82,9 @@ int	main(int argc, char **argv2, char **envp)
 			add_history(str);
 			arguments(data.argv, str);
 			min_split(data.argv);
-		//	print_list(data.argv);
+			print_list(data.argv);
 			expand(&data);
-		//	print_list(data.argv);
+			print_list(data.argv);
 			stop = min_builtins(str, &data);
 		}
 		free_arg_str(str, *data.argv);
@@ -110,7 +110,10 @@ void	print_list(t_argv **argv)
 		printf("arg[%d]->%s\n", w, aux->arg);
 		while (aux->split[i])
 		{
+			printf("aqui si\n");
 			printf("\ts[%d]->%s\n", i, aux->split[i]);
+			printf("aqui no\n");
+			printf("\ts[%d]->%p\n", i, aux->split[i]);
 			i++;
 		}
 		w++;

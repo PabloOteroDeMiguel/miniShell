@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 10:15:16 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/05 19:28:52 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/04/08 12:02:19 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ void	change_pwd(t_myenv **myenv)
 	while (ft_strcmp(aux->key, "PWD") != 0)
 		aux = aux->next;
 	buff = getcwd(NULL, 200);
+	free(aux->value);
 	aux->value = buff;
-	free(buff);
 }
