@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 11:13:41 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/08 16:07:11 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/04/08 16:15:39 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,10 @@ char	*change_str(char *str, t_myenv **myenv)
 		}
 		aux = aux->next;
 	}
+	print = ft_strjoin(sub, quote);
+	free(quote);
 	free(sub);
-	return (0);
+	return (print);
 }
 
 void	expand(t_data *data)
