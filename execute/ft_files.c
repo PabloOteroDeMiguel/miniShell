@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_files.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/23 14:09:21 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/03/23 17:01:31 by pmoreno-         ###   ########.fr       */
+/*   Created: 2022/02/16 16:48:00 by pmoreno-          #+#    #+#             */
+/*   Updated: 2022/04/12 12:17:47 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_pipex.h"
+#include "../minishell.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_open_infile(char *arc)
 {
-	int	i;
+	int	fd;
 
-	i = 0;
-	if (s == 0)
-		return ;
-	while (s[i] != 0)
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
-	write(fd, "\n", 1);
+	fd = open(arc, O_RDONLY);
+	if (fd < 0)
+		ft_file_error(arc);
+	close(fd);
+	exit (0);
+}
+
+void	ft_open_outfile(char *arc)
+{
+	int	fd;
+
+	fd = open(arc, O_CREAT | O_WRONLY, 0666);
+	close(fd);
 }

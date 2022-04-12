@@ -6,11 +6,11 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 15:36:06 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/03/23 17:01:01 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/04/12 12:18:06 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_pipex.h"
+#include "../minishell.h"
 
 void	free_variables(t_comm_path **comm_dir)
 {

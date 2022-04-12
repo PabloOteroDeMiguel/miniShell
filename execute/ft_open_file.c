@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_open_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/14 11:37:40 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/03/23 17:01:41 by pmoreno-         ###   ########.fr       */
+/*   Created: 2022/03/11 13:00:08 by pmoreno-          #+#    #+#             */
+/*   Updated: 2022/04/12 12:19:30 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_pipex.h"
+#include "../minishell.h"
 
-char	*ft_strchr(const char *s, int c)
+int	ft_open_file(char **argv, int argc)
 {
-	int		i;
+	int	fd;
 
-	i = 0;
-	while (s[i] != 0)
-	{
-		if (s[i] == (unsigned char)c)
-			return ((char *)&s[i]);
-		i++;
-	}
-	if (s[i] == c)
-		return ((char *)&s[i]);
-	return (0);
+	fd = 0;
+	if (argc != 4)
+		fd = open(argv[1], O_RDONLY);
+	return (fd);
 }

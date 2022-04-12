@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   main_last_part.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/23 14:05:27 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/03/23 17:01:49 by pmoreno-         ###   ########.fr       */
+/*   Created: 2022/03/10 12:11:55 by pmoreno-          #+#    #+#             */
+/*   Updated: 2022/04/12 12:19:11 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_pipex.h"
+#include "../minishell.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+void	ft_final_part(t_comm_path **comm_dir, char **l_paths)
 {
-	char	*aux2;
-
-	if (s1 == 0 || s2 == 0)
-		return (0);
-	aux2 = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (aux2 == 0)
-		return (0);
-	ft_memcpy(aux2, s1, ft_strlen(s1) + 1);
-	ft_strlcat(aux2, s2, ft_strlen(s1) + ft_strlen(s2) + 1);
-	return (aux2);
+	free_variables_list(l_paths);
+	free_variables(comm_dir);
+	free(comm_dir);
 }

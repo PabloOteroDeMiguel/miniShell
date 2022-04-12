@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_error_funct2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/14 11:29:56 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/03/23 17:02:03 by pmoreno-         ###   ########.fr       */
+/*   Created: 2022/03/10 12:16:47 by pmoreno-          #+#    #+#             */
+/*   Updated: 2022/04/12 12:17:28 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_pipex.h"
+#include "../minishell.h"
 
-size_t	ft_strlen(const char *s)
+void	ft_args_error(void)
 {
-	size_t	i;
-
-	i = 0;
-	while (s[i] != 0)
-		i++;
-	return (i);
+	ft_putstr_fd("Usage: ./pipex infile \"cmd1\" \"cmd2\" outfile\n", 2);
+	exit(1);
 }

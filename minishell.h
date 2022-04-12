@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/08 14:14:37 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/04/12 12:08:31 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 //# include "pipex/inc/pipex.h"
 # include "libft.h"
 # include "structs.h"
+# include "execute.h"
 
 /*Main*/
 int		main(int argc, char **argv2, char **envp);
