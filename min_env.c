@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:42:58 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/05 12:04:35 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/04/28 12:19:09 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,33 @@ void	print_env(t_myenv **myenv)
 		printf("%s=%s\n", aux->key, aux->value);
 		aux = aux->next;
 	}
+}
+
+char	**env_to_char(t_myenv **myenv)
+{
+	char	**str;
+	char	*auxstr;
+	t_myenv	*aux;
+	int		i;
+
+	i = 0;
+	aux = *myenv;
+	while (aux)
+	{
+		i++;
+		aux = aux->next;
+	}
+	aux = *myenv;
+	str = malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	while (aux)
+	{
+		auxstr = ft_strjoin(aux->key, "=");
+		str[i] = ft_strjoin(auxstr, aux->value);
+		free(auxstr);
+		i++;
+		aux = aux->next;
+	}
+	str[i] = 0;
+	return (str);
 }

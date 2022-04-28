@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/12 13:05:23 by potero           ###   ########.fr       */
+/*   Updated: 2022/04/28 12:29:01 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,17 @@ int	main(int argc, char **argv2, char **envp)
 	*data.myenv = 0;
 	data.infile = "/dev/fd/0";
 	data.outfile = "/dev/fd/1";
-	while (envp[i])
-	{ //Esto sobra pero tengo que hacer una funcion que tranforme myenv en un **char (no olvidar el =)
-		printf("%s\n", envp[i]);
-		i++;
-	}
 	min_getenv(envp, data.myenv);
+	data.myenv_str = env_to_char(data.myenv);
+
+	i = 0;
+	while (data.myenv_str[i])
+	{
+		printf("ENV--->%s\n", envp[i]);
+		printf("myENV->%s\n", data.myenv_str[i]);
+		i++;
+	}	
+
 	while (stop != 0)
 	{
 		w = 0;
@@ -109,6 +114,7 @@ int	main(int argc, char **argv2, char **envp)
 		free_arg_str(str, *data.argv);
 	}
 	free_env(*data.myenv);
+	free_env_char(data.myenv_str);
 	free(data.myenv);
 	free(data.argv);
 	return (0);
