@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/28 12:29:01 by potero           ###   ########.fr       */
+/*   Updated: 2022/05/03 10:10:53 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,14 @@ int	min_builtins(char *str, t_data *data)
 	}
 	else
 	{
-		exec = malloc(5);
+		exec = malloc(4);
 		exec[0] = "execute";
-		exec[1] = data->outfile;
+		exec[1] = data->infile;
 		exec[2] = argv->arg;
-		exec[3] = data->infile;
-		exec[4] = 0;
-		//execute(4, exec, *data->myenv);
+		printf("cmmd-> %s\n", argv->arg);
+		exec[3] = data->outfile;
+	//	exec[4] = 0;
+		execute(4, exec, data->myenv_str);
 		free(exec);
 	} 	
 	return (1);
@@ -64,29 +65,31 @@ int	main(int argc, char **argv2, char **envp)
 	t_data	data;
 	int		stop;
 	int		w;
-	int i = 0;
+//	int i = 0;
 	
 	if (argc > 1) 
 		exit(1);
 	argv2 = 0;
-	atexit(leaks);
+//	atexit(leaks);
 	stop = 1;
 	data.argv = malloc(sizeof(t_argv *));
 	data.myenv = malloc(sizeof(t_myenv *));
 	*data.myenv = 0;
-	data.infile = "/dev/fd/0";
-	data.outfile = "/dev/fd/1";
+//	data.infile = "/dev/fd/0";
+//	data.outfile = "/dev/fd/1";
+	data.infile = "a.txt";
+	data.outfile = "b.txt";
+
 	min_getenv(envp, data.myenv);
 	data.myenv_str = env_to_char(data.myenv);
-
-	i = 0;
+/*
 	while (data.myenv_str[i])
 	{
-		printf("ENV--->%s\n", envp[i]);
-		printf("myENV->%s\n", data.myenv_str[i]);
+		printf("myenv->%s\n", data.myenv_str[i]);
+		printf("env--->%s\n", envp[i]);
 		i++;
-	}	
-
+	}
+*/
 	while (stop != 0)
 	{
 		w = 0;
