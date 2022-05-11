@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/28 12:24:57 by potero           ###   ########.fr       */
+/*   Updated: 2022/05/11 10:02:29 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@
 # include<stdio.h>
 # include<readline/readline.h>
 # include<readline/history.h>
+# include<fcntl.h>
 //# include "pipex/inc/pipex.h"
 # include "libft.h"
 # include "structs.h"
-# include "execute.h"
+//# include "execute.h"
 
 /*Main*/
 int		main(int argc, char **argv2, char **envp);
@@ -73,5 +74,16 @@ void	min_unset(t_myenv **myenv, t_argv *argv);
 /*Expand*/
 void	expand(t_data *data);
 char	*change_str(char *str, t_myenv **myenv);
+
+/*Cmmd*/
+	/*ccmd*/
+int		command(char **argv, char **envp);
+int		execute(char **argv, char **envp, char *direction);
+
+	/*path*/
+int		cmmd_addarg(char    **new_path, char *path, char *arg);
+void	not_cmmd(char *str);
+char	*cmmd_find_path(char **envp);
+char	*cmmd_path(char **path, char *arg);
 
 #endif

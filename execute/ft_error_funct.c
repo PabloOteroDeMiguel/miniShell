@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 16:54:00 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/04/12 12:17:13 by potero           ###   ########.fr       */
+/*   Updated: 2022/05/10 08:11:11 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	ft_file_error(char *str)
 	write(2, ": ", 2);
 	ft_putstr_fd(str, 2);
 	write(2, "\n", 1);
-	exit(1);
+	//exit(1);
+	return ;
 }
 
 void	ft_comm_error(char *str)
@@ -31,7 +32,8 @@ void	ft_comm_error(char *str)
 	ft_putstr_fd(s[0], 2);
 	write(2, "\n", 1);
 	free_variables_list(s);
-	exit(127);
+	//exit(127);
+	return ;
 }
 
 void	ft_error(t_comm_path **var, int e)
@@ -51,6 +53,7 @@ void	ft_command_validation(t_comm_path **comm_dir, int ferror)
 
 	var = (*comm_dir);
 	if (var->comm == NULL)
-		exit(127);
+		return ;
+		//exit(127);
 	ft_error(comm_dir, ferror);
 }

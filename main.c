@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/05/03 10:10:53 by potero           ###   ########.fr       */
+/*   Updated: 2022/05/11 10:26:12 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	min_builtins(char *str, t_data *data)
 {
 	t_argv	*argv;
 	char	**exec;
+	int 	i;
 
 	argv = *data->argv;
 	if (argv->split[0] == 0)
@@ -46,14 +47,13 @@ int	min_builtins(char *str, t_data *data)
 	}
 	else
 	{
-		exec = malloc(4);
-		exec[0] = "execute";
-		exec[1] = data->infile;
-		exec[2] = argv->arg;
-		printf("cmmd-> %s\n", argv->arg);
-		exec[3] = data->outfile;
-	//	exec[4] = 0;
-		execute(4, exec, data->myenv_str);
+		exec = malloc(sizeof(char *) * 4);
+		exec[0] = data->infile;
+		exec[1] = argv->arg;
+		exec[2] = data->outfile;
+		exec[3] = 0;
+		i = command(exec, data->myenv_str);
+		printf("%i\n", i);
 		free(exec);
 	} 	
 	return (1);
@@ -75,10 +75,10 @@ int	main(int argc, char **argv2, char **envp)
 	data.argv = malloc(sizeof(t_argv *));
 	data.myenv = malloc(sizeof(t_myenv *));
 	*data.myenv = 0;
-//	data.infile = "/dev/fd/0";
-//	data.outfile = "/dev/fd/1";
-	data.infile = "a.txt";
-	data.outfile = "b.txt";
+	data.infile = "/dev/fd/0";
+	data.outfile = "/dev/fd/1";
+//	data.infile = "a.txt";
+//	data.outfile = "b.txt";
 
 	min_getenv(envp, data.myenv);
 	data.myenv_str = env_to_char(data.myenv);

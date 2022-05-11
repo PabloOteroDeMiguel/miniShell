@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_pipex.h                                       :+:      :+:    :+:   */
+/*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 15:48:35 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/04/12 12:00:56 by potero           ###   ########.fr       */
+/*   Updated: 2022/05/09 11:35:05 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void			ft_args_error(void);
 
 // main.c
 int				execute(int argc, char **argv, char **envp);
-t_comm_path		**ft_accesslist(char **l_paths, char **argv, int argc);
+t_comm_path		**ft_accesslist(char **l_paths, char *argv, int argc);
 char			*ft_envp_path(char **envp, int argc);
 void			ft_add_path(char **l_paths, char *argv, t_comm_path **aux_l);
 void			ft_valid_direction(t_comm_path	**comm_dir, char **argv);
