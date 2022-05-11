@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/05/11 10:26:12 by potero           ###   ########.fr       */
+/*   Updated: 2022/05/11 12:01:10 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	main(int argc, char **argv2, char **envp)
 	if (argc > 1) 
 		exit(1);
 	argv2 = 0;
-//	atexit(leaks);
+	atexit(leaks);
 	stop = 1;
 	data.argv = malloc(sizeof(t_argv *));
 	data.myenv = malloc(sizeof(t_myenv *));

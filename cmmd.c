@@ -6,11 +6,11 @@
 /*   By: potero <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 09:20:12 by potero            #+#    #+#             */
-/*   Updated: 2022/05/11 10:28:19 by potero           ###   ########.fr       */
+/*   Updated: 2022/05/11 12:14:42 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 int	command(char **argv, char **envp)
 {
@@ -18,7 +18,6 @@ int	command(char **argv, char **envp)
 	char	**arg;
 	char	*direction;
 	int		r;
-//	int i = 0;
 
 	arg = ft_split(argv[1], ' ');
 	path = ft_split(cmmd_find_path(envp), ':');
@@ -40,6 +39,9 @@ int	command(char **argv, char **envp)
 		return (127);
 	r = execute(argv, envp, direction);
 	
+	free_env_char(arg);
+	free_env_char(path);
+	free(direction);
 	return (r);
 }
 
@@ -49,7 +51,9 @@ int	execute(char **argv, char **envp, char *direction)
 	int			fd2;
 	int			status;
 	int			pid;
+	char 		**arg;
 
+	arg = ft_split(argv[1], ' ');
 	pid = fork();
 	fd = open(argv[0], O_RDONLY);
 	if (fd < 0)
@@ -66,11 +70,12 @@ int	execute(char **argv, char **envp, char *direction)
 		close(fd);
 		dup2(fd2, STDOUT_FILENO);
 		close(fd2);
-		if (execve(direction, argv, envp) < 0)
+		if (execve(direction, arg, envp) < 0)
 			return (127);
 			//exit (127);
 	}
 	close(fd);
 	wait(&status);
+	free_env_char(arg);
 	return (100);
 }
