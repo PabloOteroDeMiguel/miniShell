@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/05/30 10:05:30 by potero           ###   ########.fr       */
+/*   Updated: 2022/05/30 11:57:23 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	leaks(void)
 int	min_builtins(char *str, t_data *data)
 {
 	t_argv	*argv;
-	char	**exec;
+//	char	**exec;
 	int 	i;
 
 	argv = *data->argv;
@@ -47,14 +47,15 @@ int	min_builtins(char *str, t_data *data)
 	}
 	else
 	{
-		exec = malloc(sizeof(char *) * 4);
+	/*	exec = malloc(sizeof(char *) * 4);
 		exec[0] = data->infile;
 		exec[1] = argv->arg;
 		exec[2] = data->outfile;
 		exec[3] = 0;
-		i = command(exec, data->myenv_str);
+		i = command(exec, data->myenv_str);*/
+		i = command(data);
 		printf("%i\n", i);
-		free(exec);
+	//	free(exec);
 	} 	
 	return (1);
 }
