@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:57:16 by potero-d          #+#    #+#             */
-/*   Updated: 2022/05/30 11:38:42 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/05/30 12:16:27 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,11 @@ int	execute(int argc, char **argv, char **envp, char **direction)
 	char	**arg;
 	int		i;
 	
-	
+/*Hacer que la funcion commmand (cmmd.c) meta las direcciones dentro de la 
+ * estructura argv (hacer un while)
+ * diseñar algo con if dependiedno que comando es si abrir un fd u otro
+*/
+ 	
 	i = 2;
 	arg = ft_split(argv[i], ' ');
 //	ft_putstr_fd(arg[0], 1);
