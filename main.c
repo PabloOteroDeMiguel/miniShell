@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/05/11 12:01:10 by potero           ###   ########.fr       */
+/*   Updated: 2022/05/30 10:05:30 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	main(int argc, char **argv2, char **envp)
 			min_split(data.argv);
 		//	print_list(data.argv);
 			expand(&data);
-		//	print_list(data.argv);
+			print_list(data.argv);
 			stop = min_builtins(str, &data);
 		}
 		free_arg_str(str, *data.argv);
@@ -134,6 +134,10 @@ void	print_list(t_argv **argv)
 	while (aux)
 	{
 		i = 0;
+		if (aux->quote == 3)
+			printf("There is a pipe |\n");
+		else
+			printf("NO pipe\n");
 		//printf("arg[%d]->%p->%s\n", w, aux, aux->arg);
 		printf("arg[%d]->%s\n", w, aux->arg);
 		if (aux->split[i] == 0)
