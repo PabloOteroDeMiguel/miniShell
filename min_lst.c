@@ -6,7 +6,7 @@
 /*   By: potero <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 12:31:47 by potero            #+#    #+#             */
-/*   Updated: 2022/03/30 13:31:14 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/04/07 11:05:59 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_argv	*lstnew(char *str, int q)
 
 int	lstsize(t_argv *argv)
 {
-	int			i;
+	int		i;
 	t_argv	*aux;
 
 	i = 0;
@@ -57,7 +57,7 @@ t_argv	*lstlast(t_argv *argv)
 void	lst_add_back(t_argv **argv, t_argv *new)
 {
 	t_argv	*aux;
-	
+
 	if (*argv)
 	{
 		aux = lstlast(*argv);

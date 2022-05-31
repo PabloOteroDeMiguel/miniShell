@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_addarg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmoreno- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/23 14:05:27 by pmoreno-          #+#    #+#             */
-/*   Updated: 2021/09/23 14:06:15 by pmoreno-         ###   ########.fr       */
+/*   Created: 2022/01/12 12:10:04 by potero-d          #+#    #+#             */
+/*   Updated: 2022/01/17 13:26:15 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+int	ft_addarg(char	**new_path, char *path, char *arg)
 {
-	char	*aux2;
+	char	*aux;
+	int		ac;
 
-	if (s1 == 0 || s2 == 0)
+	ac = access(arg, X_OK);
+	if (ac == 0)
+	{
+		*new_path = arg;
 		return (0);
-	aux2 = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (aux2 == 0)
+	}
+	aux = ft_strjoin(path, "/");
+	*new_path = ft_strjoin(aux, arg);
+	ac = access(*new_path, X_OK);
+	free(aux);
+	if (ac == 0)
 		return (0);
-	ft_memcpy(aux2, s1, ft_strlen(s1) + 1);
-	ft_strlcat(aux2, s2, ft_strlen(s1) + ft_strlen(s2) + 1);
-	return (aux2);
+	else
+		return (1);
 }
