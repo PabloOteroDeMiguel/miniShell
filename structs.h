@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 11:30:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/05/30 11:57:21 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/05/31 09:12:42 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct s_argv
 {
 	char			*arg;
 	char			**split;
+	char			*direction;
 	int				error_code;
 	int				quote;
 	struct s_argv	*next;

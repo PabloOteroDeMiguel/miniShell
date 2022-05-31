@@ -6,7 +6,7 @@
 /*   By: potero <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 09:20:12 by potero            #+#    #+#             */
-/*   Updated: 2022/05/30 12:16:29 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/05/31 14:49:18 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,22 @@
 
 int	command(t_data *data)
 {
-	t_argv	*arg;
+	t_argv	*aux;
 	char	**path;
-	char	*direction;
 
-	arg = *data->argv;
+	aux = *data->argv;
 	path = ft_split(cmmd_find_path(data->myenv_str), ':');
-	direction = cmmd_path(path, arg->split[0]);
-
+	while (aux)
+	{	
+		aux->direction = cmmd_path(path, aux->split[0]);
+		printf("dir->%s\n", aux->direction);
+		if (aux->direction == NULL)
+			aux->error_code = 127;
+		else
+			aux->error_code = 100;
+		printf("error->%i\n", aux->error_code);
+		aux = aux->next;
+	}
 /*
 	while (arg[i])
 	{
@@ -34,14 +42,19 @@ int	command(t_data *data)
 		printf("argv[%i]-> %s\n", i, argv[i]);
 		i++;
 	}
-	printf("dir-> %s\n", direction);*/
+	printf("dir-> %s\n", direction);
+*/
+/*
 	if (direction == NULL)
 		return (127);
-	arg->error_code = execute(data, direction);
+*/
+	aux = *data->argv;
+	if (aux->error_code == 100)	
+		aux->error_code = execute(data, aux->direction);
 	
 	free_env_char(path);
-	free(direction);
-	return (arg->error_code);
+//	free(direction);
+	return (aux->error_code);
 }
 
 int	execute(t_data *data, char *direction)
