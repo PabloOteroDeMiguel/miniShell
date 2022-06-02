@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/05/11 12:16:06 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/02 19:48:04 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	lst_add_back(t_argv **argv, t_argv *new);
 void	add_front(t_argv **argv, t_argv *new);
 
 /*Builtins*/
+int     check_flags(char *flag);
 void	min_echo(t_argv **argv);
 void	min_pwd(t_myenv **myenv);
 
@@ -76,8 +77,10 @@ void	expand(t_data *data);
 char	*change_str(char *str, t_myenv **myenv);
 
 /*Cmmd*/
-int		command(char **argv, char **envp);
-int		execute(char **argv, char **envp, char *direction);
+//int		command(char **argv, char **envp);
+int		command(t_data *data);
+//int		execute(char **argv, char **envp, char *direction);
+int		execute(t_data *data, char *direction);;
 
 /*Cmmd_Path*/
 int		cmmd_addarg(char    **new_path, char *path, char *arg);

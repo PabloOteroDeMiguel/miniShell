@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 11:10:35 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/08 14:42:29 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/06/02 18:49:16 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	arguments(t_argv **argv, char *str)
 		while (str[i] == ' ')
 			i++;
 		len = 0;
+/*
 		if (str[i] == 39)
 		{
 			len++;
@@ -77,8 +78,7 @@ void	arguments(t_argv **argv, char *str)
 			lst_add_back(argv, lstnew(ft_substr(str, i + 1, len - 1), 1));
 			i = i + len ;
 			w++;
-			len = 0;
-		}
+			len = 0;		}
 		else if (str[i] == 34)
 		{
 			len++;
@@ -89,20 +89,22 @@ void	arguments(t_argv **argv, char *str)
 			w++;
 			len = 0;
 		}
-		else if (str[i] == 124)
+*/
+		if (str[i] == 124)
 		{
 			len++;
 			while (str[i + len] != 124 && str[i + len])
 				len++;
-			lst_add_back(argv, lstnew(ft_substr(str, i + 1, len - 1), 0));
+			lst_add_back(argv, lstnew(ft_substr(str, i + 1, len - 1), 3));
 			i = i + len ;
 			w++;
 			len = 0;
 		}
 		else
 		{
-			while (str[i + len] != 34 && str[i + len] != 39
-				&& str[i + len] != 124 && str[i + len])
+		//	while (str[i + len] != 34 && str[i + len] != 39
+		//		&& str[i + len] != 124 && str[i + len])
+			while (str[i + len] != 124 && str[i + len])
 				len++;
 			lst_add_back(argv, lstnew(ft_substr(str, i, len), 0));
 			i = i + len - 1;
@@ -112,7 +114,28 @@ void	arguments(t_argv **argv, char *str)
 		i++;
 	}
 }
+/*
+void	remove_quotes(t_data *data)
+{
+	int		i;
+	int		len;
+	char	str;
+	char	aux;
+	t_argv	*arg_aux;
 
+	arg_aux = *data->argv;
+	while (arg)
+	{
+		i = 0;
+		len = 0;
+		while (arg_aux->arg[i])
+		{
+			if (arg_aux->arg[i] == 39)
+			{
+				if (i != 0)
+					aux = ft_substr(arg_aux->arg, 0, i)
+}
+*/
 void	min_split(t_argv **argv)
 {
 	t_argv	*aux;
