@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 11:30:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/05/31 09:12:42 by potero           ###   ########.fr       */
+/*   Updated: 2022/04/28 12:00:44 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ typedef struct s_argv
 {
 	char			*arg;
 	char			**split;
-	char			*direction;
-	int				error_code;
 	int				quote;
 	struct s_argv	*next;
 }	t_argv;
@@ -39,7 +37,6 @@ typedef struct s_data
 	char			*infile;
 	char			*outfile;
 	char			**myenv_str;
-	int				cmmd;
 } t_data;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:13:18 by potero-d          #+#    #+#             */
-/*   Updated: 2022/05/31 19:13:56 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/06/02 19:32:56 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	check_flags(char *flag)
 	int	len;
 
 	i = 0;
+	// printf("prueba----------->\n");
 	if (flag[i] == '-')
 	{
 		i++;
@@ -29,13 +30,14 @@ int	check_flags(char *flag)
 			i++;
 		}
 	}
+	else
+		return (1);
 	return (0);
 }
 
 void	min_echo(t_argv **argv)
 {
 	t_argv	*aux;
-//	char	*print;
 	int		i;
 	int		n;
 
@@ -43,8 +45,10 @@ void	min_echo(t_argv **argv)
 	aux = *argv;
 	if (aux->split[1])
 	{
+		// printf("hay algo--------->\n");
 		if (check_flags(aux->split[1]) == 0)
 		{
+			// printf("hay flags-------->\n");
 			n = 1;
 			i = 2;
 		}
@@ -72,11 +76,13 @@ void	min_echo(t_argv **argv)
 				printf(" ");
 			aux = aux->next;
 		}
+		
 	}
 	else
 	{
+		// printf("no hay nada\n");
 		aux = aux->next;
-		if (aux && check_flags(aux->split[1]) == 0)
+		if (aux && (check_flags(aux->split[1]) == 0))
 		{
 			n = 1;
 			aux = aux->next;

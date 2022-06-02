@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/05/30 11:57:23 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/05/11 12:01:10 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	leaks(void)
 int	min_builtins(char *str, t_data *data)
 {
 	t_argv	*argv;
-//	char	**exec;
+	char	**exec;
 	int 	i;
 
 	argv = *data->argv;
@@ -47,15 +47,14 @@ int	min_builtins(char *str, t_data *data)
 	}
 	else
 	{
-	/*	exec = malloc(sizeof(char *) * 4);
+		exec = malloc(sizeof(char *) * 4);
 		exec[0] = data->infile;
 		exec[1] = argv->arg;
 		exec[2] = data->outfile;
 		exec[3] = 0;
-		i = command(exec, data->myenv_str);*/
-		i = command(data);
+		i = command(exec, data->myenv_str);
 		printf("%i\n", i);
-	//	free(exec);
+		free(exec);
 	} 	
 	return (1);
 }
@@ -112,7 +111,7 @@ int	main(int argc, char **argv2, char **envp)
 			min_split(data.argv);
 		//	print_list(data.argv);
 			expand(&data);
-			print_list(data.argv);
+		//	print_list(data.argv);
 			stop = min_builtins(str, &data);
 		}
 		free_arg_str(str, *data.argv);
@@ -135,10 +134,6 @@ void	print_list(t_argv **argv)
 	while (aux)
 	{
 		i = 0;
-		if (aux->quote == 3)
-			printf("There is a pipe |\n");
-		else
-			printf("NO pipe\n");
 		//printf("arg[%d]->%p->%s\n", w, aux, aux->arg);
 		printf("arg[%d]->%s\n", w, aux->arg);
 		if (aux->split[i] == 0)

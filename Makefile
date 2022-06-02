@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: potero-d <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/07 12:55:48 by potero-d          #+#    #+#              #
-#    Updated: 2022/05/30 11:08:28 by potero-d         ###   ########.fr        #
+#    Updated: 2022/06/01 20:25:37 by pmoreno-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ NAME = minishell
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g -O0
 
 %.o:%.c
 		$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I$(LIBFT_PATH) -I$(EXECT_PATH) -I$(INCS) -I/Users/$(USER)/.brew/opt/readline/include
@@ -34,7 +34,7 @@ RM = rm -f
 
 $(NAME): $(OBJS)
 		@make -C $(LIBFT_PATH) --silent
-		gcc -o $(NAME) $(OBJS) -I./libft -L./libft -lft -I/Users/$(USER)/.brew/opt/readline/include -lreadline
+		gcc -o $(NAME) $(OBJS) -I./libft -L./libft -lft -I/Users/$(USER)/.brew/opt/readline/include -lreadline -fsanitize=address
 
 all: $(NAME)  
 
