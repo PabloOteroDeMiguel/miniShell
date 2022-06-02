@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 11:13:41 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/08 16:50:08 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/06/02 19:33:25 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*change_str(char *str, t_myenv **myenv)
 	free(sub);
 	return (print);
 }
-
+/*
 void	expand(t_data *data)
 {
 	t_argv	*argv;
@@ -72,7 +72,6 @@ void	expand(t_data *data)
 	int		j;
 
 	argv = *data->argv;
-
 	while (argv)
 	{
 		i = 0;
@@ -100,6 +99,62 @@ void	expand(t_data *data)
 					argv->split[j] = 0;
 				}
 				i--;
+			}	
+			i++;
+		}
+		argv = argv->next;
+	}
+}
+*/
+
+int	change(int i)
+{
+	if (i == 0)
+		return(1);
+	else
+		return(0);
+}
+void	expand(t_data *data)
+{
+	t_argv	*argv;
+	int		i;
+	char	*aux;
+	int		single_quote;
+//	int		j;
+
+	argv = *data->argv;
+	while (argv)
+	{
+		single_quote = 0;
+		i = 0;
+		while (argv->arg[i])
+		{	
+			if (argv->arg[i] == 39)
+				single_quote = change(single_quote);
+			if (argv->arg[i] == '$' && single_quote == 0)
+			{
+				aux = change_str(argv->split[i], data->myenv);
+				if (aux != 0)
+				{	
+					free(argv->arg);
+					argv->arg = ft_strdup(aux);
+					free(aux);
+				}
+	/*
+				else
+				{
+					j = i;
+					while (argv->split[j + 1])
+					{
+						free(argv->split[j]);
+						argv->split[j] = ft_strdup(argv->split[j + 1]);
+						j++;
+					}
+					free(argv->split[j]);
+					argv->split[j] = 0;
+				}
+				i--;
+	*/
 			}	
 			i++;
 		}

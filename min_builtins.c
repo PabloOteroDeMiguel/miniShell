@@ -3,14 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   min_builtins.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:13:18 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/07 13:55:53 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/06/01 10:21:28 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	check_flags(char *flag)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	if (flag[i] == '-')
+	{
+		i++;
+		len = ft_strlen(flag);
+		while (i < len)
+		{
+			if (flag[i] != 'n')
+				return (1);
+			i++;
+		}
+	}
+	return (0);
+}
 
 void	min_echo(t_argv **argv)
 {
@@ -23,7 +43,7 @@ void	min_echo(t_argv **argv)
 	aux = *argv;
 	if (aux->split[1])
 	{
-		if (ft_strcmp(aux->split[1], "-n") == 0)
+		if (check_flags(aux->split[1]) == 0)
 		{
 			n = 1;
 			i = 2;
@@ -56,7 +76,7 @@ void	min_echo(t_argv **argv)
 	else
 	{
 		aux = aux->next;
-		if (aux && (ft_strcmp(aux->arg, "-n") == 0))
+		if (aux && check_flags(aux->split[1]) == 0)
 		{
 			n = 1;
 			aux = aux->next;
