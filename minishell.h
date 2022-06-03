@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/05/30 11:36:10 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/06/03 13:13:46 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	min_unset(t_myenv **myenv, t_argv *argv);
 
 /*Expand*/
 void	expand(t_data *data);
-char	*change_str(char *str, t_myenv **myenv);
+char	*change_str(char *str, t_myenv **myenv, int *len);
 
 /*Cmmd*/
 //int		command(char **argv, char **envp);

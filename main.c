@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/02 19:32:31 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/03 12:48:08 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ void	print_list(t_argv **argv)
 			printf("NO pipe\n");*/
 		//printf("arg[%d]->%p->%s\n", w, aux, aux->arg);
 		printf("arg[%d]->%s\n", w, aux->arg);
+/*
 		if (aux->split[i] == 0)
 			return ;
 		while (aux->split[i])
@@ -144,6 +145,7 @@ void	print_list(t_argv **argv)
 			i++;
 		}
 		w++;
+*/
 		aux = aux->next;
 	}
 }
