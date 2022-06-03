@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 11:13:41 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/03 13:15:20 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/03 13:31:36 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,12 +135,24 @@ void	expand(t_data *data)
 }
 */
 
-int	change(int i)
+int	change(int i, char c)
 {
-	if (i == 0)
-		return(1);
-	else
-		return(0);
+	int	ret;
+
+	ret = 0;
+	if ((i == 0) && (c == 34))
+		ret = 2;
+	else if ((i == 0) && (c == 39))
+		ret = 1;
+	else if( (i == 1) && (c == 34))
+		ret = 1;
+	else if ((i == 1) && (c == 39))
+		ret = 0;
+	else if ((i == 2) && (c == 34))
+		ret = 0;
+	else if ((i == 2) && (c == 39))
+		ret = 2;
+		return(ret);
 }
 void	expand(t_data *data)
 {
@@ -163,10 +175,10 @@ void	expand(t_data *data)
 		{		
 		//	printf("quote->%i\n", single_quote);
 		//	printf("char[%i]->%c\n", i, argv->arg[i]);
-			if (argv->arg[i] == 39)
-				single_quote = change(single_quote);
+			if ((argv->arg[i] == 39) || (argv->arg[i] == 34))
+				single_quote = change(single_quote, argv->arg[i]);
 		//	printf("quote->%i\n", single_quote);
-			if (argv->arg[i] == '$' && single_quote == 0)
+			if (argv->arg[i] == '$' && single_quote != 1)
 			{
 				prev = ft_substr(argv->arg, 0, i);
 		//		printf("prev->%s\n", prev);
