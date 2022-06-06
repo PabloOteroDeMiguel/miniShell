@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/06 11:40:25 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/06 17:29:04 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	leaks(void)
 int	min_builtins(char *str, t_data *data)
 {
 	t_argv	*argv;
-//	int 	i;
+	int 	i;
 
 	argv = *data->argv;
 	if (argv->split[0] == 0)
@@ -44,13 +44,12 @@ int	min_builtins(char *str, t_data *data)
 			printf("exit\n");
 			return (0);
 	}
-/*
 	else
 	{
 		i = command(data);
 		printf("%i\n", i);
 	}
-*/
+
 	return (1);
 }
 
@@ -103,9 +102,10 @@ int	main(int argc, char **argv2, char **envp)
 		{
 			add_history(str);
 			arguments(data.argv, str);	//separamos por pipes
-		//	print_list(data.argv);
 			expand(&data);				//expandimos los $
 			min_split(&data);
+		//	print_list(data.argv);
+			remove_quotes(data.argv);
 			print_list(data.argv);
 			stop = min_builtins(str, &data);
 		}

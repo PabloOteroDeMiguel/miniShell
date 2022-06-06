@@ -6,13 +6,15 @@
 #    By: potero-d <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/07 12:55:48 by potero-d          #+#    #+#              #
-#    Updated: 2022/05/30 11:08:28 by potero-d         ###   ########.fr        #
+#    Updated: 2022/06/06 15:45:08 by potero           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS = main.c min_argv.c min_lst.c min_builtins.c\
 	   min_free.c min_env.c min_cd.c min_export.c min_unset.c min_expand.c\
+	   min_remove_quotes.c\
 	   cmmd.c cmmd_path.c
+		
 ##	   execute/ft_lstadd_back.c execute/ft_lstlast.c execute/ft_error_funct.c\
 	   execute/ft_files.c execute/ft_free_variables.c execute/ft_error_funct2.c\
 	   execute/ft_lstnew.c execute/main_last_part.c execute/ft_open_file.c\

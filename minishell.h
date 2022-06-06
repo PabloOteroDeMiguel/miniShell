@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/06 10:22:20 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/06 15:47:25 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,9 @@ int		cmmd_addarg(char    **new_path, char *path, char *arg);
 void	not_cmmd(char *str);
 char	*cmmd_find_path(char **envp);
 char	*cmmd_path(char **path, char *arg);
+
+/*Remove_quotes*/
+char	*quotes(char *str);
+void	remove_quotes(t_argv **argv);
 
 #endif
