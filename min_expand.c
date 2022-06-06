@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 11:13:41 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/03 13:31:36 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/03 13:47:26 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*change_str(char *str, t_myenv **myenv , int *len)
 	aux = *myenv;
 	extra = 0;
 	key = ft_strchr(str, '$') + 1;
-	printf("key->%s\n", key);
+//	printf("key->%s\n", key);
 	i = 0;
 	while (key[i])
 	{
@@ -163,7 +163,6 @@ void	expand(t_data *data)
 	char	*new;
 	char	*prev;
 	int		single_quote;
-//	int		j;
 
 	argv = *data->argv;
 	while (argv)
@@ -184,17 +183,11 @@ void	expand(t_data *data)
 		//		printf("prev->%s\n", prev);
 				//aux = change_str(argv->split[i], data->myenv);
 				aux = change_str(&argv->arg[i], data->myenv, &len);
-				printf("prev->%s\n", prev);
-				printf("aux->%s\n", aux);
-		/*
-				if (aux)
-					len = ft_strlen(aux);
-				else
-					len = 0;
-		*/
+		//		printf("prev->%s\n", prev);
+		//		printf("aux->%s\n", aux);
 		//		printf("len->%i\n", len);
 				new = ft_strjoin(prev, aux);
-				printf("new->%s\n", new);
+		//		printf("new->%s\n", new);
 				free(aux);
 				free(prev);
 				if (new != 0)
@@ -203,24 +196,10 @@ void	expand(t_data *data)
 					argv->arg = ft_strdup(new);
 					free(new);
 				}
-				printf("char[%i]->%c\n", i, argv->arg[i]);
+		//		printf("char[%i]->%c\n", i, argv->arg[i]);
 				i = i + len - 1;
-				printf("char[%i]->%c\n", i, argv->arg[i]);
-	/*
-				else
-				{
-					j = i;
-					while (argv->split[j + 1])
-					{
-						free(argv->split[j]);
-						argv->split[j] = ft_strdup(argv->split[j + 1]);
-						j++;
-					}
-					free(argv->split[j]);
-					argv->split[j] = 0;
-				}
-				i--;
-	*/
+		//		printf("char[%i]->%c\n", i, argv->arg[i]);
+
 			}	
 			i++;
 		}

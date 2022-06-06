@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 11:10:35 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/02 18:49:16 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/06 12:44:57 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ void	remove_quotes(t_data *data)
 					aux = ft_substr(arg_aux->arg, 0, i)
 }
 */
+/*
 void	min_split(t_argv **argv)
 {
 	t_argv	*aux;
@@ -152,5 +153,112 @@ void	min_split(t_argv **argv)
 			aux->split[1] = NULL;
 		}
 		aux = aux->next;
+	}
+}
+*/
+
+static int	change_quote(int q, char c)
+{
+	int r;
+	
+	r = 0;
+	if ((c == 39) && (q == 0))
+		r = 1;
+	else if ((c == 39) && (q == 1))
+		r = 0;
+	else if ((c == 39) && (q == 2))
+		r = 2;
+	else if ((c == 34) && (q == 0))
+		r = 2;
+	else if ((c == 34) && (q == 1))
+		r = 1;
+	else if ((c == 34) && (q == 2))
+		r = 0;
+	return (r);
+}
+
+static int	min_words(char *s)
+{
+	int	w;
+	int	i;
+	int q;
+
+	q = 0;
+	i = 0;
+	while (s[i] == ' ')
+		i++;
+	w = 1;
+	while (s[i + 1])
+	{
+		if (s[i] == ' ' && s[i + 1] != ' ' && q == 0)
+			w++;
+		else if (s[i] == 39) //single quote. Esto se puede poner en un solo else if (195 y 197)
+			q = change_quote(q, s[i]);
+		else if (s[i] == 34) //double quote
+			q = change_quote(q, s[i]);
+		i++;
+	}
+	return (w);	
+}
+
+void static aux(char ***str, char *s)
+{
+	int	i;
+	int	j;
+	int w;
+	int	q;
+
+	i = 0;
+	j = 0;
+	w = 0;
+	q = 0;
+	while (s[i] == ' ')
+		i++;
+	while (s[i])
+	{
+	//	printf("s[%i]->%c\n", i, s[i]);
+	//	printf("q[%i]->%i\n", i, q);
+	//	printf("j[%i]->%i\n", i, j);
+		if ((s[i] == ' ') && (q == 0))
+		{
+			(*str)[w] = ft_substr(s, i - j, j);
+			while (s[i + 1] == ' ')
+				i++;
+			w++;
+			j = 0;
+		}
+		else if ((s[i] != ' ') || (s[i] == ' ' && q != 0))
+				j++;
+		if (s[i] == 34 || s[i] == 39)
+			q = change_quote(q, s[i]);
+		i++;
+	}
+	if (s[i - 1] != ' ')
+		(*str)[w++] = ft_substr(s, i - j, j);
+	(*str)[w] = 0;
+}
+
+void	min_split(t_data *data)
+{
+	int		words;
+	t_argv	*argv;
+
+	argv = *data->argv;
+	while (argv)
+	{
+		if (!argv->arg)
+			argv->split = 0;
+		if (ft_strlen(argv->arg) == 0)
+		{
+			argv->split = malloc(sizeof(char *) * 1);
+			argv->split[0] = 0;
+		}
+		words = min_words(argv->arg);
+	//	printf("w->%i\n", words);		
+		argv->split = malloc(sizeof(char *) * (words + 1));
+		if (!argv->split)
+			argv->split = 0;
+		aux(&argv->split, argv->arg);
+		argv = argv->next;
 	}
 }

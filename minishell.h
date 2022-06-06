@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/03 13:36:15 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/06 10:22:20 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int		min_builtins(char *str, t_data *data);
 void	read_str(t_argv *argv, char *str);
 int		words(char *str);
 void	arguments(t_argv **argv, char *str);
-void	min_split(t_argv **argv);
+void	min_split(t_data *data);
+//void	min_split(t_argv **argv);
 
 /*Free*/
 void	free_arg_str(char *str, t_argv *argv);
