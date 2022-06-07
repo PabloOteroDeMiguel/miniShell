@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/06 17:29:04 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/07 16:39:16 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,33 @@ int	min_builtins(char *str, t_data *data)
 	}
 	else
 	{
-		i = command(data);
-		printf("%i\n", i);
+		direction(data);
+		if (data->num_argc == 1)
+			i = command(data);
+		else if (data->num_argc > 1)
+		{
+			printf("PIPEX\n");
+			i = pipe_execute(data);
+		}
+	//	free_env_char(data->dir_pipe);
+	//	free_env_char(data->arg_pipe);
 	}
-
 	return (1);
+}
+
+int cont_arg(t_argv **argv)
+{
+	int 	cont;
+	t_argv	*aux;
+
+	cont = 0;
+	aux = *argv;
+	while (aux)
+	{
+		cont++;
+		aux = aux->next;
+	}
+	return (cont);
 }
 
 int	main(int argc, char **argv2, char **envp)
@@ -106,6 +128,7 @@ int	main(int argc, char **argv2, char **envp)
 			min_split(&data);
 		//	print_list(data.argv);
 			remove_quotes(data.argv);
+			data.num_argc = cont_arg(data.argv);
 			print_list(data.argv);
 			stop = min_builtins(str, &data);
 		}

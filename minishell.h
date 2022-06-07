@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/06 15:47:25 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/07 11:32:01 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 int		main(int argc, char **argv2, char **envp);
 void	print_list(t_argv **argv);
 int		min_builtins(char *str, t_data *data);
+int		cont_arg(t_argv **argv);
 
 /*Argv*/
 void	read_str(t_argv *argv, char *str);
@@ -78,16 +79,20 @@ int		change(int i, char c);
 char	*change_str(char *str, t_myenv **myenv, int *len);
 
 /*Cmmd*/
-//int		command(char **argv, char **envp);
 int		command(t_data *data);
-//int		execute(char **argv, char **envp, char *direction);
-int		execute(t_data *data, char *direction);;
+int		execute(t_data *data, char *direction);
+void	direction(t_data *data);
 
 /*Cmmd_Path*/
 int		cmmd_addarg(char    **new_path, char *path, char *arg);
 void	not_cmmd(char *str);
 char	*cmmd_find_path(char **envp);
 char	*cmmd_path(char **path, char *arg);
+
+/*Pipex*/
+int		pipex(t_data *data);
+int		mid_cmd(int i, t_data *data);
+int		pipe_execute(t_data *data);
 
 /*Remove_quotes*/
 char	*quotes(char *str);
