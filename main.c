@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/07 16:39:16 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/07 17:43:25 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ int	min_builtins(char *str, t_data *data)
 			printf("PIPEX\n");
 			i = pipe_execute(data);
 		}
-	//	free_env_char(data->dir_pipe);
-	//	free_env_char(data->arg_pipe);
+		free_env_char(data->dir_pipe);
+		free_env_char(data->arg_pipe);
 	}
 	return (1);
 }

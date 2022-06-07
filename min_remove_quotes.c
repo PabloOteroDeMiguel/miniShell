@@ -6,32 +6,11 @@
 /*   By: potero <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 13:01:20 by potero            #+#    #+#             */
-/*   Updated: 2022/06/06 17:21:28 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/07 17:52:39 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/*
-static int  change_quote(int q, char c)
-{
-	int r;
-
-	r = 0;
-	if ((c == 39) && (q == 0))
-		r = 1;
-	else if ((c == 39) && (q == 1))
-		r = 0;
-	else if ((c == 39) && (q == 2))
-		r = 2;
-	else if ((c == 34) && (q == 0))
-		r = 2;
-	else if ((c == 34) && (q == 1))
-		r = 1;
-	else if ((c == 34) && (q == 2))
-		r = 0;
-	return (r);
-}
-*/
 
 char	*quotes(char *str)
 {

@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:13:18 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/01 10:21:28 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/07 17:48:14 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,14 @@ int	check_flags(char *flag)
 			i++;
 		}
 	}
+	else
+		return (1);
 	return (0);
 }
 
 void	min_echo(t_argv **argv)
 {
 	t_argv	*aux;
-//	char	*print;
 	int		i;
 	int		n;
 
@@ -99,7 +100,6 @@ void	min_echo(t_argv **argv)
 	if (n == 0)
 		printf("\n");
 }
-
 void	min_pwd(t_myenv	**myenv)
 {
 	t_myenv	*aux;
