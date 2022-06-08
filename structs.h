@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 11:30:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/07 11:13:00 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/08 12:56:40 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ typedef struct s_data
 {
 	struct s_myenv	**myenv;
 	struct s_argv	**argv;
-	char			**dir_pipe;
-	char			**arg_pipe;
 	char			*infile;
 	char			*outfile;
 	char			**myenv_str;
