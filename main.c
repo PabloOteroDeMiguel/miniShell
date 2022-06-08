@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/08 16:19:21 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/08 19:21:39 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,20 @@ int	min_builtins(char *str, t_data *data)
 			printf("exit123\n");
 			return (0);
 	}
+
 	else
 	{
 	//	direction(data);
-		i = pipe_execute(data);
-		printf("1\n");
-		/*
+	//	i = pipe_execute(data);
+
 		if (data->num_argc == 1)
-			i = command(data);
+			i = execute(data);
 		else if (data->num_argc > 1)
 		{
 			printf("PIPEX\n");
 			i = pipe_execute(data);
-		}
-		*/
+		}	
+
 	}
 	return (1);
 }
@@ -82,7 +82,7 @@ int	main(int argc, char **argv2, char **envp)
 	char	*str;
 	t_data	data;
 	int		stop;
-	int		w;
+//	int		stdin_copy;
 //	int i = 0;
 	
 	if (argc > 1) 
@@ -90,6 +90,7 @@ int	main(int argc, char **argv2, char **envp)
 	argv2 = 0;
 	atexit(leaks);
 	stop = 1;
+//	stdin_copy = dup(STDIN_FILENO);
 	data.argv = malloc(sizeof(t_argv *));
 	data.myenv = malloc(sizeof(t_myenv *));
 	*data.myenv = 0;
@@ -110,7 +111,6 @@ int	main(int argc, char **argv2, char **envp)
 */
 	while (stop != 0)
 	{
-		w = 0;
 		*data.argv = NULL;	
 		printf("\033[;33m");
 		//str = readline("\033[;33mMinishell$ \033[0m");
@@ -119,7 +119,9 @@ int	main(int argc, char **argv2, char **envp)
 		//printf("\033[0;32m");
 		if (!str)
 		{
-			printf("exit\n");
+			printf("exit1\n");
+			//str = readline("Minishell$ ");
+	//		dup2(stdin_copy, STDIN_FILENO);
 			exit(0);
 		}
 		if (str  && ft_strlen(str) > 0)

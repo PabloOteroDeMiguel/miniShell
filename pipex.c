@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:57:16 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/08 16:41:50 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/08 19:16:25 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	mid_cmd(t_argv *arg, t_data *data)
 		if (execve(arg->direction, arg->split, data->myenv_str) < 0)
 			return (128);
 	}
-//	dup2(fd[0], STDIN_FILENO);
+	//dup2(fd[0], STDIN_FILENO);
 	close(fd[0]);
 	close(fd[1]);
 	return (0);
@@ -38,7 +38,6 @@ int	mid_cmd(t_argv *arg, t_data *data)
 
 int	pipe_execute(t_data *data)
 {
-//	int		fd;
 	int		fd[2];
 	int		fd3;
 	int		status;
@@ -75,14 +74,18 @@ int	pipe_execute(t_data *data)
 			return (1);
 		arg = arg->next;
 	}
-	fd3 = open(data->outfile, O_CREAT | O_WRONLY | O_TRUNC, 0666);
+/*	fd3 = open(data->outfile, O_CREAT | O_WRONLY | O_TRUNC, 0666);
 	if (fd3 < 0)
 		return (0);
+*/
 	pid = fork();
 	if (pid == -1)
 		return (1);
 	else if (pid == 0)
 	{
+		fd3 = open(data->outfile, O_CREAT | O_WRONLY | O_TRUNC, 0666);
+		if (fd3 < 0)
+			return (0);
 		dup2(fd3, STDOUT_FILENO);
 		close(fd3);
 		if (execve(arg->direction, arg->split, data->myenv_str) < 0)

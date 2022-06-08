@@ -6,7 +6,7 @@
 /*   By: potero <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 09:20:12 by potero            #+#    #+#             */
-/*   Updated: 2022/06/08 16:35:26 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/08 19:20:34 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int	command(t_data *data)
 	return (aux->error_code);
 }
 */
-/*
-int	execute(t_data *data, char *direction)
+
+int	execute(t_data *data)
 {
 	int			fd[2];
 	int			status;
@@ -73,11 +73,11 @@ int	execute(t_data *data, char *direction)
 		close(fd[0]);
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[1]);
-		if (execve(direction, arg->split, data->myenv_str) < 0)
+		if (execve(arg->direction, arg->split, data->myenv_str) < 0)
 			return (127);
 	}
 	close(fd[0]);
 	wait(&status);
 	return (100);
 }
-*/
+

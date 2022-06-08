@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/07 19:18:39 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/08 19:21:00 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	*change_str(char *str, t_myenv **myenv, int *len);
 
 /*Cmmd*/
 int		command(t_data *data);
-int		execute(t_data *data, char *direction);
+int		execute(t_data *data);
 void	direction(t_data *data);
 
 /*Cmmd_Path*/
