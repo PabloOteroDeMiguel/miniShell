@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:57:16 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/08 16:36:40 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/08 16:41:50 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ int	mid_cmd(t_argv *arg, t_data *data)
 		close(fd[0]);
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[1]);
-	//	ft_putstr_fd(direction[i - 2], 2);
-	//	ft_putstr_fd(arg[0], 2);
 		if (execve(arg->direction, arg->split, data->myenv_str) < 0)
 			return (128);
 	}
