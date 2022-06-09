@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 11:10:35 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/09 13:15:57 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/09 13:28:33 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,53 +39,11 @@ void	arguments(t_argv **argv, char *str)
 		i++;
 	}
 }
-/*
-void	remove_quotes(t_data *data)
-{
-	int		i;
-	int		len;
-	char	str;
-	char	aux;
-	t_argv	*arg_aux;
-
-	arg_aux = *data->argv;
-	while (arg)
-	{
-		i = 0;
-		len = 0;
-		while (arg_aux->arg[i])
-		{
-			if (arg_aux->arg[i] == 39)
-			{
-				if (i != 0)
-					aux = ft_substr(arg_aux->arg, 0, i)
-}
-*/
-/*
-void	min_split(t_argv **argv)
-{
-	t_argv	*aux;
-
-	aux = *argv;
-	while (aux)
-	{
-		if (aux->quote == 0)
-			aux->split = ft_split(aux->arg, ' ');
-		else
-		{
-			aux->split = malloc(sizeof(char *) * 2);
-			aux->split[0] = ft_strdup(aux->arg);
-			aux->split[1] = NULL;
-		}
-		aux = aux->next;
-	}
-}
-*/
 
 static int	change_quote(int q, char c)
 {
-	int r;
-	
+	int	r;
+
 	r = 0;
 	if ((c == 39) && (q == 0))
 		r = 1;
@@ -106,7 +64,7 @@ static int	min_words(char *s)
 {
 	int	w;
 	int	i;
-	int q;
+	int	q;
 
 	q = 0;
 	i = 0;
@@ -117,43 +75,33 @@ static int	min_words(char *s)
 	{
 		if (s[i] == ' ' && s[i + 1] != ' ' && q == 0)
 			w++;
-		else if (s[i] == 39) //single quote. Esto se puede poner en un solo else if (195 y 197)
-			q = change_quote(q, s[i]);
-		else if (s[i] == 34) //double quote
+		else if (s[i] == 39 || s[i] == 34)
 			q = change_quote(q, s[i]);
 		i++;
 	}
-	return (w);	
+	return (w);
 }
 
-void static aux(char ***str, char *s)
+void static	aux(char ***str, char *s, int q, int w)
 {
 	int	i;
 	int	j;
-	int w;
-	int	q;
 
 	i = 0;
 	j = 0;
-	w = 0;
-	q = 0;
 	while (s[i] == ' ')
 		i++;
 	while (s[i])
 	{
-	//	printf("s[%i]->%c\n", i, s[i]);
-	//	printf("q[%i]->%i\n", i, q);
-	//	printf("j[%i]->%i\n", i, j);
 		if ((s[i] == ' ') && (q == 0))
 		{
-			(*str)[w] = ft_substr(s, i - j, j);
+			(*str)[w++] = ft_substr(s, i - j, j);
 			while (s[i + 1] == ' ')
 				i++;
-			w++;
 			j = 0;
 		}
 		else if ((s[i] != ' ') || (s[i] == ' ' && q != 0))
-				j++;
+			j++;
 		if (s[i] == 34 || s[i] == 39)
 			q = change_quote(q, s[i]);
 		i++;
@@ -166,8 +114,12 @@ void static aux(char ***str, char *s)
 void	min_split(t_data *data)
 {
 	int		words;
+	int		w;
+	int		q;
 	t_argv	*argv;
 
+	w = 0;
+	q = 0;
 	argv = *data->argv;
 	while (argv)
 	{
@@ -179,11 +131,10 @@ void	min_split(t_data *data)
 			argv->split[0] = 0;
 		}
 		words = min_words(argv->arg);
-	//	printf("w->%i\n", words);		
 		argv->split = malloc(sizeof(char *) * (words + 1));
 		if (!argv->split)
 			argv->split = 0;
-		aux(&argv->split, argv->arg);
+		aux(&argv->split, argv->arg, q, w);
 		argv = argv->next;
 	}
 }
