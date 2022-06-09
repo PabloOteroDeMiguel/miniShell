@@ -6,7 +6,7 @@
 /*   By: potero <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 09:20:12 by potero            #+#    #+#             */
-/*   Updated: 2022/06/08 19:20:34 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/09 10:59:26 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	direction(t_data *data)
 	while (aux)
 	{	
 		aux->direction = cmmd_path(path, aux->split[0]);
-	//	printf("dir->%s\n", aux->direction);
-	//	printf("dir->%p\n", aux->direction);
 		if (aux->direction == NULL)
 			aux->error_code = 127;
 		else
@@ -38,17 +36,13 @@ void	direction(t_data *data)
 	free_env_char(path);
 }
 
-/*
-int	command(t_data *data)
+static void	child(int fd[2])
 {
-	t_argv	*aux;
-
-	aux = *data->argv;
-	if (aux->error_code == 100)	
-		aux->error_code = execute(data, aux->direction);
-	return (aux->error_code);
+	dup2(fd[0], STDIN_FILENO);
+	close(fd[0]);
+	dup2(fd[1], STDOUT_FILENO);
+	close(fd[1]);
 }
-*/
 
 int	execute(t_data *data)
 {
@@ -69,10 +63,7 @@ int	execute(t_data *data)
 		return (1);
 	else if (pid == 0)
 	{
-		dup2(fd[0], STDIN_FILENO);
-		close(fd[0]);
-		dup2(fd[1], STDOUT_FILENO);
-		close(fd[1]);
+		child(fd);
 		if (execve(arg->direction, arg->split, data->myenv_str) < 0)
 			return (127);
 	}
@@ -80,4 +71,3 @@ int	execute(t_data *data)
 	wait(&status);
 	return (100);
 }
-
