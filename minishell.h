@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/08 19:21:00 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/09 13:14:29 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	free_env(t_myenv *myenv);
 void	free_env_char(char **str);
 
 /*List*/
-t_argv	*lstnew(char *str, int q);
+//t_argv	*lstnew(char *str, int q);
+t_argv	*lstnew(char *str);
 int		lstsize(t_argv *argv);
 t_argv	*lstlast(t_argv *lst);
 void	lst_add_back(t_argv **argv, t_argv *new);
