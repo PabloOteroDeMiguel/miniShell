@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/09 13:14:29 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/09 13:42:20 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,10 @@ t_argv	*lstlast(t_argv *lst);
 void	lst_add_back(t_argv **argv, t_argv *new);
 void	add_front(t_argv **argv, t_argv *new);
 
-/*Builtins*/
+/*Echo*/
 void	min_echo(t_argv **argv);
+
+/*PWD*/
 void	min_pwd(t_myenv **myenv);
 
 /*Env*/
