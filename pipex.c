@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:57:16 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/08 19:16:25 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/09 19:06:40 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	mid_cmd(t_argv *arg, t_data *data)
 {
-	int 	fd[2];
+	int		fd[2];
 	int		pid;
 
 	pipe(fd);
@@ -35,7 +35,6 @@ int	mid_cmd(t_argv *arg, t_data *data)
 	return (0);
 }
 
-
 int	pipe_execute(t_data *data)
 {
 	int		fd[2];
@@ -43,7 +42,6 @@ int	pipe_execute(t_data *data)
 	int		status;
 	int		pid;
 	t_argv	*arg;
- 	
 
 	arg = *data->argv;
 	pipe(fd);

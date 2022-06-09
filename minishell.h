@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/09 16:43:48 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/09 19:04:52 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,11 @@
 # include<readline/readline.h>
 # include<readline/history.h>
 # include<fcntl.h>
-//# include "pipex/inc/pipex.h"
 # include "libft.h"
 # include "structs.h"
-//# include "execute.h"
 
 /*Main*/
 int		main(int argc, char **argv2, char **envp);
-//void	print_list(t_argv **argv);
 int		min_builtins(char *str, t_data *data);
 int		cont_arg(t_argv **argv);
 
@@ -35,7 +32,6 @@ void	read_str(t_argv *argv, char *str);
 int		words(char *str);
 void	arguments(t_argv **argv, char *str);
 void	min_split(t_data *data);
-//void	min_split(t_argv **argv);
 
 /*Free*/
 void	free_arg_str(char *str, t_argv *argv);
@@ -43,7 +39,6 @@ void	free_env(t_myenv *myenv);
 void	free_env_char(char **str);
 
 /*List*/
-//t_argv	*lstnew(char *str, int q);
 t_argv	*lstnew(char *str);
 int		lstsize(t_argv *argv);
 t_argv	*lstlast(t_argv *lst);
@@ -62,7 +57,6 @@ t_myenv	*envnew(char *str);
 t_myenv	*envlast(t_myenv *myenv);
 void	env_add_back(t_myenv **myenv, t_myenv *new);
 void	min_getenv(char **envp, t_myenv **myenv);
-//void	print_env(t_myenv **env);
 char	**env_to_char(t_myenv **myenv);
 
 /*Cd*/
@@ -92,7 +86,7 @@ int		execute(t_data *data);
 void	direction(t_data *data);
 
 /*Cmmd_Path*/
-int		cmmd_addarg(char    **new_path, char *path, char *arg);
+int		cmmd_addarg(char **new_path, char *path, char *arg);
 void	not_cmmd(char *str);
 char	*cmmd_find_path(char **envp);
 char	*cmmd_path(char **path, char *arg);
@@ -104,7 +98,7 @@ int		mid_cmd(t_argv *arg, t_data *data);
 int		pipe_execute(t_data *data);
 
 /*Remove_quotes*/
-char	*quotes(char *str);
+char	*quotes(char *str, char c);
 void	remove_quotes(t_argv **argv);
 
 #endif

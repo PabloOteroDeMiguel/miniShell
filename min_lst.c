@@ -6,13 +6,12 @@
 /*   By: potero <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 12:31:47 by potero            #+#    #+#             */
-/*   Updated: 2022/06/09 13:14:11 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/09 18:09:37 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//t_argv	*lstnew(char *str, int q)
 t_argv	*lstnew(char *str)
 {
 	t_argv	*element;
@@ -21,7 +20,6 @@ t_argv	*lstnew(char *str)
 	if (!element)
 		return (NULL);
 	element->arg = str;
-//	element->quote = q;
 	element->next = NULL;
 	return (element);
 }

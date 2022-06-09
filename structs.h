@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 11:30:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/08 12:56:40 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/09 19:05:18 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_myenv
 	char			*key;
 	char			*value;
 	struct s_myenv	*next;
-} t_myenv;
+}	t_myenv;
 
 typedef struct s_data
 {
@@ -40,6 +40,6 @@ typedef struct s_data
 	char			*outfile;
 	char			**myenv_str;
 	int				num_argc;
-} t_data;
+}	t_data;
 
 #endif
