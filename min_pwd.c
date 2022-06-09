@@ -6,15 +6,15 @@
 /*   By: potero <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:38:09 by potero            #+#    #+#             */
-/*   Updated: 2022/06/09 13:39:21 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/09 13:43:49 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	 min_pwd(t_myenv **myenv)
+void	min_pwd(t_myenv **myenv)
 {
-	t_myenv *aux;
+	t_myenv	*aux;
 
 	aux = *myenv;
 	while (ft_strcmp(aux->key, "PWD") != 0)
