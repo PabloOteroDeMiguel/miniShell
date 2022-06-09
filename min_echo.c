@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   min_builtins.c                                     :+:      :+:    :+:   */
+/*   min_echo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:13:18 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/09 13:40:58 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/09 14:06:57 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,44 +57,6 @@ void	min_echo(t_argv **argv)
 			i++;
 			if (aux->split[i] != 0)
 				printf(" ");
-		}
-		aux = aux->next;
-		while (aux)
-		{
-			i = 0;
-			while (aux->split[i])
-			{
-				printf("%s", aux->split[i]);
-				i++;
-				if (aux->split[i] != 0)
-					printf(" ");
-			}
-			if (aux->next != 0)
-				printf(" ");
-			aux = aux->next;
-		}
-	}
-	else
-	{
-		aux = aux->next;
-		if (aux && check_flags(aux->split[1]) == 0)
-		{
-			n = 1;
-			aux = aux->next;
-		}
-		while (aux)
-		{
-			i = 0;
-			while (aux->split[i])
-			{
-				printf("%s", aux->split[i]);
-				i++;
-				if (aux->split[i] != 0)
-					printf(" ");
-			}	
-			if (aux->next != 0)
-				printf(" ");
-			aux = aux->next;
 		}
 	}
 	if (n == 0)

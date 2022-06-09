@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/09 13:42:20 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/09 14:09:08 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	add_front(t_argv **argv, t_argv *new);
 
 /*Echo*/
 void	min_echo(t_argv **argv);
+int		check_flags(char *flag);
 
 /*PWD*/
 void	min_pwd(t_myenv **myenv);
