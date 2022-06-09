@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/09 14:09:08 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/09 16:43:48 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 /*Main*/
 int		main(int argc, char **argv2, char **envp);
-void	print_list(t_argv **argv);
+//void	print_list(t_argv **argv);
 int		min_builtins(char *str, t_data *data);
 int		cont_arg(t_argv **argv);
 
@@ -62,7 +62,7 @@ t_myenv	*envnew(char *str);
 t_myenv	*envlast(t_myenv *myenv);
 void	env_add_back(t_myenv **myenv, t_myenv *new);
 void	min_getenv(char **envp, t_myenv **myenv);
-void	print_env(t_myenv **env);
+//void	print_env(t_myenv **env);
 char	**env_to_char(t_myenv **myenv);
 
 /*Cd*/
@@ -81,6 +81,10 @@ void	min_unset(t_myenv **myenv, t_argv *argv);
 void	expand(t_data *data);
 int		change(int i, char c);
 char	*change_str(char *str, t_myenv **myenv, int *len);
+
+/*Print*/
+void	print_env(t_myenv **env);
+void	print_list(t_argv **argv);
 
 /*Cmmd*/
 int		command(t_data *data);

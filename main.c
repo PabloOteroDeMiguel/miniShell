@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/08 19:21:39 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/09 16:49:36 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	min_builtins(char *str, t_data *data)
 	//	execve("minishell", 0, 0);
 	else if (ft_strcmp(argv->split[0], "exit") == 0)
 	{
-			printf("exit123\n");
+			printf("exit\n");
 			return (0);
 	}
 
@@ -144,36 +144,4 @@ int	main(int argc, char **argv2, char **envp)
 	free(data.myenv);
 	free(data.argv);
 	return (0);
-}
-
-void	print_list(t_argv **argv)
-{
-	t_argv	*aux;
-	int		w;
-	int		i;
-
-	w = 0;
-	aux = *argv;
-	while (aux)
-	{
-		i = 0;
-	/*	if (aux->quote == 3)
-			printf("There is a pipe |\n");
-		else
-			printf("NO pipe\n");*/
-		//printf("arg[%d]->%p->%s\n", w, aux, aux->arg);
-		printf("arg[%d]->%s\n", w, aux->arg);
-
-		if (aux->split[i] == 0)
-			return ;
-		while (aux->split[i])
-		{
-			printf("\ts[%d]->%s\n", i, aux->split[i]);
-		//	printf("\ts[%d]->%p\n", i, aux->split[i]);
-			i++;
-		}
-
-		w++;
-		aux = aux->next;
-	}
 }
