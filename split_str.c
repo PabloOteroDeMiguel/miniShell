@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   split_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/15 09:40:23 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/14 11:47:02 by pmoreno-         ###   ########.fr       */
+/*   Created: 2022/06/02 20:12:27 by pmoreno-          #+#    #+#             */
+/*   Updated: 2022/06/04 15:20:31 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "minishell.h"
 
-char	*ft_strchr(const char *str, int c)
+int ft_all_alphanumeric(const char *str)
 {
-	size_t	i;
+	int	i;
 
-	i = 0;
-	while (i <= ft_strlen(str))
+	i = 1;
+	while (str[i])
 	{
-		if (str[i] == (unsigned char)c)
-			return ((char *)(&str[i]));
+		if ((str[i] < 65 || str[i] > 90 ) && (str[i] < 97 || str[i] > 122))
+			return (i);
 		i++;
 	}
-	if (c == '\0')
-		return (0);
-	return (0);
+	return (-1);
 }

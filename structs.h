@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 11:30:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/05/31 09:12:42 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/14 13:12:14 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_argv
 	char			*direction;
 	int				error_code;
 	int				quote;
+	int				num_split;
 	struct s_argv	*next;
 }	t_argv;
 
@@ -30,7 +31,7 @@ typedef struct s_myenv
 	char			*key;
 	char			*value;
 	struct s_myenv	*next;
-} t_myenv;
+}	t_myenv;
 
 typedef struct s_data
 {
@@ -39,7 +40,7 @@ typedef struct s_data
 	char			*infile;
 	char			*outfile;
 	char			**myenv_str;
-	int				cmmd;
-} t_data;
+	int				num_argc;
+}	t_data;
 
 #endif

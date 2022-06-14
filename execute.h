@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 15:48:35 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/05/09 11:35:05 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/04 15:44:33 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,19 +73,6 @@ void			free_variables(t_comm_path **comm_dir);
 
 int				ft_open_file(char **argv, int argc);
 
-/*
-// Libft methods
-void			ft_putstr_fd(char *s, int fd);
-size_t			ft_strlen(const char *str);
-size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
-int				ft_strncmp(const char *s1, const char *s2, size_t n);
-char			*ft_strchr(const char *s, int c);
-char			**ft_split(char const *s, char c);
-char			*ft_strjoin(char const *s1, char const *s2);
-void			*ft_memcpy(void *dst, const void *src, size_t n);
-size_t			ft_strlcat(char *dst, const char *src, size_t dstsize);
-size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
-*/
 t_comm_path		*ft_lstnew_error(char **content);
 int				ft_lstsize(t_comm_path *lst);
 

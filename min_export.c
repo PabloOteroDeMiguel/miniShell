@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 12:44:20 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/05 12:52:28 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/06/09 18:05:51 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,23 +80,5 @@ void	min_export(t_data *data)
 				env_add_back(&myenv, export_new(argv->split[i]));
 		}
 		i++;
-	}
-	if (argv->next != 0)
-	{
-		argv = argv->next;
-		while (argv)
-		{
-			i = 0;
-			while (argv->split[i])
-			{
-				if (ft_strchr(argv->split[i], '=') != 0)
-				{
-					if (exist_key(argv->split[i], myenv) == 0)
-						env_add_back(&myenv, export_new(argv->split[i]));
-				}
-				i++;
-			}
-			argv = argv->next;
-		}
 	}
 }

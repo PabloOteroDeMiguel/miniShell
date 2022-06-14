@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:13:18 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/02 19:47:42 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/06/04 15:19:57 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,17 @@ int	check_flags(char *flag)
 	return (0);
 }
 
-void	min_echo(t_argv **argv)
+void	min_echo(t_argv **argv, t_myenv **env, int	error_code)
 {
 	t_argv	*aux;
+	// char	**list;
 	int		i;
 	int		n;
 
 	n = 0;
 	aux = *argv;
+	env = 0;
+	printf("%d\n-------\n", error_code);
 	if (aux->split[1])
 	{
 		if (check_flags(aux->split[1]) == 0)
@@ -53,10 +56,21 @@ void	min_echo(t_argv **argv)
 			i = 1;
 		while (aux->split[i])
 		{
-			printf("%s", aux->split[i]);
+			printf("\n--------------> ARG %d", i);
+			char *str = ft_strchr(aux->split[i], '$');
+			printf("\n--------------> SPLIT: %s\n", str);
+			if (!str)
+			{
+				printf("%s", aux->split[i]);
+				if (aux->split[i] != 0)
+					printf(" ");
+			}
+			else
+			{
+				int pos = ft_all_alphanumeric(str);
+				printf("POS: %d\n", pos);
+			}
 			i++;
-			if (aux->split[i] != 0)
-				printf(" ");
 		}
 		aux = aux->next;
 		while (aux)

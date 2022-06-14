@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 09:51:07 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/28 12:24:28 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/09 18:08:15 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@ void	free_arg_str(char *str, t_argv *argv)
 	while (argv)
 	{
 		i = 0;
-		while(argv->split[i])
+		while (argv->split[i])
 		{
 			free(argv->split[i]);
 			i++;
 		}
 		free(argv->split);
 		free(argv->arg);
+		free(argv->direction);
 		aux = argv->next;
 		free(argv);
 		argv = aux;
@@ -54,7 +55,7 @@ void	free_env(t_myenv *myenv)
 
 void	free_env_char(char **str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])

@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   min_pwd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: potero <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/15 09:40:23 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/14 11:47:02 by pmoreno-         ###   ########.fr       */
+/*   Created: 2022/06/09 13:38:09 by potero            #+#    #+#             */
+/*   Updated: 2022/06/09 13:43:49 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "minishell.h"
 
-char	*ft_strchr(const char *str, int c)
+void	min_pwd(t_myenv **myenv)
 {
-	size_t	i;
+	t_myenv	*aux;
 
-	i = 0;
-	while (i <= ft_strlen(str))
-	{
-		if (str[i] == (unsigned char)c)
-			return ((char *)(&str[i]));
-		i++;
-	}
-	if (c == '\0')
-		return (0);
-	return (0);
+	aux = *myenv;
+	while (ft_strcmp(aux->key, "PWD") != 0)
+		aux = aux->next;
+	printf("%s\n", aux->value);
 }

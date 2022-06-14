@@ -6,13 +6,13 @@
 /*   By: potero <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 09:27:12 by potero            #+#    #+#             */
-/*   Updated: 2022/05/11 11:47:32 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/07 19:24:43 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	cmmd_addarg(char	**new_path, char *path, char *arg)
+int	cmmd_addarg(char **new_path, char *path, char *arg)
 {
 	char	*aux;
 	int		ac;

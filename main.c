@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/02 19:32:31 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/14 13:33:50 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,38 +20,57 @@ void	leaks(void)
 int	min_builtins(char *str, t_data *data)
 {
 	t_argv	*argv;
-//	int 	i;
+	// int		i;
 
 	argv = *data->argv;
 	if (argv->split[0] == 0)
 		return (1);
-	if ((ft_strcmp(argv->split[0], "echo") == 0) || (ft_strncmp(str, "ECHO", 4) == 0))
+	if ((ft_strcmp(argv->split[0], "echo") == 0)
+		|| (ft_strncmp(str, "ECHO", 4) == 0))
 		min_echo(data->argv);
 	else if (ft_strcmp(str, "pwd") == 0 || ft_strcmp(str, "PWD") == 0)
 		min_pwd(data->myenv);
 	else if (ft_strcmp(str, "env") == 0 || ft_strcmp(str, "ENV") == 0)
 		print_env(data->myenv);
-	else if	(ft_strcmp(argv->split[0], "cd") == 0)
+	else if (ft_strcmp(argv->split[0], "cd") == 0)
 		min_cd(data);
 	else if (ft_strcmp(argv->split[0], "export") == 0)
 		min_export(data);
-	else if	(ft_strcmp(argv->split[0], "unset") == 0)
+	else if (ft_strcmp(argv->split[0], "unset") == 0)
 		min_unset(data->myenv, *data->argv);
 	//else if (ft_strcmp(argv->split[0], "./minishell") == 0)
 	//	execve("minishell", 0, 0);
 	else if (ft_strcmp(argv->split[0], "exit") == 0)
 	{
-			printf("exit\n");
-			return (0);
+		printf("exit\n");
+		return (0);
 	}
-/*
-	else
-	{
-		i = command(data);
-		printf("%i\n", i);
-	}
-*/
+	// else
+	// {
+	// 	if (data->num_argc == 1)
+	// 		i = execute(data);
+	// 	else if (data->num_argc > 1)
+	// 	{
+	// 		printf("PIPEX\n");
+	// 		i = pipe_execute(data);
+	// 	}	
+	// }
 	return (1);
+}
+
+int	cont_arg(t_argv **argv)
+{
+	int		cont;
+	t_argv	*aux;
+
+	cont = 0;
+	aux = *argv;
+	while (aux)
+	{
+		cont++;
+		aux = aux->next;
+	}
+	return (cont);
 }
 
 int	main(int argc, char **argv2, char **envp)
@@ -59,10 +78,8 @@ int	main(int argc, char **argv2, char **envp)
 	char	*str;
 	t_data	data;
 	int		stop;
-	int		w;
-//	int i = 0;
-	
-	if (argc > 1) 
+
+	if (argc > 1)
 		exit(1);
 	argv2 = 0;
 	atexit(leaks);
@@ -70,42 +87,34 @@ int	main(int argc, char **argv2, char **envp)
 	data.argv = malloc(sizeof(t_argv *));
 	data.myenv = malloc(sizeof(t_myenv *));
 	*data.myenv = 0;
-	data.infile = "/dev/fd/0";
-	data.outfile = "/dev/fd/1";
+	// data.infile = "/dev/fd/0";
+	// data.outfile = "/dev/fd/1";
 //	data.infile = "a.txt";
 //	data.outfile = "b.txt";
-
 	min_getenv(envp, data.myenv);
 	data.myenv_str = env_to_char(data.myenv);
-/*
-	while (data.myenv_str[i])
-	{
-		printf("myenv->%s\n", data.myenv_str[i]);
-		printf("env--->%s\n", envp[i]);
-		i++;
-	}
-*/
 	while (stop != 0)
 	{
-		w = 0;
 		*data.argv = NULL;	
-		printf("\033[;33m");
-		//str = readline("\033[;33mMinishell$ \033[0m");
+		// printf("\033[33m");
 		str = readline("Minishell$ ");
-		printf("\033[0m");
-		//printf("\033[0;32m");
+		// printf("\033[0m");
 		if (!str)
 		{
-			printf("exit\n");
+			printf("exit1\n");
 			exit(0);
 		}
-		if (str  && ft_strlen(str) > 0)
+		if (str && ft_strlen(str) > 0)
 		{
+			set_initial_files(&data);
 			add_history(str);
 			arguments(data.argv, str);
-			min_split(data.argv);
-		//	print_list(data.argv);
 			expand(&data);
+			min_split(&data);
+			remove_quotes(data.argv);
+			data.num_argc = cont_arg(data.argv);
+			check_files(&data);
+			direction(&data);
 			print_list(data.argv);
 			stop = min_builtins(str, &data);
 		}
@@ -116,34 +125,4 @@ int	main(int argc, char **argv2, char **envp)
 	free(data.myenv);
 	free(data.argv);
 	return (0);
-}
-
-void	print_list(t_argv **argv)
-{
-	t_argv	*aux;
-	int		w;
-	int		i;
-
-	w = 0;
-	aux = *argv;
-	while (aux)
-	{
-		i = 0;
-	/*	if (aux->quote == 3)
-			printf("There is a pipe |\n");
-		else
-			printf("NO pipe\n");*/
-		//printf("arg[%d]->%p->%s\n", w, aux, aux->arg);
-		printf("arg[%d]->%s\n", w, aux->arg);
-		if (aux->split[i] == 0)
-			return ;
-		while (aux->split[i])
-		{
-			printf("\ts[%d]->%s\n", i, aux->split[i]);
-		//	printf("\ts[%d]->%p\n", i, aux->split[i]);
-			i++;
-		}
-		w++;
-		aux = aux->next;
-	}
 }
