@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:05:04 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/06/14 13:32:48 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/06/14 13:46:07 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	set_infile(t_data *data, t_argv *argv, int i)
 		if (argv->split[i][1])
 		{
 			data->infile = ft_strchar(argv->split[i], '<');
-			// free(argv->split[i]);
+			printf("%p\n", argv->split[0]);
 			while (i < argv->num_split - 1)
 			{
 				// free(argv->split[i]);
