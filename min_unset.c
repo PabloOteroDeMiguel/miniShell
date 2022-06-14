@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 12:32:48 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/09 19:00:36 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/14 11:23:55 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	min_unset(t_myenv **myenv, t_argv *argv)
 	{
 		aux = *myenv;
 		aux2 = *myenv;
-		while (aux2)
+		while (aux2->next)
 		{
 			if (ft_strcmp(argv->split[i], aux2->next->key) == 0)
 			{
