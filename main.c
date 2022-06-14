@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/14 11:14:14 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/06/14 13:09:22 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,12 @@ int	min_builtins(char *str, t_data *data)
 	}
 	else
 	{
-		if (data->num_argc == 1)
+		command_found(data);
+		if (data->num_argc == 1 && data->error_no == 0)
+		{
 			i = execute(data);
-		else if (data->num_argc > 1)
+		}
+		else if (data->num_argc > 1 && data->error_no == 0) 
 		{
 		//	printf("PIPEX\n");
 			i = pipe_execute(data);
@@ -87,10 +90,11 @@ int	main(int argc, char **argv2, char **envp)
 	data.argv = malloc(sizeof(t_argv *));
 	data.myenv = malloc(sizeof(t_myenv *));
 	*data.myenv = 0;
-	data.infile = "/dev/fd/0";
-	data.outfile = "/dev/fd/1";
+//	data.infile = "/dev/fd/0";
+//	data.outfile = "/dev/fd/1";
 //	data.infile = "a.txt";
 //	data.outfile = "b.txt";
+	data.error_no = 0;
 	min_getenv(envp, data.myenv);
 	data.myenv_str = env_to_char(data.myenv);
 	while (stop != 0)
@@ -106,12 +110,14 @@ int	main(int argc, char **argv2, char **envp)
 		}
 		if (str && ft_strlen(str) > 0)
 		{
+			set_initial_files(&data);
 			add_history(str);
 			arguments(data.argv, str);
 			expand(&data);
 			min_split(&data);
 			remove_quotes(data.argv);
 			data.num_argc = cont_arg(data.argv);
+			check_files(&data);
 			direction(&data);
 			print_list(data.argv);
 			stop = min_builtins(str, &data);
