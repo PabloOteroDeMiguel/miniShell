@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:37:47 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/14 13:09:39 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/06/14 13:37:48 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	command_found(t_data *data)
 	else
 		p = 0;
 	/*si el último existe no hay que imprimir cmmd not found */
-	printf("p->%i\n", p);
 	arg = *data->argv;
 	while (arg)
 	{

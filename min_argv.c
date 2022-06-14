@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 11:10:35 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/09 13:28:33 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/14 13:20:36 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ void	min_split(t_data *data)
 			argv->split[0] = 0;
 		}
 		words = min_words(argv->arg);
+		argv->num_split = words;
 		argv->split = malloc(sizeof(char *) * (words + 1));
 		if (!argv->split)
 			argv->split = 0;
