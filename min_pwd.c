@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   min_pwd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: potero <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/14 11:21:47 by potero-d          #+#    #+#             */
-/*   Updated: 2021/12/02 16:06:14 by potero-d         ###   ########.fr       */
+/*   Created: 2022/06/09 13:38:09 by potero            #+#    #+#             */
+/*   Updated: 2022/06/09 13:43:49 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "minishell.h"
 
-size_t	ft_strlen(const char *str)
+void	min_pwd(t_myenv **myenv)
 {
-	int	i;
+	t_myenv	*aux;
 
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
+	aux = *myenv;
+	while (ft_strcmp(aux->key, "PWD") != 0)
+		aux = aux->next;
+	printf("%s\n", aux->value);
 }

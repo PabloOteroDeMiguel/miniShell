@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/16 10:21:36 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/11 20:32:54 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/09 19:07:17 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # include<string.h>
 # include<stdlib.h>
 # include<stdio.h>
-
 
 typedef struct s_list
 {

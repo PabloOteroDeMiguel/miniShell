@@ -6,13 +6,13 @@
 #    By: potero-d <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/07 12:55:48 by potero-d          #+#    #+#              #
-#    Updated: 2022/06/06 18:28:37 by potero           ###   ########.fr        #
+#    Updated: 2022/06/14 12:14:11 by potero-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = main.c min_argv.c min_lst.c min_builtins.c\
+SRCS = main.c min_argv.c min_lst.c min_echo.c min_pwd.c\
 	   min_free.c min_env.c min_cd.c min_export.c min_unset.c min_expand.c\
-	   min_remove_quotes.c\
+	   min_remove_quotes.c min_print.c min_error.c min_files.c\
 	   cmmd.c cmmd_path.c pipex.c
 
 LIBFT_PATH = libft/

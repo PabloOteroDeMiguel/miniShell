@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:42:58 by potero-d          #+#    #+#             */
-/*   Updated: 2022/04/28 12:19:09 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/14 13:05:00 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ t_myenv	*envnew(char *str)
 	char	*aux;
 
 	element = malloc(sizeof(t_myenv));
-	aux = getenv(str);
+	if (ft_strcmp(str, "?") == 0)
+		aux = "0";
+	else
+		aux = getenv(str);
 	if (!element)
 		return (NULL);
 	element->key = str;
@@ -56,6 +59,7 @@ void	min_getenv(char **envp, t_myenv **myenv)
 {
 	int		i;
 	int		j;
+	char	*error;
 
 	i = 0;
 	while (envp[i])
@@ -66,20 +70,10 @@ void	min_getenv(char **envp, t_myenv **myenv)
 		env_add_back(myenv, envnew(ft_substr(envp[i], 0, j)));
 		i++;
 	}
-}
-
-void	print_env(t_myenv **myenv)
-{
-	t_myenv	*aux;
-	int		i;
-
-	i = 0;
-	aux = *myenv;
-	while (aux)
-	{
-		printf("%s=%s\n", aux->key, aux->value);
-		aux = aux->next;
-	}
+	error = malloc(sizeof(char *) * 2);
+	error[0] = 63;
+	error[1] = 0;
+	env_add_back(myenv, envnew(error));
 }
 
 char	**env_to_char(t_myenv **myenv)
