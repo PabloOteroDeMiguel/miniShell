@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/14 13:09:22 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/06/15 13:56:35 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	main(int argc, char **argv2, char **envp)
 	char	*str;
 	t_data	data;
 	int		stop;
+	int		std[2];
 
 	if (argc > 1)
 		exit(1);
@@ -99,6 +100,8 @@ int	main(int argc, char **argv2, char **envp)
 	data.myenv_str = env_to_char(data.myenv);
 	while (stop != 0)
 	{
+		std[0] = dup(STDIN_FILENO);
+		std[1] = dup(STDOUT_FILENO);
 		*data.argv = NULL;	
 		printf("\033[;33m");
 		str = readline("Minishell$ ");
@@ -123,6 +126,8 @@ int	main(int argc, char **argv2, char **envp)
 			stop = min_builtins(str, &data);
 		}
 		free_arg_str(str, *data.argv);
+		dup2(STDIN_FILENO, std[0]);
+		dup2(STDOUT_FILENO, std[1]);
 	}
 	free_env(*data.myenv);
 	free_env_char(data.myenv_str);
