@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/15 15:28:48 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/06/16 11:27:15 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,14 @@ int	min_builtins(char *str, t_data *data)
 		if (data->num_argc == 1 && data->error_no == 0)
 		{
 			data->error_no = execute(data);
+			pipe_error(data);
 		}
 		else if (data->num_argc > 1 && data->error_no == 0) 
 		{
 		//	printf("PIPEX\n");
 			data->error_no = pipe_execute(data);
+			pipe_error(data);
 		}
-		pipe_error(data);
 	/*
 		if (data->error_no == 0)
 			i = pipe_execute(data);

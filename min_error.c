@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:37:47 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/15 15:28:51 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/06/16 11:40:51 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,12 @@ int	command_found(t_data *data)
 	t_argv	*arg;
 	int		p;
 
+	p = 0;
 	arg = *data->argv;
 	while (arg->next)
 		arg = arg->next;
 	if (arg->error_code != 127)
 		p = 1;
-	else
-		p = 0;
 	/*si el último existe no hay que imprimir cmmd not found */
 	arg = *data->argv;
 	while (arg)
