@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/15 15:19:29 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/06/17 16:41:02 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include<fcntl.h>
 # include "libft.h"
 # include "structs.h"
+# include <errno.h>
 
 /*Main*/
 int		main(int argc, char **argv2, char **envp);
@@ -105,6 +106,7 @@ void	remove_quotes(t_argv **argv);
 int		command_found(t_data *data);
 void	update_error(t_data *data);
 void	pipe_error(t_data *data);
+void	fd_error(char *str);
 
 /*Files*/
 void	check_files(t_data *data);

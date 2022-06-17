@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:37:47 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/17 10:14:52 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/06/17 16:51:02 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,23 @@ void	pipe_error(t_data *data)
 	t_argv	*arg;
 
 	arg = *data->argv;
-	if (data->error_no == 1)
+/*	if (data->error_no == 1)
 	{
 		printf("Minishell: %s: No such file or directory\n", data->infile);
 		printf("Minishell: %s: Permission denied\n", data->infile);
-	}
-	else if (data->error_no == 127)
+	}*/
+	if (data->error_no == 127)
 		printf("Minishell. %s: No such file or directory\n", arg->split[0]);
 	update_error(data);
+}
+
+void	fd_error(char *str)
+{
+	ft_putstr_fd(strerror(errno), 2);
+	write(2, ": ", 2);
+	ft_putstr_fd(str, 2);
+	write(2, "\n", 1);
+//	data->error_no = 1;
+//	update_error(data);
+	exit (1);
 }
