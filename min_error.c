@@ -6,12 +6,11 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:37:47 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/17 10:10:55 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/06/17 10:14:52 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 int	command_found(t_data *data)
 {
@@ -24,7 +23,6 @@ int	command_found(t_data *data)
 		arg = arg->next;
 	if (arg->error_code != 127)
 		p = 1;
-	/*si el último existe no hay que imprimir cmmd not found */
 	arg = *data->argv;
 	while (arg)
 	{
@@ -40,7 +38,7 @@ int	command_found(t_data *data)
 		arg = arg->next;
 	}
 	update_error(data);
-	return (0); 
+	return (0);
 }
 
 void	update_error(t_data *data)
