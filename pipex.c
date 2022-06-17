@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:57:16 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/17 10:11:41 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/06/17 11:57:49 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,20 @@ int	pipe_execute(t_data *data)
 		if (execve(arg->direction, arg->split, data->myenv_str) < 0)
 			return (127);
 	}
+	write (2, "1\n", 2);
+	//dup2(fd1[0], STDIN_FILENO);
 	if (data->num_argc > 1) //si solo hay un comando no hace nada
 		arg = arg->next;
-	dup2(fd1[0], STDIN_FILENO);
+//	arg = arg->next;
+//	dup2(fd1[0], STDIN_FILENO);
+/*
+ * Si comento esto funciona "efrf | ls " pero no funciona " <a.txt grep 1 | wc"
+ * si lo descomento funciona el segundo pero no el primero
+ */
 	close(fd1[0]);
 	close(fd1[1]);
+	dup2(fd1[0], STDIN_FILENO);
+	write (2, "2\n", 2);
 	while (arg->next)
 	{
 		if (mid_cmd(arg, data) != 0)
