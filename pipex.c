@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:57:16 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/16 15:28:48 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/17 10:11:41 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int	mid_cmd(t_argv *arg, t_data *data)
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[1]);
 		if (execve(arg->direction, arg->split, data->myenv_str) < 0)
-			return (128);
+			return (127);
 	}
-	//dup2(fd[0], STDIN_FILENO);
+//	dup2(fd[0], STDIN_FILENO);
 	close(fd[0]);
 	close(fd[1]);
 	return (0);
@@ -54,7 +54,7 @@ int	pipe_execute(t_data *data)
 		close(fd1[0]);
 		fd = open(data->infile, O_RDONLY);
 		if (fd < 0)
-			return (0);
+			return (1);
 		dup2(fd, STDIN_FILENO);
 		close(fd);
 		dup2(fd1[1], STDOUT_FILENO);
@@ -64,7 +64,7 @@ int	pipe_execute(t_data *data)
 	}
 	if (data->num_argc > 1) //si solo hay un comando no hace nada
 		arg = arg->next;
-	//dup2(fd[0], STDIN_FILENO);
+	dup2(fd1[0], STDIN_FILENO);
 	close(fd1[0]);
 	close(fd1[1]);
 	while (arg->next)
@@ -84,7 +84,7 @@ int	pipe_execute(t_data *data)
 	{
 		fd3 = open(data->outfile, O_CREAT | O_WRONLY | O_TRUNC, 0666);
 		if (fd3 < 0)
-			return (0);
+			return (1);
 		dup2(fd3, STDOUT_FILENO);
 		close(fd3);
 		if (execve(arg->direction, arg->split, data->myenv_str) < 0)
@@ -97,7 +97,7 @@ int	pipe_execute(t_data *data)
 		wait(&status);
 		arg = arg->next;
 	}
-	return (100);
+	return (0);
 }
 
 /*
