@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/17 16:41:02 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/06/17 17:39:19 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 # include<readline/readline.h>
 # include<readline/history.h>
 # include<fcntl.h>
+# include <errno.h>
 # include "libft.h"
 # include "structs.h"
-# include <errno.h>
 
 /*Main*/
 int		main(int argc, char **argv2, char **envp);
