@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:57:16 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/17 16:51:00 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/06/17 17:36:39 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,6 @@ int	pipe_execute(t_data *data)
 	t_argv	*arg;
 
 	arg = *data->argv;
-//	fd = open(data->infile, O_RDONLY);
-//	if (fd < 0)
-//		return (1);
 	pipe(fd1);
 	pid = fork();
 	if (pid == -1)
