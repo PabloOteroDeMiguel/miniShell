@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:37:47 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/17 17:33:19 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/06/20 10:35:36 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,13 @@
 int	command_found(t_data *data)
 {
 	t_argv	*arg;
-	int		p;
 
-	p = 0;
-	arg = *data->argv;
-	while (arg->next)
-		arg = arg->next;
-	if (arg->error_code != 127)
-		p = 1;
 	arg = *data->argv;
 	while (arg)
 	{
 		if (arg->error_code == 127)
 		{
-			if (p == 0)
-				not_cmmd(arg->split[0]);
+			not_cmmd(arg->split[0]);
 			data->error_no = 127;
 			update_error(data);
 		}
