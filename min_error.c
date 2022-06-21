@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:37:47 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/20 10:35:36 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/21 16:40:41 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,5 @@ void	fd_error(char *str)
 	write(2, ": ", 2);
 	ft_putstr_fd(str, 2);
 	write(2, "\n", 1);
-//	data->error_no = 1;
-//	update_error(data);
 	exit (1);
 }

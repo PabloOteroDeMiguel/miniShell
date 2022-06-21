@@ -6,7 +6,7 @@
 /*   By: potero <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 09:20:12 by potero            #+#    #+#             */
-/*   Updated: 2022/06/15 15:09:30 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/06/21 16:42:07 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,36 @@ int	execute(t_data *data)
 	t_argv		*arg;
 
 	arg = *data->argv;
+/*
 	fd[0] = open(data->infile, O_RDONLY);
 	if (fd[0] < 0)
+	{
+		fd_error(data->infile);
 		return (1);
+	}
 	fd[1] = open(data->outfile, O_CREAT | O_WRONLY | O_TRUNC, 0666);
 	if (fd[1] < 0)
+	{
+		fd_error(data->infile);
 		return (1);
+	}
+	*/
 	pid = fork();
 	if (pid == -1)
 		return (1);
 	else if (pid == 0)
 	{
+		fd[0] = open(data->infile, O_RDONLY);
+		if (fd[0] < 0)
+			fd_error(data->infile);
+		fd[1] = open(data->outfile, O_CREAT | O_WRONLY | O_TRUNC, 0666);
+		if (fd[1] < 0)
+			fd_error(data->outfile);
 		child(fd);
 		if (execve(arg->direction, arg->split, data->myenv_str) < 0)
-			return (127);
+			exit(127);
 	}
-	close(fd[0]);
+//	close(fd[0]);
 	wait(&status);
-	return (0);
+	return (WEXITSTATUS(status));
 }

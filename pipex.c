@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:57:16 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/17 17:36:39 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/06/21 16:56:54 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,12 @@ int	pipe_execute(t_data *data)
 	while (arg)
 	{
 		wait(&status);
+		data->error_no = WEXITSTATUS(status);
+		printf("ERR->%i\n", data->error_no);
+		printf("WEX->%i\n", WEXITSTATUS(status));
 		arg = arg->next;
 	}
-	return (0);
+	printf("WEXFINAL->%i\n", WEXITSTATUS(status));
+	data->error_no = WEXITSTATUS(status);
+	return (data->error_no);
 }
