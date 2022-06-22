@@ -6,11 +6,38 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:57:16 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/22 10:27:04 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/22 11:45:22 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	first_cmmd(t_argv *arg, t_data *data, int fd1[2])
+{
+	int	fd;
+	int	pid;
+	int	status;
+
+	pipe(fd1);
+	pid = fork();
+	if (pid == -1)
+		return (1);
+	else if (pid == 0)
+	{
+		close(fd1[0]);
+		fd = open(data->infile, O_RDONLY);
+		if (fd < 0)
+			fd_error(data->infile);
+		dup2(fd, STDIN_FILENO);
+		close(fd);
+		dup2(fd1[1], STDOUT_FILENO);
+		close(fd1[1]);
+		if (execve(arg->direction, arg->split, data->myenv_str) < 0)
+			exit(127);
+	}
+	wait(&status);
+	return (0);
+}
 
 int	mid_cmd(t_argv *arg, t_data *data)
 {
@@ -37,61 +64,48 @@ int	mid_cmd(t_argv *arg, t_data *data)
 	return (0);
 }
 
-int	pipe_execute(t_data *data)
+int	last_cmmd(t_argv *arg, t_data *data)
 {
-	int		fd;
-	int		fd1[2];
-	int		fd3;
-	int		status;
-	int		pid;
-	t_argv	*arg;
+	int	fd;
+	int	pid;
 
-	arg = *data->argv;
-	pipe(fd1);
 	pid = fork();
 	if (pid == -1)
 		return (1);
 	else if (pid == 0)
 	{
-		close(fd1[0]);
-		fd = open(data->infile, O_RDONLY);
+		fd = open(data->outfile, O_CREAT | O_WRONLY | O_TRUNC, 0666);
 		if (fd < 0)
-		{
-			fd_error(data->infile);
-			return (1);
-		}
-		dup2(fd, STDIN_FILENO);
+			fd_error(data->outfile);
+		dup2(fd, STDOUT_FILENO);
 		close(fd);
-		dup2(fd1[1], STDOUT_FILENO);
-		close(fd1[1]);
 		if (execve(arg->direction, arg->split, data->myenv_str) < 0)
-			exit(127);
+			return (127);
 	}
+	return (0);
+}
+
+int	pipe_execute(t_data *data)
+{
+	int		fd1[2];
+	int		status;
+	t_argv	*arg;
+
+	arg = *data->argv;
+	if (first_cmmd(arg, data, fd1) != 0)
+		return (1);
 	arg = arg->next;
 	close(fd1[1]);
 	dup2(fd1[0], STDIN_FILENO);
-	wait(&status);
 	while (arg->next)
 	{
 		if (mid_cmd(arg, data) != 0)
 			return (1);
 		arg = arg->next;
 	}
-	pid = fork();
-	if (pid == -1)
+	if (last_cmmd(arg, data) != 0)
 		return (1);
-	else if (pid == 0)
-	{
-		fd3 = open(data->outfile, O_CREAT | O_WRONLY | O_TRUNC, 0666);
-		if (fd3 < 0)
-			return (1);
-		dup2(fd3, STDOUT_FILENO);
-		close(fd3);
-		if (execve(arg->direction, arg->split, data->myenv_str) < 0)
-			return (127);
-	}
 	close(STDIN_FILENO);
-	arg = *data->argv;
 	wait(&status);
 	return (WEXITSTATUS(status));
 }
