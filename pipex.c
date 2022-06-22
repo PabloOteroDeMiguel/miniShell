@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:57:16 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/21 16:56:54 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/22 10:27:04 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	mid_cmd(t_argv *arg, t_data *data)
 {
 	int		fd[2];
 	int		pid;
+	int		status;
 
 	pipe(fd);
 	pid = fork();
@@ -32,6 +33,7 @@ int	mid_cmd(t_argv *arg, t_data *data)
 	dup2(fd[0], STDIN_FILENO);
 	close(fd[0]);
 	close(fd[1]);
+	wait(&status);
 	return (0);
 }
 
@@ -68,6 +70,7 @@ int	pipe_execute(t_data *data)
 	arg = arg->next;
 	close(fd1[1]);
 	dup2(fd1[0], STDIN_FILENO);
+	wait(&status);
 	while (arg->next)
 	{
 		if (mid_cmd(arg, data) != 0)
@@ -89,15 +92,6 @@ int	pipe_execute(t_data *data)
 	}
 	close(STDIN_FILENO);
 	arg = *data->argv;
-	while (arg)
-	{
-		wait(&status);
-		data->error_no = WEXITSTATUS(status);
-		printf("ERR->%i\n", data->error_no);
-		printf("WEX->%i\n", WEXITSTATUS(status));
-		arg = arg->next;
-	}
-	printf("WEXFINAL->%i\n", WEXITSTATUS(status));
-	data->error_no = WEXITSTATUS(status);
-	return (data->error_no);
+	wait(&status);
+	return (WEXITSTATUS(status));
 }
