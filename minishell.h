@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/21 16:41:11 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/23 10:58:09 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,9 @@ char	*cmmd_find_path(char **envp);
 char	*cmmd_path(char **path, char *arg);
 
 /*Pipex*/
-int		pipex(t_data *data);
-//int		mid_cmd(int i, t_data *data);
+int		first_cmmd(t_argv *arg, t_data *data, int fd1[2]);
 int		mid_cmd(t_argv *arg, t_data *data);
+int		last_cmmd(t_argv *arg, t_data *data);
 int		pipe_execute(t_data *data);
 
 /*Remove_quotes*/

@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:42:58 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/14 13:05:00 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/06/23 12:18:03 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ t_myenv	*envnew(char *str)
 	element = malloc(sizeof(t_myenv));
 	if (ft_strcmp(str, "?") == 0)
 		aux = "0";
+	else if (ft_strcmp(str, "PWD") == 0)
+		aux = getcwd(NULL, 200);
+	else if (ft_strcmp(str, "SHLVL") == 0)
+		aux = "1";
 	else
 		aux = getenv(str);
 	if (!element)
@@ -27,6 +31,8 @@ t_myenv	*envnew(char *str)
 	element->key = str;
 	element->value = ft_strdup(aux);
 	element->next = NULL;
+	if (ft_strcmp(str, "PWD") == 0)
+		free(aux);
 	return (element);
 }
 
@@ -62,6 +68,12 @@ void	min_getenv(char **envp, t_myenv **myenv)
 	char	*error;
 
 	i = 0;
+	if (!envp[i])
+	{
+		envp[0] = "PWD=";
+		envp[1] = "SHLVL=";
+		envp[2] = 0;
+	}
 	while (envp[i])
 	{
 		j = 0;

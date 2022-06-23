@@ -6,7 +6,7 @@
 /*   By: potero <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 09:20:12 by potero            #+#    #+#             */
-/*   Updated: 2022/06/21 16:42:07 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/23 12:18:22 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,14 @@ void	direction(t_data *data)
 		if (aux->direction == NULL)
 			aux->error_code = 127;
 		else
-		{
 			aux->error_code = 100;
-		}
 		i++;
 		aux = aux->next;
 	}
-	free_env_char(path);
+	if (path != 0)
+		free_env_char(path);
+	else
+		free(path);
 }
 
 static void	child(int fd[2])
@@ -52,20 +53,6 @@ int	execute(t_data *data)
 	t_argv		*arg;
 
 	arg = *data->argv;
-/*
-	fd[0] = open(data->infile, O_RDONLY);
-	if (fd[0] < 0)
-	{
-		fd_error(data->infile);
-		return (1);
-	}
-	fd[1] = open(data->outfile, O_CREAT | O_WRONLY | O_TRUNC, 0666);
-	if (fd[1] < 0)
-	{
-		fd_error(data->infile);
-		return (1);
-	}
-	*/
 	pid = fork();
 	if (pid == -1)
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: potero <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 09:27:12 by potero            #+#    #+#             */
-/*   Updated: 2022/06/15 12:03:57 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/06/23 12:11:26 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ char	*cmmd_path(char **path, char *arg)
 	int		i;
 	char	*new_path;
 
+	if (path == 0)
+		return (0);
 	new_path = NULL;
 	i = 0;
 	while (path[i])
