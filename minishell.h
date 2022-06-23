@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/23 10:58:09 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/06/23 13:57:41 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ int		last_cmmd(t_argv *arg, t_data *data);
 int		pipe_execute(t_data *data);
 
 /*Remove_quotes*/
-char	*quotes(char *str, char c);
+//char	*quotes(char *str, char c);
+char	*quotes(char *str);
 void	remove_quotes(t_argv **argv);
 
 /*Error*/
