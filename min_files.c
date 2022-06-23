@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:05:04 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/06/15 16:30:29 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/06/17 17:56:08 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,11 @@ static int	check_if_infile(t_argv *argv, int i)
 	return (0);
 }
 
-static void	set_outfile(t_data *data, t_argv *argv, int i)
+static int	set_outfile(t_data *data, t_argv *argv, int i)
 {
+	int	j;
+
+	j = i;
 	if (argv->split[i][0] == '>' && argv->split[i][1] != '>')
 	{
 		printf("OUTFILE: ");
@@ -96,7 +99,7 @@ static void	set_outfile(t_data *data, t_argv *argv, int i)
 				else
 				{
 					argv->split[i] = 0;
-					return ;	
+					return (j);	
 				}
 			}
 		}
@@ -111,11 +114,12 @@ static void	set_outfile(t_data *data, t_argv *argv, int i)
 			}
 			argv->split[argv->num_split - 2] = 0;
 			argv->split[argv->num_split - 1] = 0;
-			return ;
+			return (j);
 		}
 		write(1, "AAAAAA3\n", 9);
 		printf(" %s\n", data->outfile);
 	}
+	return(j+1);
 }
 
 static int	check_if_outfile(t_argv *argv, int i)
@@ -135,6 +139,7 @@ void	check_files(t_data *data)
 {
 	t_argv	*argv;
 	int		i;
+	int		fd;
 
 	printf("---------------------------\n");
 	printf("INFILE: %s\n", data->infile);
@@ -154,7 +159,11 @@ void	check_files(t_data *data)
 			else if (check_if_outfile(argv, i) == 1)
 			{
 				printf("Es outfile\n");
-				set_outfile(data, argv, i);
+				i = set_outfile(data, argv, i);
+				fd = open(data->outfile, O_CREAT | O_WRONLY | O_TRUNC, 0666);
+				if (fd < 0)
+					return ;
+				close(fd);
 			}
 		}
 		write(1, "ADIO4\n", 6);
