@@ -6,7 +6,7 @@
 /*   By: potero <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 13:01:20 by potero            #+#    #+#             */
-/*   Updated: 2022/06/23 14:02:08 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/06/23 15:01:12 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,9 @@ char	*quotes(char *str)
 			aux2 = ft_substr(str, i + 1, ft_strlen(str) - i);
 			free(str);
 			str = ft_strjoin(aux, aux2);
+			printf("aux1->%s\n", aux);
+			printf("aux2->%s\n", aux2);
+			printf("str1->%s\n", str);
 			free(aux);
 			free(aux2);
 			while (str[i] && str[i] != c)
@@ -73,6 +76,9 @@ char	*quotes(char *str)
 			aux2 = ft_substr(str, i + 1, ft_strlen(str) - i);
 			free(str);
 			str = ft_strjoin(aux, aux2);
+			printf("aux3->%s\n", aux);
+			printf("aux4->%s\n", aux2);
+			printf("str2->%s\n", str);
 			free(aux);
 			free(aux2);
 		}

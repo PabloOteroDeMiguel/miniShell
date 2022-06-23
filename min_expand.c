@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 11:13:41 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/09 17:50:10 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/23 15:01:10 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ char	*change_str(char *str, t_myenv **myenv, int *len)
 		{
 		//	aux = ft_strchr(key, key[i]);
 			extra = ft_strchr(key, key[i]);
+			printf("extra->%s\n", extra);
 		//	extra = ft_strdup(aux);
 			key[i] = 0;
 			break ;

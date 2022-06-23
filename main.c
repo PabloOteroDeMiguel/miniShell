@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/23 14:02:11 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/06/23 15:01:14 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ int	main(int argc, char **argv2, char **envp)
 			arguments(data.argv, str);
 			expand(&data);
 			min_split(&data);
+			print_list(data.argv);
 			remove_quotes(data.argv);
 			data.num_argc = cont_arg(data.argv);
 			check_files(&data);
