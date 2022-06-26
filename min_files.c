@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:05:04 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/06/17 17:56:08 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/06/26 10:39:27 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,13 @@ static void	set_infile(t_data *data, t_argv *argv, int i)
 			{
 				if (argv->split[i + 1])
 				{
+					argv->split[i] = 0;
 					argv->split[i] = ft_strdup(argv->split[i + 1]);
-					argv->split[i + 1] = 0;
 					i++;
 				}
-				else
-				{
-					argv->split[i] = 0;
-					return ;	
-				}			
 			}
+			printf(" %s\n", data->infile);
+			argv->split[i] = 0;
 		}
 		else
 		{
@@ -92,16 +89,14 @@ static int	set_outfile(t_data *data, t_argv *argv, int i)
 			{
 				if (argv->split[i + 1])
 				{
+					argv->split[i] = 0;
 					argv->split[i] = ft_strdup(argv->split[i + 1]);
-					argv->split[i + 1] = 0;
 					i++;
 				}
-				else
-				{
-					argv->split[i] = 0;
-					return (j);	
-				}
 			}
+			printf(" %s\n", data->outfile);
+			argv->split[i] = 0;
+			return (j);	
 		}
 		else
 		{
@@ -114,10 +109,9 @@ static int	set_outfile(t_data *data, t_argv *argv, int i)
 			}
 			argv->split[argv->num_split - 2] = 0;
 			argv->split[argv->num_split - 1] = 0;
+			printf(" %s\n", data->outfile);
 			return (j);
 		}
-		write(1, "AAAAAA3\n", 9);
-		printf(" %s\n", data->outfile);
 	}
 	return(j+1);
 }
