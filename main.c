@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/17 16:04:34 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/06/26 12:23:50 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,8 @@ int	main(int argc, char **argv2, char **envp)
 			check_files(&data);
 			direction(&data);
 			print_list(data.argv);
+			printf("Infile: %s\n", data.infile);
+			printf("Outfile: %s\n", data.outfile);
 			stop = min_builtins(str, &data);
 		}
 		free_arg_str(str, *data.argv);
