@@ -6,7 +6,7 @@
 #    By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/07 12:55:48 by potero-d          #+#    #+#              #
-#    Updated: 2022/06/27 13:18:22 by potero           ###   ########.fr        #
+#    Updated: 2022/06/27 13:40:44 by potero           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,12 +32,12 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 %.o:%.c
-		@$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I$(LIBFT_PATH) -I$(EXECT_PATH) -I$(INCS) -I/Users/$(USER)/.brew/opt/readline/include
+		@$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I$(LIBFT_PATH) -I$(EXECT_PATH) -I$(INCS) -I/Users/$(USER)/.brew/opt/readline/include -L${HOME}/.brew/opt/readline/lib
 RM = rm -f
 
 $(NAME): $(OBJS)
 		@make -C $(LIBFT_PATH) --silent
-		@$(CC) -o $(NAME) $(OBJS) -I./$(LIBFT_PATH) -L./$(LIBFT_PATH) -lft -I/Users/$(USER)/.brew/opt/readline/include -lreadline
+		@$(CC) -o $(NAME) $(OBJS) -I./$(LIBFT_PATH) -L./$(LIBFT_PATH) -lft -I/Users/$(USER)/.brew/opt/readline/include -L${HOME}/.brew/opt/readline/lib -lreadline
 		@echo $(GREEN)$(NAME)": ready to be executed"$(NONE)
 
 all: $(NAME)  
