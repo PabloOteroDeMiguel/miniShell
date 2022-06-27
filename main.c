@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/23 15:01:14 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/06/27 13:21:20 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,26 @@ int	cont_arg(t_argv **argv)
 	return (cont);
 }
 
+void	sighandler(int signum)
+{
+	if (signum == SIGINT)
+	{
+		printf("\n");
+		rl_on_new_line();
+	//	rl_replace_line("", 0);
+		rl_redisplay();
+	}
+	
+}
+/*
+void	sighandler(void)
+{
+	struct sigaction	ctrlc;
+
+	ctrlc.sa_handler = &handler_ctrlc;
+	sigaction(SIGINT, &ctrlc, NULL);
+}
+*/
 int	main(int argc, char **argv2, char **envp)
 {
 	char	*str;
@@ -89,7 +109,7 @@ int	main(int argc, char **argv2, char **envp)
 	if (argc > 1)
 		exit(1);
 	argv2 = 0;
-//	atexit(leaks);
+	//atexit(leaks);
 	stop = 1;
 	data.argv = malloc(sizeof(t_argv *));
 	data.myenv = malloc(sizeof(t_myenv *));
@@ -101,6 +121,8 @@ int	main(int argc, char **argv2, char **envp)
 	data.error_no = 0;
 	min_getenv(envp, data.myenv);
 	data.myenv_str = env_to_char(data.myenv);
+	//sighandler();
+	signal(SIGINT, sighandler);
 	while (stop != 0)
 	{
 		std[0] = dup(STDIN_FILENO);
@@ -121,12 +143,13 @@ int	main(int argc, char **argv2, char **envp)
 			arguments(data.argv, str);
 			expand(&data);
 			min_split(&data);
-			print_list(data.argv);
 			remove_quotes(data.argv);
 			data.num_argc = cont_arg(data.argv);
 			check_files(&data);
 			direction(&data);
 			print_list(data.argv);
+			printf("Infile: %s\n", data.infile);
+			printf("Outfile: %s\n", data.outfile);
 			stop = min_builtins(str, &data);
 		}
 		free_arg_str(str, *data.argv);
