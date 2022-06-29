@@ -6,16 +6,35 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:57:16 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/22 11:45:22 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/29 13:01:24 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int	builtins_pipex(t_argv *argv, t_data *data)
+{
+	int r;
+
+	r = 0;
+	if ((ft_strcmp(argv->split[0], "echo") == 0)
+		|| (ft_strncmp(argv->split[0], "ECHO", 4) == 0))
+			min_echo(data->argv);
+	else if (ft_strcmp(argv->split[0], "pwd") == 0
+		|| ft_strcmp(argv->split[0], "PWD") == 0)
+			min_pwd(data->myenv);
+	else if (ft_strcmp(argv->arg, "env") == 0
+		|| ft_strcmp(argv->arg, "ENV") == 0)
+			print_env(data->myenv);
+	else
+		r = 1;
+	return (r);
+}
+
 int	first_cmmd(t_argv *arg, t_data *data, int fd1[2])
 {
 	int	fd;
-	int	pid;
+	pid_t	pid;
 	int	status;
 
 	pipe(fd1);
@@ -32,8 +51,9 @@ int	first_cmmd(t_argv *arg, t_data *data, int fd1[2])
 		close(fd);
 		dup2(fd1[1], STDOUT_FILENO);
 		close(fd1[1]);
+	//	builtins_pipex(arg, data);
 		if (execve(arg->direction, arg->split, data->myenv_str) < 0)
-			exit(127);
+				exit(127);
 	}
 	wait(&status);
 	return (0);
@@ -42,7 +62,7 @@ int	first_cmmd(t_argv *arg, t_data *data, int fd1[2])
 int	mid_cmd(t_argv *arg, t_data *data)
 {
 	int		fd[2];
-	int		pid;
+	pid_t	pid;
 	int		status;
 
 	pipe(fd);
@@ -67,7 +87,7 @@ int	mid_cmd(t_argv *arg, t_data *data)
 int	last_cmmd(t_argv *arg, t_data *data)
 {
 	int	fd;
-	int	pid;
+	pid_t	pid;
 
 	pid = fork();
 	if (pid == -1)

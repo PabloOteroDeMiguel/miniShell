@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/27 11:56:04 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/29 11:59:57 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "libft.h"
 # include "structs.h"
 
+void	rl_replace_line(const char *text, int clear_undo);
 /*Main*/
 int		main(int argc, char **argv2, char **envp);
 int		min_builtins(char *str, t_data *data);

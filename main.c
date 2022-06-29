@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/27 13:21:20 by potero           ###   ########.fr       */
+/*   Updated: 2022/06/29 12:27:13 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ int	main(int argc, char **argv2, char **envp)
 	min_getenv(envp, data.myenv);
 	data.myenv_str = env_to_char(data.myenv);
 	//sighandler();
-	signal(SIGINT, sighandler);
+	//signal(SIGINT, sighandler);
 	while (stop != 0)
 	{
 		std[0] = dup(STDIN_FILENO);
@@ -138,6 +138,7 @@ int	main(int argc, char **argv2, char **envp)
 		}
 		if (str && ft_strlen(str) > 0)
 		{
+			signal(SIGINT, sighandler);
 			set_initial_files(&data);
 			add_history(str);
 			arguments(data.argv, str);

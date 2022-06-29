@@ -6,7 +6,7 @@
 /*   By: potero <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 09:20:12 by potero            #+#    #+#             */
-/*   Updated: 2022/06/23 12:18:22 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/06/29 13:01:22 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	execute(t_data *data)
 {
 	int			fd[2];
 	int			status;
-	int			pid;
+	pid_t		pid;
 	t_argv		*arg;
 
 	arg = *data->argv;
