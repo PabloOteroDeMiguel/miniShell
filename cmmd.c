@@ -6,7 +6,7 @@
 /*   By: potero <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 09:20:12 by potero            #+#    #+#             */
-/*   Updated: 2022/06/30 10:03:58 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/06/30 11:40:11 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	execute(t_data *data)
 	int			status;
 	pid_t		pid;
 	t_argv		*arg;
+	int i=0;
 
 	arg = *data->argv;
 	pid = fork();
@@ -65,6 +66,12 @@ int	execute(t_data *data)
 		if (fd[1] < 0)
 			fd_error(data->outfile);
 		child(fd);
+		while(data->myenv_str[i])
+		{
+			printf("%s\n", data->myenv_str[i]);
+			i++;
+		}
+
 		if (execve(arg->direction, arg->split, data->myenv_str) < 0)
 			exit(127);
 	}
