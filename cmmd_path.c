@@ -6,7 +6,7 @@
 /*   By: potero <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 09:27:12 by potero            #+#    #+#             */
-/*   Updated: 2022/06/23 12:11:26 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/06/30 10:03:55 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	cmmd_addarg(char **new_path, char *path, char *arg)
 	ac = access(arg, X_OK);
 	if (ac == 0)
 	{
-		*new_path = arg;
+		*new_path = ft_strdup(arg);
 		return (0);
 	}
 	aux = ft_strjoin(path, "/");
