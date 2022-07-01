@@ -6,12 +6,12 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:14:13 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/30 11:12:44 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/01 12:04:00 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+/*
 void	shlvl(t_myenv **myenv)
 {
 	int		i;
@@ -33,4 +33,16 @@ void	shlvl(t_myenv **myenv)
 		}
 		aux = aux->next;
 	}
+}
+*/
+char	*shlvl(char *str)
+{
+	int	i;
+
+	if (str == NULL)
+		return ("1");
+	i = ft_atoi(str);
+	i++;
+	return (ft_itoa(i));
+// creo que esto esta dando leaks
 }

@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/30 10:19:59 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/01 12:01:56 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ void	check_files(t_data *data);
 void	set_initial_files(t_data *data);
 
 /*SHLVL*/
-void	shlvl(t_myenv **myenv);
+//void	shlvl(t_myenv **myenv);
+char	*shlvl(char *str);
 
 #endif
