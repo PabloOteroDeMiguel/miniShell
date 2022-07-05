@@ -6,120 +6,83 @@
 /*   By: potero <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 13:01:20 by potero            #+#    #+#             */
-/*   Updated: 2022/07/05 13:00:54 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/05 15:20:45 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-char	*quotes(char *str, char c)
+static void	aux_strings(char **str, int i)
 {
-	char	*ret;
 	char	*aux;
 	char	*aux2;
-	int		i;
-	int		j;
 
-	i = 0;
-	while (str[i])
-	{
-		if ((str[i] == 34) || (str[i] == 39))
-		{
-			c = str[i];
-			aux = ft_substr(str, 0, i);
-			j = i + 1;
-			while (str[j] && str[j] != c)
-				j++;
-			aux2 = ft_substr(str, i + 1, j - i - 1);
-			ret = ft_strjoin(aux, aux2);
-			free(aux);
-			free(aux2);
-			aux = ft_substr(str, j + 1, ft_strlen(str) - j);
-			aux2 = ft_strjoin(ret, aux);
-			free(str);
-			str = ft_strdup(aux2);
-			i = j - 2;
-		}
-		i++;
-	}
-	return (aux2);
+	aux = ft_substr(*str, 0, i);
+	aux2 = ft_substr(*str, i + 1, ft_strlen(*str) - i);
+	free(*str);
+	*str = ft_strjoin(aux, aux2);
+	free(aux);
+	free(aux2);
 }
-*/
 
-char	*quotes(char *str)
+char	*quotes(char *arg)
 {
-	int 	i;
+	int		i;
 	char	c;
-	char	*aux;
-	char	*aux2;
 	char	*ret;
+	char	*str;
 
+	str = ft_strdup(arg);
 	i = 0;
 	while (str[i])
 	{
 		if ((str[i] == 34) || (str[i] == 39))
 		{
 			c = str[i];
-			aux = ft_substr(str, 0, i);
-			aux2 = ft_substr(str, i + 1, ft_strlen(str) - i);
-			free(str);
-			str = ft_strjoin(aux, aux2);
-			printf("aux1->%s\n", aux);
-			printf("aux2->%s\n", aux2);
-			printf("str1->%s\n", str);
-			free(aux);
-			free(aux2);
+			aux_strings(&str, i);
 			while (str[i] && str[i] != c)
 				i++;
-			aux = ft_substr(str, 0, i);
-			aux2 = ft_substr(str, i + 1, ft_strlen(str) - i);
-			free(str);
-			str = ft_strjoin(aux, aux2);
-			printf("aux3->%s\n", aux);
-			printf("aux4->%s\n", aux2);
-			printf("str2->%s\n", str);
-			free(aux);
-			free(aux2);
+			aux_strings(&str, i);
 		}
 		i++;
 	}
+	free(str);
 	ret = ft_strdup(str);
 	return (ret);
+}
+
+static void	aux_split(char **split)
+{
+	char	*str;
+
+	str = quotes(*split);
+	free(*split);
+	*split = ft_strdup(str);
+	free(str);
 }
 
 void	remove_quotes(t_argv **argv)
 {
 	int		i;
-	char	c;
 	char	*str;
 	t_argv	*aux;
 
 	aux = *argv;
-	c = 0;
 	while (aux)
 	{
 		i = 0;
 		if (ft_strchr(aux->arg, 34) != 0
 			|| ft_strchr(aux->arg, 39) != 0)
 		{	
-		//	str = quotes(aux->arg, c);
 			str = quotes(aux->arg);
 			free(aux->arg);
-			aux->arg = ft_strdup(str);
-			free(str);
+			aux->arg = str;
 		}
 		while (aux->split[i])
 		{
 			if (ft_strchr(aux->split[i], 34) != 0
 				|| ft_strchr(aux->split[i], 39) != 0)
-			{
-			//	str = quotes(aux->split[i], c);
-				str = quotes(aux->split[i]);
-				free(aux->split[i]);
-				aux->split[i] = ft_strdup(str);
-				free(str);
-			}
+				aux_split(&aux->split[i]);
 			i++;
 		}
 		aux = aux->next;
