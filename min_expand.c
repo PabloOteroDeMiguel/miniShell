@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 11:13:41 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/23 15:01:10 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/05 12:51:21 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,14 @@ char	*change_str(char *str, t_myenv **myenv, int *len)
 	env = *myenv;
 	extra = 0;
 	key = ft_strchr(str, '$') + 1;
+//	printf("key->%s\n", key);
 	i = 0;
 	while (key[i])
 	{
 		if (key[i] == 39 || key[i] == 34 || key[i] == '$' || key[i] == ' ')
 		{
-		//	aux = ft_strchr(key, key[i]);
-			extra = ft_strchr(key, key[i]);
-			printf("extra->%s\n", extra);
-		//	extra = ft_strdup(aux);
+			extra = ft_strdup(ft_strchr(key, key[i]));
+		//	printf("extra->%s\n", extra);
 			key[i] = 0;
 			break ;
 		}
@@ -44,15 +43,15 @@ char	*change_str(char *str, t_myenv **myenv, int *len)
 		{
 			aux = ft_strdup(env->value);
 			*len = ft_strlen(aux);
-			if (extra != 0)
+			if (extra)
 			{
 				print = ft_strjoin(aux, extra);
-			//	free(extra);
+			//	printf("print->%s\n", print);
+				free(extra);
 			}
 			else
 				print = ft_strdup(aux);
 			free(aux);
-		//	free(extra);
 			return (print);
 		}
 		env = env->next;
