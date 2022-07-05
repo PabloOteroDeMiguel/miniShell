@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/01 12:01:56 by potero           ###   ########.fr       */
+/*   Updated: 2022/07/05 11:35:06 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_myenv	*export_new(char *str);
 int		exist_key(char *key, t_myenv *myenv);
 
 /*Unset*/
-void	min_unset(t_myenv **myenv, t_argv *argv);
+void	min_unset(t_myenv **myenv, t_argv *argv, t_data *data);
 
 /*Expand*/
 void	expand(t_data *data);

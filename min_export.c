@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 12:44:20 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/09 18:05:51 by potero           ###   ########.fr       */
+/*   Updated: 2022/07/05 11:37:13 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,6 @@ void	min_export(t_data *data)
 		}
 		i++;
 	}
+	free_env_char(data->myenv_str);
+	data->myenv_str = env_to_char(data->myenv);
 }
