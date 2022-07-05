@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:42:58 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/01 12:01:13 by potero           ###   ########.fr       */
+/*   Updated: 2022/07/05 11:28:58 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ t_myenv	*envnew(char *str)
 		aux = getcwd(NULL, 200);
 	else if (ft_strcmp(str, "SHLVL") == 0)
 		aux = shlvl(getenv(str));
-	//	aux = "1";
 	else
 		aux = getenv(str);
 	if (!element)
@@ -32,7 +31,7 @@ t_myenv	*envnew(char *str)
 	element->key = str;
 	element->value = ft_strdup(aux);
 	element->next = NULL;
-	if (ft_strcmp(str, "PWD") == 0)
+	if ((ft_strcmp(str, "PWD") == 0) || (ft_strcmp(str, "SHLVL") == 0))
 		free(aux);
 	return (element);
 }

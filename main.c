@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/30 11:32:12 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/05 11:28:55 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,6 @@ int	main(int argc, char **argv2, char **envp)
 //	data.outfile = "b.txt";
 	data.error_no = 0;
 	min_getenv(envp, data.myenv);
-	shlvl(data.myenv);
 	data.myenv_str = env_to_char(data.myenv);
 	//sighandler();
 	//signal(SIGINT, sighandler);
