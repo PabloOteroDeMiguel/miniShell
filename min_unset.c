@@ -6,13 +6,20 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 12:32:48 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/05 11:37:10 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/05 11:58:10 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	min_unset(t_myenv **myenv, t_argv *argv, t_data *data)
+void	min_unset(t_data *data)
+{
+	aux_unset(data->myenv, *data->argv);
+	free_env_char(data->myenv_str);
+	data->myenv_str = env_to_char(data->myenv);
+}
+
+void	aux_unset(t_myenv **myenv, t_argv *argv)
 {
 	t_myenv	*aux;
 	t_myenv	*aux2;
@@ -39,6 +46,4 @@ void	min_unset(t_myenv **myenv, t_argv *argv, t_data *data)
 		}
 		i++;
 	}
-	free_env_char(data->myenv_str);
-	data->myenv_str = env_to_char(data->myenv);
 }

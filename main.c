@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/05 11:34:44 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/05 11:58:08 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int	min_builtins(char *str, t_data *data)
 	else if (ft_strcmp(argv->split[0], "export") == 0)
 		min_export(data);
 	else if (ft_strcmp(argv->split[0], "unset") == 0)
-		min_unset(data->myenv, *data->argv, data);
+		min_unset(data);
+	//	min_unset(data->myenv, *data->argv, data);
 	//else if (ft_strcmp(argv->split[0], "./minishell") == 0)
 	//	execve("minishell", 0, 0);
 	else if (ft_strcmp(argv->split[0], "exit") == 0)
