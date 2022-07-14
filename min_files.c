@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:05:04 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/07/14 16:23:32 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/14 16:39:18 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,25 +50,21 @@ static void	clean_split(t_argv *argv, int i, int z)
 	argv->num_split--;
 }
 
-static void	set_infile(t_data *data, t_argv *argv, int i)
+static void	set_infile(t_argv *argv, int i)
 {
 	if (argv->split[i][0] == '<' && argv->split[i][1] != '<')
 	{
 		free(argv->infile);
-		printf("INFILE: ");
 		if (argv->split[i][1])
 		{
-			data->infile = ft_strdup(ft_strchar(argv->split[i], '<'));
 			argv->infile = ft_strdup(ft_strchar(argv->split[i], '<'));
 			clean_split(argv, i, 1);
 		}
 		else
 		{
-			data->infile = ft_strdup(argv->split[i + 1]);
 			argv->infile = ft_strdup(argv->split[i + 1]);
 			clean_split(argv, i, 2);
 		}
-		printf(" %s\n", argv->infile);
 	}
 }
 
@@ -79,27 +75,23 @@ static int	check_if_infile(t_argv *argv, int i)
 	return (0);
 }
 
-static void	set_outfile(t_data *data, t_argv *argv, int i)
+static void	set_outfile(t_argv *argv, int i)
 {
 
 	if (argv->split[i][0] == '>' && argv->split[i][1] != '>')
 	{
 		free(argv->outfile);
-		printf("OUTFILE: ");
 		if (argv->split[i][1])
 		{
-			data->outfile = ft_strdup(ft_strchar(argv->split[i], '>'));
 			argv->outfile = ft_strdup(ft_strchar(argv->split[i], '>'));
 			clean_split(argv, i, 1);
 
 		}
 		else
 		{
-			data->outfile = ft_strdup(argv->split[i + 1]);
 			argv->outfile = ft_strdup(argv->split[i + 1]);
 			clean_split(argv, i, 2);
 		}
-		printf(" %s\n", data->outfile);
 	}
 }
 
@@ -121,8 +113,6 @@ void	set_initial_files(t_data *data)
 		arg->outfile = ft_strdup("/dev/fd/1");
 		arg = arg->next;
 	}
-	data->infile = "/dev/fd/0";
-	data->outfile = "/dev/fd/1";
 }
 
 void	check_files(t_data *data)
@@ -132,10 +122,6 @@ void	check_files(t_data *data)
 	int		fd;
 	
 //	argv = *data->argv;
-	printf("---------------------------\n");
-	printf("INFILE: %s\n", data->infile);
-	printf("OUTFILE: %s\n", data->outfile);
-	printf("---------------------------\n");
 	/*
 	i = 0;
 	while (argv)
@@ -154,12 +140,12 @@ void	check_files(t_data *data)
 		{
 			if (check_if_infile(argv, i) == 1)
 			{
-				set_infile(data, argv, i);
+				set_infile(argv, i);
 				i--;
 			}
 			else if (check_if_outfile(argv, i) == 1)
 			{
-				set_outfile(data, argv, i);
+				set_outfile(argv, i);
 				i--;
 				fd = open(argv->outfile, O_CREAT | O_WRONLY | O_TRUNC, 0666);
 				if (fd < 0)

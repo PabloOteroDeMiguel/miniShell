@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:57:16 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/14 11:18:32 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/14 16:39:20 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ int	first_cmmd(t_argv *arg, t_data *data, int fd1[2])
 	else if (pid == 0)
 	{
 		close(fd1[0]);
-		fd = open(data->infile, O_RDONLY);
+		fd = open(arg->infile, O_RDONLY);
 		if (fd < 0)
-			fd_error(data->infile);
+			fd_error(arg->infile);
 		dup2(fd, STDIN_FILENO);
 		close(fd);
 		dup2(fd1[1], STDOUT_FILENO);
@@ -94,9 +94,9 @@ int	last_cmmd(t_argv *arg, t_data *data)
 		return (1);
 	else if (pid == 0)
 	{
-		fd = open(data->outfile, O_CREAT | O_WRONLY | O_TRUNC, 0666);
+		fd = open(arg->outfile, O_CREAT | O_WRONLY | O_TRUNC, 0666);
 		if (fd < 0)
-			fd_error(data->outfile);
+			fd_error(arg->outfile);
 		dup2(fd, STDOUT_FILENO);
 		close(fd);
 		if (execve(arg->direction, arg->split, data->myenv_str) < 0)

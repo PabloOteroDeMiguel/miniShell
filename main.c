@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/14 16:23:35 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/14 16:34:55 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,8 +151,6 @@ int	main(int argc, char **argv2, char **envp)
 			check_files(&data);
 			direction(&data);
 			print_list(data.argv);
-			printf("Infile: %s\n", data.infile);
-			printf("Outfile: %s\n", data.outfile);
 			stop = min_builtins(str, &data);
 		}
 		free_arg_str(str, *data.argv);
