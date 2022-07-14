@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:05:04 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/07/14 17:12:20 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/14 17:35:51 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static void	clean_split(t_argv *argv, int i, int z)
 
 	split_new = malloc(sizeof(char *) * argv->num_split);
 	j = 0;
-
 	while ((j < argv->num_split - z) && (argv->split[j + z]))
 	{
 		if (j < i)
@@ -77,7 +76,6 @@ static int	check_if_infile(t_argv *argv, int i)
 
 static void	set_outfile(t_argv *argv, int i)
 {
-
 	if (argv->split[i][0] == '>' && argv->split[i][1] != '>')
 	{
 		free(argv->outfile);
@@ -85,7 +83,6 @@ static void	set_outfile(t_argv *argv, int i)
 		{
 			argv->outfile = ft_strdup(ft_strchar(argv->split[i], '>'));
 			clean_split(argv, i, 1);
-
 		}
 		else
 		{
@@ -110,9 +107,7 @@ void	set_initial_files(t_data *data)
 	while (arg)
 	{
 		arg->infile = ft_strdup("/dev/fd/0");
-	//	arg->infile = 0;
 		arg->outfile = ft_strdup("/dev/fd/1");
-	//	arg->outfile = 0;
 		arg = arg->next;
 	}
 }
@@ -122,18 +117,7 @@ void	check_files(t_data *data)
 	t_argv	*argv;
 	int		i;
 	int		fd;
-	
-//	argv = *data->argv;
-	/*
-	i = 0;
-	while (argv)
-	{
-		printf("infile[%i]: %s\n", i, argv->infile);
-		printf("outfile[%i]: %s\n", i, argv->outfile);
-		i++;
-		argv = argv->next;
-	}
-	*/
+
 	argv = *data->argv;
 	while (argv)
 	{
@@ -158,4 +142,3 @@ void	check_files(t_data *data)
 		argv = argv->next;
 	}
 }
-
