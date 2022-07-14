@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:57:16 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/14 16:39:20 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/14 17:17:08 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	last_cmmd(t_argv *arg, t_data *data)
 	}
 	return (0);
 }
-
+/*
 int	pipe_execute(t_data *data)
 {
 	int		fd1[2];
@@ -127,5 +127,50 @@ int	pipe_execute(t_data *data)
 		return (1);
 	close(STDIN_FILENO);
 	wait(&status);
+	return (WEXITSTATUS(status));
+}
+*/
+
+int	pipe_execute(t_data *data)
+{
+	int		fd[2];
+	int		status;
+	pid_t	pid;
+	t_argv	*arg;
+
+	arg = *data->argv;
+	while (arg)
+	{
+		pipe(fd);
+		pid = fork();
+		if (pid == -1)
+			return (1);
+		else if (pid == 0)
+		{
+			//close(fd[0]);
+			if (ft_strcmp(arg->infile, "/dev/fd/0") != 0)
+			{
+				fd[0] = open(arg->infile, O_RDONLY);
+				if (fd[0] < 0)
+					fd_error(arg->infile);
+			}
+			if ((ft_strcmp(arg->outfile, "/dev/fd/1") != 0) || (!arg->next)) 
+			{
+				fd[1] = open(arg->outfile, O_CREAT | O_WRONLY | O_TRUNC, 0666);
+				if (fd[1] < 0)
+					fd_error(arg->outfile);
+			}
+			dup2(fd[0], STDIN_FILENO);
+			close(fd[0]);
+			dup2(fd[1], STDOUT_FILENO);
+			close(fd[1]);
+			if (execve(arg->direction, arg->split, data->myenv_str) < 0)
+				exit(127);
+		}
+		close(STDIN_FILENO);
+		wait(&status);
+
+		arg = arg->next;
+	}
 	return (WEXITSTATUS(status));
 }
