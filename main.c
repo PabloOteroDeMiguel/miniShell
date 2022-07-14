@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/05 13:00:57 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/14 13:39:13 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,10 +139,11 @@ int	main(int argc, char **argv2, char **envp)
 		}
 		if (str && ft_strlen(str) > 0)
 		{
-			signal(SIGINT, sighandler);
-			set_initial_files(&data);
+		//	signal(SIGINT, sighandler);
+			//set_initial_files(&data);
 			add_history(str);
 			arguments(data.argv, str);
+			set_initial_files(&data);
 			expand(&data);
 			min_split(&data);
 			remove_quotes(data.argv);

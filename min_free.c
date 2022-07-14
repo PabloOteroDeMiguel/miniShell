@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 09:51:07 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/05 15:21:00 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/14 13:39:17 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	free_arg_str(char *str, t_argv *argv)
 		free(argv->split);
 		free(argv->arg);
 		free(argv->direction);
+		free(argv->infile);
+		free(argv->outfile);
 		aux = argv->next;
 		free(argv);
 		argv = aux;
