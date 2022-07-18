@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:57:16 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/14 17:17:08 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/14 18:32:14 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,8 @@ int	pipe_execute(t_data *data)
 			if (execve(arg->direction, arg->split, data->myenv_str) < 0)
 				exit(127);
 		}
+		close(fd[0]);
+		close(fd[1]);
 		close(STDIN_FILENO);
 		wait(&status);
 

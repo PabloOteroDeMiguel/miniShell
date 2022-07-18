@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:05:04 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/07/14 17:57:51 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/14 18:41:40 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,10 @@ void	set_initial_files(t_data *data)
 	arg = *data->argv;
 	while (arg)
 	{
-		arg->infile = ft_strdup("/dev/fd/0");
-		arg->outfile = ft_strdup("/dev/fd/1");
+		//arg->infile = ft_strdup("/dev/fd/0");
+		arg->infile = 0;
+		//arg->outfile = ft_strdup("/dev/fd/1");
+		arg->outfile = 0;
 		arg = arg->next;
 	}
 }
