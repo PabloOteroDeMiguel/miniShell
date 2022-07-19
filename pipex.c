@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:57:16 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/19 13:49:59 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/19 16:16:51 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,21 +134,20 @@ int	pipe_execute(t_data *data)
 int	pipe_execute(t_data *data)
 {
 	int		fd[2];
-	int		fd_last;
 	int		status;
 	pid_t	pid;
 	t_argv	*arg;
 
 	arg = *data->argv;
-	while (arg->next)
+	while (arg)
 	{
-		pipe(fd);
+		if (arg->next)
+			pipe(fd);
 		pid = fork();
 		if (pid == -1)
 			return (1);
 		else if (pid == 0)
 		{
-		//	dup2(fd[0], STDIN_FILENO);
 			close(fd[0]);
 			if (arg->infile != 0)
 			{
@@ -166,8 +165,6 @@ int	pipe_execute(t_data *data)
 					fd_error(arg->outfile);
 			}
 
-		//	dup2(fd[0], STDIN_FILENO);
-		//	close(fd[0]);
 			dup2(fd[1], STDOUT_FILENO);
 			close(fd[1]);
 			if (execve(arg->direction, arg->split, data->myenv_str) < 0)
@@ -176,30 +173,9 @@ int	pipe_execute(t_data *data)
 		dup2(fd[0], STDIN_FILENO);
 		close(fd[0]);
 		close(fd[1]);
-	//	close(STDIN_FILENO);
 		wait(&status);
 		arg = arg->next;
 	}
-	pid = fork();
-	if (pid == -1)
-		return (1);
-	else if (pid == 0)
-	{
-		fd_last = open(arg->outfile, O_CREAT | O_WRONLY | O_TRUNC, 0666);
-		/*
-		if (arg->outfile != 0)
-		{
-			fd_last = open(arg->outfile, O_CREAT | O_WRONLY | O_TRUNC, 0666);
-			if (fd_last < 0)
-				fd_error(arg->outfile);
-		}
-		*/
-		dup2(fd_last, STDOUT_FILENO);
-		close(fd_last);
-		if (execve(arg->direction, arg->split, data->myenv_str) < 0)
-			exit(127);
-	}
 	close(STDIN_FILENO);
-	wait(&status);
 	return (WEXITSTATUS(status));
 }
