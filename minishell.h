@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/05 14:46:36 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/20 13:21:23 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@
 
 void	rl_replace_line(const char *text, int clear_undo);
 /*Main*/
+int		execute(t_data *data);
 int		main(int argc, char **argv2, char **envp);
-int		min_builtins(char *str, t_data *data);
+//int		min_builtins(char *str, t_data *data);
 int		cont_arg(t_argv **argv);
 
 /*Argv*/
@@ -86,7 +87,7 @@ void	print_list(t_argv **argv);
 
 /*Cmmd*/
 int		command(t_data *data);
-int		execute(t_data *data);
+int		execute_cmmd(t_data *data);
 void	direction(t_data *data);
 
 /*Cmmd_Path*/
@@ -118,5 +119,8 @@ void	set_initial_files(t_data *data);
 
 /*SHLVL*/
 char	*shlvl(char *str);
+
+/*Builtins*/
+int		min_builtins(t_data *data);
 
 #endif

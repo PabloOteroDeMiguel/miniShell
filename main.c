@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/20 11:39:33 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/20 13:38:17 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@ void	leaks(void)
 {
 	system("leaks minishell");
 }
-
+/*
 int	min_builtins(char *str, t_data *data)
 {
 	t_argv	*argv;
-//	int		i;
 
 	argv = *data->argv;
 	if (argv->split[0] == 0)
@@ -38,9 +37,6 @@ int	min_builtins(char *str, t_data *data)
 		min_export(data);
 	else if (ft_strcmp(argv->split[0], "unset") == 0)
 		min_unset(data);
-	//	min_unset(data->myenv, *data->argv, data);
-	//else if (ft_strcmp(argv->split[0], "./minishell") == 0)
-	//	execve("minishell", 0, 0);
 	else if (ft_strcmp(argv->split[0], "exit") == 0)
 	{
 		printf("exit\n");
@@ -62,6 +58,34 @@ int	min_builtins(char *str, t_data *data)
 			pipe_error(data);
 		}
 		
+	}
+	return (1);
+}
+*/
+int	execute(t_data *data)
+{
+	t_argv	*arg;
+
+	arg = *data->argv;
+	if (ft_strcmp(arg->split[0], "exit") == 0)
+	{
+		printf("exit\n");
+		return (0);
+	}
+	else
+	{
+		command_found(data);
+		if (data->num_argc == 1 && data->error_no == 0)
+		{
+			data->error_no = execute_cmmd(data);
+			//data->error_no = pipe_execute(data);
+			pipe_error(data);
+		}
+		else if (data->num_argc > 1 && data->error_no == 0) 
+		{
+			data->error_no = pipe_execute(data);
+			pipe_error(data);
+		}	
 	}
 	return (1);
 }
@@ -116,10 +140,6 @@ int	main(int argc, char **argv2, char **envp)
 	data.argv = malloc(sizeof(t_argv *));
 	data.myenv = malloc(sizeof(t_myenv *));
 	*data.myenv = 0;
-//	data.infile = "/dev/fd/0";
-//	data.outfile = "/dev/fd/1";
-//	data.infile = "a.txt";
-//	data.outfile = "b.txt";
 	data.error_no = 0;
 	min_getenv(envp, data.myenv);
 	data.myenv_str = env_to_char(data.myenv);
@@ -152,7 +172,8 @@ int	main(int argc, char **argv2, char **envp)
 			check_files(&data);
 			direction(&data);
 			print_list(data.argv);
-			stop = min_builtins(str, &data);
+			//stop = min_builtins(str, &data);
+			stop = execute(&data);
 		}
 		free_arg_str(str, *data.argv);
 		dup2(STDIN_FILENO, std[0]);

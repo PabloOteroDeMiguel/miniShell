@@ -6,7 +6,7 @@
 /*   By: potero <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 09:20:12 by potero            #+#    #+#             */
-/*   Updated: 2022/07/20 11:41:41 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/20 13:34:37 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void files(t_argv *arg)
 		arg->outfile = ft_strdup("/dev/fd/1");
 }
 
-int	execute(t_data *data)
+int	execute_cmmd(t_data *data)
 {
 	int			fd[2];
 	int			status;
@@ -61,6 +61,11 @@ int	execute(t_data *data)
 	t_argv		*arg;
 
 	arg = *data->argv;
+	if (min_builtins(data) == 0)
+	{
+		printf("Is a builtin\n");
+		return (0);
+	}
 	pid = fork();
 	files(arg);
 	if (pid == -1)
