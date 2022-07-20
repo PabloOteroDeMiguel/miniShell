@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/20 14:37:24 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/20 14:52:52 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	set_initial_files(t_data *data);
 char	*shlvl(char *str);
 
 /*Builtins*/
-int		min_builtins(t_data *data);
+int		min_builtins(t_argv *argv, t_data *data);
 int		builtins_pipex(t_argv *argv, t_data *data);
 
 #endif

@@ -6,24 +6,22 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 13:11:39 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/20 14:41:54 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/20 14:53:27 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	min_builtins(t_data *data)
+int	min_builtins(t_argv *arg, t_data *data)
 {
-	t_argv	*arg;
 	int		r;
 
 	r = 0;
-	arg = *data->argv;
 	if (arg->split[0] == 0)
 		return (0);
 	if ((ft_strcmp(arg->split[0], "echo") == 0)
 		|| (ft_strcmp(arg->split[0], "ECHO") == 0))
-		min_echo(data->argv);
+		min_echo(&arg);
 	else if (ft_strcmp(arg->split[0], "pwd") == 0
 		|| ft_strcmp(arg->split[0], "PWD") == 0)
 		min_pwd(data->myenv);
@@ -35,25 +33,6 @@ int	min_builtins(t_data *data)
 		min_export(data);
 	else if (ft_strcmp(arg->split[0], "unset") == 0)
 		min_unset(data);
-	else
-		r = 1;
-	return (r);
-}
-
-int	builtins_pipex(t_argv *argv, t_data *data)
-{
-	int	r;
-
-	r = 0;
-	if ((ft_strcmp(argv->split[0], "echo") == 0)
-		|| (ft_strncmp(argv->split[0], "ECHO", 4) == 0))
-		min_echo(&argv);
-	else if (ft_strcmp(argv->split[0], "pwd") == 0
-		|| ft_strcmp(argv->split[0], "PWD") == 0)
-		min_pwd(data->myenv);
-	else if (ft_strcmp(argv->arg, "env") == 0
-		|| ft_strcmp(argv->arg, "ENV") == 0)
-		print_env(data->myenv);
 	else
 		r = 1;
 	return (r);

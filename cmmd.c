@@ -6,7 +6,7 @@
 /*   By: potero <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 09:20:12 by potero            #+#    #+#             */
-/*   Updated: 2022/07/20 14:32:55 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/20 14:46:48 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,7 @@ int	execute_cmmd(t_data *data)
 
 	arg = *data->argv;
 	if (min_builtins(data) == 0)
-	{
-		//printf("Is a builtin\n");
 		return (0);
-	}
 	pid = fork();
 	files(arg);
 	if (pid == -1)
