@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:57:16 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/19 16:23:54 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/20 11:41:55 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ int	pipe_execute(t_data *data)
 	arg = *data->argv;
 	while (arg)
 	{
+
 		if (arg->next)
 			pipe(fd);
 		pid = fork();
@@ -157,7 +158,6 @@ int	pipe_execute(t_data *data)
 				dup2(fd[0], STDIN_FILENO);
 				close(fd[0]);
 			}
-
 			if (arg->outfile != 0)
 			{
 				fd[1] = open(arg->outfile, O_CREAT | O_WRONLY | O_TRUNC, 0666);
