@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/20 13:21:23 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/20 14:37:24 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	rl_replace_line(const char *text, int clear_undo);
 /*Main*/
 int		execute(t_data *data);
 int		main(int argc, char **argv2, char **envp);
-//int		min_builtins(char *str, t_data *data);
 int		cont_arg(t_argv **argv);
 
 /*Argv*/
@@ -97,13 +96,9 @@ char	*cmmd_find_path(char **envp);
 char	*cmmd_path(char **path, char *arg);
 
 /*Pipex*/
-int		first_cmmd(t_argv *arg, t_data *data, int fd1[2]);
-int		mid_cmd(t_argv *arg, t_data *data);
-int		last_cmmd(t_argv *arg, t_data *data);
 int		pipe_execute(t_data *data);
 
 /*Remove_quotes*/
-//char	*quotes(char *str, char c);
 char	*quotes(char *arg);
 void	remove_quotes(t_argv **argv);
 
@@ -122,5 +117,6 @@ char	*shlvl(char *str);
 
 /*Builtins*/
 int		min_builtins(t_data *data);
+int		builtins_pipex(t_argv *argv, t_data *data);
 
 #endif
