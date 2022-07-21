@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/21 13:06:21 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/21 13:26:48 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ int	main(int argc, char **argv2, char **envp)
 		free_arg_str(str, *data.argv);
 		dup2(STDIN_FILENO, std[0]);
 		dup2(STDOUT_FILENO, std[1]);
+		unlink(".here_doc");
 	}
 	free_env(*data.myenv);
 	free_env_char(data.myenv_str);
