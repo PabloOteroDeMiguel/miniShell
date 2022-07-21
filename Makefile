@@ -6,7 +6,7 @@
 #    By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/07 12:55:48 by potero-d          #+#    #+#              #
-#    Updated: 2022/07/20 13:19:47 by potero-d         ###   ########.fr        #
+#    Updated: 2022/07/21 12:32:06 by potero-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ BLUE	= '\033[1;34m'
 SRCS = main.c min_argv.c min_lst.c min_echo.c min_pwd.c\
 	   min_free.c min_env.c min_cd.c min_export.c min_unset.c min_expand.c\
 	   min_remove_quotes.c min_print.c min_error.c min_files.c min_shlvl.c\
-	   cmmd.c cmmd_path.c pipex.c min_builtins.c
+	   cmmd.c cmmd_path.c pipex.c min_builtins.c min_here_doc.c
 
 LIBFT_PATH = libft/
 
