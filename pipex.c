@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:57:16 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/20 14:53:30 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/21 11:44:11 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ int	pipe_execute(t_data *data)
 			}
 			if (arg->outfile != 0)
 			{
-				fd[1] = open(arg->outfile, O_CREAT | O_WRONLY | O_TRUNC, 0666);
+				if (arg->out == 2)
+					fd[1] = open(arg->outfile, O_CREAT | O_RDWR | O_APPEND, 0644);
+				else
+					fd[1] = open(arg->outfile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 				if (fd[1] < 0)
 					fd_error(arg->outfile);
 			}

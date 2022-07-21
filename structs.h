@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 11:30:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/14 16:32:50 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/21 11:31:07 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_argv
 	int				num_split;
 	char			*infile;
 	char			*outfile;
+	int				out;
 	struct s_argv	*next;
 }	t_argv;
 

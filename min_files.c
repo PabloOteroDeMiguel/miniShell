@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:05:04 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/07/19 12:45:15 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/21 11:47:57 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,20 @@ static void	set_outfile(t_argv *argv, int i)
 			clean_split(argv, i, 2);
 		}
 	}
+	else
+	{
+		argv->out = 2;
+		if (argv->split[i][2])
+		{
+			argv->outfile = ft_strdup(ft_strchar(argv->split[i], '>') + 1 );
+			clean_split(argv, i, 1);
+		}
+		else
+		{
+			argv->outfile = ft_strdup(argv->split[i + 1]);
+			clean_split(argv, i, 2);
+		}
+	}
 }
 
 static int	check_if_outfile(t_argv *argv, int i)
@@ -135,7 +149,7 @@ void	check_files(t_data *data)
 			{
 				set_outfile(argv, i);
 				i--;
-				fd = open(argv->outfile, O_CREAT | O_WRONLY | O_TRUNC, 0666);
+				fd = open(argv->outfile, O_CREAT | O_WRONLY , 0644);
 				if (fd < 0)
 					return ;
 				close(fd);
