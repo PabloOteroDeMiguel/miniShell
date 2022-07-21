@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:37:47 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/20 13:38:14 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/21 15:07:51 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,20 @@ int	command_found(t_data *data)
 	arg = *data->argv;
 	while (arg)
 	{
-		if (ft_strcmp(arg->split[0], "export") == 0
-			|| ft_strcmp(arg->split[0], "unset") == 0)
-				arg->error_code = 0;
-		if (arg->error_code == 127)
+		if (arg->split[0] != 0)
 		{
-			not_cmmd(arg->split[0]);
-			data->error_no = 127;
-			update_error(data);
+			if (ft_strcmp(arg->split[0], "export") == 0
+				|| ft_strcmp(arg->split[0], "unset") == 0)
+					arg->error_code = 0;
+			if (arg->error_code == 127)
+			{
+				not_cmmd(arg->split[0]);
+				data->error_no = 127;
+				update_error(data);
+			}
+			else
+				data->error_no = 0;
 		}
-		else
-			data->error_no = 0;
 		arg = arg->next;
 	}
 	update_error(data);

@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/21 13:26:48 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/21 15:09:10 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,26 +67,26 @@ int	execute(t_data *data)
 	t_argv	*arg;
 
 	arg = *data->argv;
-	if (ft_strcmp(arg->split[0], "exit") == 0)
+	if (arg->split[0] && arg->next == 0)
 	{
-		printf("exit\n");
-		return (0);
-	}
-	else
-	{
-		command_found(data);
-		if (data->num_argc == 1 && data->error_no == 0)
+		if (ft_strcmp(arg->split[0], "exit") == 0)
 		{
-			data->error_no = execute_cmmd(data);
-			//data->error_no = pipe_execute(data);
-			pipe_error(data);
+			printf("exit\n");
+			return (0);
 		}
-		else if (data->num_argc > 1 && data->error_no == 0) 
-		{
-			data->error_no = pipe_execute(data);
-			pipe_error(data);
-		}	
 	}
+	command_found(data);
+	if (data->num_argc == 1 && data->error_no == 0)
+	{
+		data->error_no = execute_cmmd(data);
+		//data->error_no = pipe_execute(data);
+		pipe_error(data);
+	}
+	else if (data->num_argc > 1 && data->error_no == 0) 
+	{
+		data->error_no = pipe_execute(data);
+		pipe_error(data);
+	}	
 	return (1);
 }
 
