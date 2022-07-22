@@ -6,7 +6,7 @@
 /*   By: potero <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 09:20:12 by potero            #+#    #+#             */
-/*   Updated: 2022/07/21 13:06:18 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/22 13:49:15 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,30 @@ void	direction(t_data *data)
 static void	child(int fd[2])
 {
 	dup2(fd[0], STDIN_FILENO);
-//	close(fd[0]);
+	close(fd[0]);
 	dup2(fd[1], STDOUT_FILENO);
-//	close(fd[1]);
+	close(fd[0]);
 }
 
-static void files(t_argv *arg)
+static void	files(t_argv *arg)
 {
 	if (arg->infile == 0)
 		arg->infile = ft_strdup("/dev/fd/0");
 	if (arg->outfile == 0)
 		arg->outfile = ft_strdup("/dev/fd/1");
+}
+
+static void	file_des(int fd[2], t_argv *arg)
+{
+	fd[0] = open(arg->infile, O_RDONLY);
+	if (fd[0] < 0)
+		fd_error(arg->infile);
+	if (arg->out == 2)
+		fd[1] = open(arg->outfile, O_CREAT | O_RDWR | O_APPEND, 0644);
+	else
+		fd[1] = open(arg->outfile, O_CREAT | O_WRONLY | O_TRUNC, 0666);
+	if (fd[1] < 0)
+		fd_error(arg->outfile);
 }
 
 int	execute_cmmd(t_data *data)
@@ -69,20 +82,11 @@ int	execute_cmmd(t_data *data)
 		return (1);
 	else if (pid == 0)
 	{
-		fd[0] = open(arg->infile, O_RDONLY);
-		if (fd[0] < 0)
-			fd_error(arg->infile);
-		if (arg->out == 2)
-			fd[1] = open(arg->outfile, O_CREAT | O_RDWR | O_APPEND, 0644);
-		else
-			fd[1] = open(arg->outfile, O_CREAT | O_WRONLY | O_TRUNC, 0666);
-		if (fd[1] < 0)
-			fd_error(arg->outfile);
+		file_des(fd, arg);
 		child(fd);
 		if (execve(arg->direction, arg->split, data->myenv_str) < 0)
 			exit(127);
 	}
-//	close(fd[0]);
 	wait(&status);
 	return (WEXITSTATUS(status));
 }
