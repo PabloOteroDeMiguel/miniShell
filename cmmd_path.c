@@ -6,7 +6,7 @@
 /*   By: potero <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 09:27:12 by potero            #+#    #+#             */
-/*   Updated: 2022/07/20 13:38:11 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/22 13:50:51 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ char	*cmmd_path(char **path, char *arg)
 		free(new_path);
 		i++;
 	}
-	//not_cmmd(arg);
 	new_path = 0;
 	return (new_path);
 }
