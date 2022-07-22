@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/21 12:32:34 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/22 12:50:16 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,15 @@ void	fd_error(char *str);
 /*Files*/
 void	check_files(t_data *data);
 void	set_initial_files(t_data *data);
+void	clean_split(t_argv *argv, int i, int z);
+
+/*Infiles*/
+void	set_infile(t_argv *argv, int i);
+int		check_if_infile(t_argv *argv, int i);
+
+/*Outfiles*/
+void	set_outfile(t_argv *argv, int i);
+int		check_if_outfile(t_argv *argv, int i);
 
 /*SHLVL*/
 char	*shlvl(char *str);
