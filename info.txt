@@ -11,3 +11,8 @@ y poner en Makefile:
 
 $(NAME):	$(OBJS)
 			$(CC) $(CFLAGS) $(OBJS) -I$(INCS) -o $(NAME) -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include -lreadline
+
+
+
+el ctrl \ finaliza el proceso hijo
+ctrl D es un eof por ejemplo wc + ctrl D sale 0 0 0
