@@ -16,3 +16,5 @@ $(NAME):	$(OBJS)
 
 el ctrl \ finaliza el proceso hijo
 ctrl D es un eof por ejemplo wc + ctrl D sale 0 0 0
+
+OJO tengo que revisar el env, se intenta ejecutar como comando y no como builtin (mirar env -i ./minishell dentro de minishell)
