@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/26 17:15:46 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/07/26 17:29:22 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,13 @@ void	sighandler(int signum)
 
 void	handler_ctrlslash(int sig)
 {
-
-	if (sign > 0 && sig == SIGQUIT)
+	if (sign == 0 && sig == SIGQUIT)
+	{
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+	else if (sign > 0 && sig == SIGQUIT)
 	{
 		kill(sign, SIGCONT);
 		write(2, "\n^\\Quit: 3\n", 11);
@@ -95,8 +100,6 @@ void	handler_ctrlslash(int sig)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	else if (sign == 0)
-			return ;
 }
 
 int	main(int argc, char **argv2, char **envp)
