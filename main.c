@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/21 15:18:31 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/26 12:03:20 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ void	sighandler(int signum)
 {
 	if (signum == SIGINT)
 	{
-		printf("\n");
+		write(1, "\n", 1);
 		rl_on_new_line();
-	//	rl_replace_line("", 0);
+		rl_replace_line("", 0);
 		rl_redisplay();
 	}
 	
@@ -98,8 +98,8 @@ int	main(int argc, char **argv2, char **envp)
 	data.error_no = 0;
 	min_getenv(envp, data.myenv);
 	data.myenv_str = env_to_char(data.myenv);
-	//sighandler();
-	//signal(SIGINT, sighandler);
+//	sighandler();
+	signal(SIGINT, sighandler);
 	while (stop != 0)
 	{
 		std[0] = dup(STDIN_FILENO);
@@ -115,7 +115,7 @@ int	main(int argc, char **argv2, char **envp)
 		}
 		if (str && ft_strlen(str) > 0)
 		{
-		//	signal(SIGINT, sighandler);
+			signal(SIGINT, sighandler);
 			//set_initial_files(&data);
 			add_history(str);
 			arguments(data.argv, str);
