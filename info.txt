@@ -15,7 +15,6 @@ $(NAME):	$(OBJS)
 
 
 el ctrl \ finaliza el proceso hijo
-para ver lo que hace hay  que hacer por ejemplo cat + ctrl ç
-https://unix.stackexchange.com/questions/226327/what-does-ctrl4-and-ctrl-do-in-bash
 ctrl D es un eof por ejemplo wc + ctrl D sale 0 0 0
 
+OJO tengo que revisar el env, se intenta ejecutar como comando y no como builtin (mirar env -i ./minishell dentro de minishell)
