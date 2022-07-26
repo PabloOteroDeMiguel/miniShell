@@ -6,15 +6,26 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/26 12:10:24 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/26 17:15:46 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int sign;
+
 void	leaks(void)
 {
 	system("leaks minishell");
+}
+
+void	no_ctrlprint(void)
+{
+	struct termios	t;
+
+	tcgetattr(0, &t);
+	t.c_lflag &= ~ECHOCTL;
+	tcsetattr(0, TCSANOW, &t);
 }
 
 int	execute(t_data *data)
@@ -22,6 +33,7 @@ int	execute(t_data *data)
 	t_argv	*arg;
 
 	arg = *data->argv;
+	
 	if (arg->split[0] && arg->next == 0)
 	{
 		if (ft_strcmp(arg->split[0], "exit") == 0)
@@ -71,15 +83,22 @@ void	sighandler(int signum)
 	}
 	
 }
-/*
-void	sighandler(void)
-{
-	struct sigaction	ctrlc;
 
-	ctrlc.sa_handler = &handler_ctrlc;
-	sigaction(SIGINT, &ctrlc, NULL);
+void	handler_ctrlslash(int sig)
+{
+
+	if (sign > 0 && sig == SIGQUIT)
+	{
+		kill(sign, SIGCONT);
+		write(2, "\n^\\Quit: 3\n", 11);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+	else if (sign == 0)
+			return ;
 }
-*/
+
 int	main(int argc, char **argv2, char **envp)
 {
 	char	*str;
@@ -92,21 +111,23 @@ int	main(int argc, char **argv2, char **envp)
 	argv2 = 0;
 //	atexit(leaks);
 	stop = 1;
+	sign = 0;
 	data.argv = malloc(sizeof(t_argv *));
 	data.myenv = malloc(sizeof(t_myenv *));
 	*data.myenv = 0;
 	data.error_no = 0;
 	min_getenv(envp, data.myenv);
 	data.myenv_str = env_to_char(data.myenv);
-//	sighandler();
-	signal(SIGINT, sighandler);
 	while (stop != 0)
 	{
+		signal(SIGINT, sighandler);
+		signal(SIGQUIT, handler_ctrlslash);
+		no_ctrlprint();
 		std[0] = dup(STDIN_FILENO);
 		std[1] = dup(STDOUT_FILENO);
 		*data.argv = NULL;	
 		printf("\033[;33m");
-		str = readline("Minishell$ ");
+		str = readline("\rMinishell$ ");
 		printf("\033[0m");
 		if (!str)
 		{
@@ -115,8 +136,6 @@ int	main(int argc, char **argv2, char **envp)
 		}
 		if (str && ft_strlen(str) > 0)
 		{
-			signal(SIGINT, sighandler);
-			//set_initial_files(&data);
 			add_history(str);
 			arguments(data.argv, str);
 			set_initial_files(&data);
@@ -128,6 +147,7 @@ int	main(int argc, char **argv2, char **envp)
 			direction(&data);
 			print_list(data.argv);
 			stop = execute(&data);
+			
 		}
 		free_arg_str(str, *data.argv);
 		dup2(STDIN_FILENO, std[0]);

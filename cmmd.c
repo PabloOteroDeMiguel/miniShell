@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmmd.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: potero <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 09:20:12 by potero            #+#    #+#             */
-/*   Updated: 2022/07/22 13:49:15 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/26 17:05:00 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int	execute_cmmd(t_data *data)
 	if (min_builtins(arg, data) == 0)
 		return (0);
 	pid = fork();
+	sign = pid;
 	files(arg);
 	if (pid == -1)
 		return (1);
@@ -86,6 +87,7 @@ int	execute_cmmd(t_data *data)
 		child(fd);
 		if (execve(arg->direction, arg->split, data->myenv_str) < 0)
 			exit(127);
+		
 	}
 	wait(&status);
 	return (WEXITSTATUS(status));

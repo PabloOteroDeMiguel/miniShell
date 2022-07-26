@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/26 11:01:53 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/26 16:37:34 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@
 # include<fcntl.h>
 # include<errno.h>
 # include<signal.h>
+# include<termios.h>
 # include "libft.h"
 # include "structs.h"
+
+extern  int sign;
 
 void	rl_replace_line(const char *text, int clear_undo);
 /*Main*/
