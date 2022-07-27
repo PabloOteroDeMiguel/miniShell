@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/27 13:55:06 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/07/27 16:55:43 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	rl_replace_line(const char *text, int clear_undo);
 int		execute(t_data *data);
 int		main(int argc, char **argv2, char **envp);
 int		cont_arg(t_argv **argv);
+void	sighandler(int signum);
 
 /*Argv*/
 void	read_str(t_argv *argv, char *str);

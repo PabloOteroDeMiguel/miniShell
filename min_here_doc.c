@@ -6,13 +6,13 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 12:14:21 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/27 13:07:30 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/07/27 17:34:36 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	min_here_doc(t_argv *arg)
+void	run_here_doc(t_argv *arg)
 {
 	int		fd;
 	char	*str;
@@ -21,6 +21,7 @@ void	min_here_doc(t_argv *arg)
 	str = readline("> ");
 	while (ft_strcmp(str, arg->eof) != 0)
 	{
+		sign = 2;
 		write(fd, str, ft_strlen(str));
 		write(fd, "\n", 1);
 		free(str);
@@ -28,4 +29,26 @@ void	min_here_doc(t_argv *arg)
 	}
 	free(str);
 	close(fd);
+}
+
+void	min_here_doc(t_argv *argv)
+{
+	int		fd[2];
+	int		pid;
+	int		status;
+
+	pipe(fd);
+	pid = fork();
+	if (pid == 0)
+	{
+		signal(SIGINT, SIG_DFL);
+		close(fd[1]);
+		close(fd[0]);
+		run_here_doc(argv);
+		exit(0);
+	}
+	signal(SIGINT, sighandler);
+	close(fd[0]);
+	close(fd[1]);
+	wait(&status);
 }

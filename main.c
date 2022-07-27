@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/27 16:20:55 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/27 17:34:39 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,22 @@ void	sighandler(int signum)
 {
 	if (signum == SIGINT)
 	{
-		write(1, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+		if (sign == 2)
+		{
+			close(0);
+			write(1, "\n", 1);
+		//	rl_on_new_line();
+		//	rl_replace_line("", 0);
+		//	rl_redisplay();
+		}
+		else
+		{
+			write(1, "\n", 1);
+			rl_on_new_line();
+			rl_replace_line("", 0);
+			rl_redisplay();
+		}
 	}
-	
 }
 
 void	handler_ctrlslash(int sig)
@@ -141,9 +151,9 @@ int	main(int argc, char **argv2, char **envp)
 		std[0] = dup(STDIN_FILENO);
 		std[1] = dup(STDOUT_FILENO);
 		*data.argv = NULL;	
-		printf("\033[;33m");
+//		printf("\033[;33m");
 		str = readline("\rMinishell$ ");
-		printf("\033[0m");
+//		printf("\033[0m");
 		if (!str)
 		{
 			printf("exit1\n");
@@ -160,7 +170,7 @@ int	main(int argc, char **argv2, char **envp)
 			data.num_argc = cont_arg(data.argv);
 			check_files(&data);
 			direction(&data);
-			print_list(data.argv);
+	//		print_list(data.argv);
 			stop = execute(&data);
 		}
 		free_arg_str(str, *data.argv);
