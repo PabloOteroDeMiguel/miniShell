@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 12:30:41 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/27 13:06:17 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/07/27 13:31:05 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,14 @@ static void	here_doc(t_argv *argv, int i)
 
 int	set_infile(t_argv *argv, int i)
 {
-	if (argv->split[i][0] == '<' && argv->split[i][1] != '<' && (argv->split[i][1] || argv->split[i + 1]))
+	if (argv->split[i][0] == '<' && argv->split[i][1] != '<'
+			&& (argv->split[i][1] || argv->split[i + 1]))
 	{
 		free(argv->infile);
 		no_here_doc(argv, i);
 	}
-	else if (argv->split[i][0] == '<' && argv->split[i][1] == '<' && (argv->split[i][2] || argv->split[i + 1]))
+	else if (argv->split[i][0] == '<' && argv->split[i][1] == '<'
+			&& (argv->split[i][2] || argv->split[i + 1]))
 	{
 		free(argv->infile);
 		argv->infile = ft_strdup(".here_doc");
@@ -73,7 +75,7 @@ int	set_infile(t_argv *argv, int i)
 	}
 	else
 	{
-		printf("Minishell: syntax error near unexpected token `newline'");
+		printf("Minishell: syntax error near unexpected token `newline'\n");
 		return (1);
 	}
 	return (0);

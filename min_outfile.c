@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   min_outfile.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 12:44:25 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/22 13:23:47 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/27 13:32:51 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +56,27 @@ static void	appen(t_argv *argv, int i)
 	}
 }
 
-void	set_outfile(t_argv *argv, int i)
+int	set_outfile(t_argv *argv, int i)
 {
-	if (argv->split[i][0] == '>' && argv->split[i][1] != '>')
+	if (argv->split[i][0] == '>' && argv->split[i][1] != '>'
+			&& (argv->split[i][1] || argv->split[i + 1]))
 	{
 		free(argv->outfile);
 		no_appen(argv, i);
 	}
-	else
+	else if (argv->split[i][0] == '>' && argv->split[i][1] == '>'
+			&& (argv->split[i][2] || argv->split[i + 1]))
 	{
 		argv->out = 2;
 		free(argv->outfile);
 		appen(argv, i);
 	}
+	else
+	{
+		printf("Minishell: syntax error near unexpected token `newline'\n");
+		return (1);
+	}
+	return (0);
 }
 
 int	check_if_outfile(t_argv *argv, int i)

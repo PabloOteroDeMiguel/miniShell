@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:05:04 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/07/27 12:57:48 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/07/27 13:12:14 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ static void	check_aux(t_argv *argv)
 		}
 		else if (check_if_outfile(argv, i) == 1)
 		{
-			set_outfile(argv, i);
+			if (set_outfile(argv, i))
+				break ;
 			i--;
 			fd = open(argv->outfile, O_CREAT | O_WRONLY, 0644);
 			if (fd < 0)

@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 09:20:12 by potero            #+#    #+#             */
-/*   Updated: 2022/07/27 12:38:06 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/07/27 13:33:04 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	file_des(int fd[2], t_argv *arg)
 	if (arg->out == 2)
 		fd[1] = open(arg->outfile, O_CREAT | O_RDWR | O_APPEND, 0644);
 	else
-		fd[1] = open(arg->outfile, O_CREAT | O_WRONLY | O_TRUNC, 0666);
+		fd[1] = open(arg->outfile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd[1] < 0)
 		fd_error(arg->outfile);
 }
@@ -74,8 +74,6 @@ int	execute_cmmd(t_data *data)
 	t_argv		*arg;
 
 	arg = *data->argv;
-	if (min_builtins(arg, data) == 0)
-		return (0);
 	pid = fork();
 	sign = pid;
 	files(arg);
@@ -85,6 +83,8 @@ int	execute_cmmd(t_data *data)
 	{
 		file_des(fd, arg);
 		child(fd);
+		if (min_builtins(arg, data) == 0)
+			exit (0);
 		if (execve(arg->direction, arg->split, data->myenv_str) < 0)
 			exit(127);
 	}
