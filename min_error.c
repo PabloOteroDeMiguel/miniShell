@@ -6,11 +6,29 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:37:47 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/21 15:07:51 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/27 12:04:04 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int is_builtin(t_argv *arg)
+{
+	int	r;
+
+	r = 0;
+	if ((ft_strcmp(arg->split[0], "echo") == 0)
+		|| (ft_strcmp(arg->split[0], "ECHO") == 0)
+		|| (ft_strcmp(arg->split[0], "pwd") == 0)
+		|| (ft_strcmp(arg->split[0], "PWD") == 0)
+		|| (ft_strcmp(arg->arg, "env") == 0)
+		|| (ft_strcmp(arg->arg, "ENV") == 0)
+		|| (ft_strcmp(arg->split[0], "cd") == 0)
+		|| (ft_strcmp(arg->split[0], "export") == 0)
+		|| (ft_strcmp(arg->split[0], "unset") == 0))
+			r = 1;
+	return (r);
+}
 
 int	command_found(t_data *data)
 {
@@ -21,9 +39,8 @@ int	command_found(t_data *data)
 	{
 		if (arg->split[0] != 0)
 		{
-			if (ft_strcmp(arg->split[0], "export") == 0
-				|| ft_strcmp(arg->split[0], "unset") == 0)
-					arg->error_code = 0;
+			if (is_builtin(arg) == 1)
+				arg->error_code = 0;
 			if (arg->error_code == 127)
 			{
 				not_cmmd(arg->split[0]);

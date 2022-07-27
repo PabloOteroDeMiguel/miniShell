@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:57:16 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/26 12:47:13 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/27 12:14:07 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ int	pipe_execute(t_data *data)
 			dup2(fd[1], STDOUT_FILENO);
 			close(fd[1]);
 			if (min_builtins(arg, data) == 0)
+			{
+				write(1, "It's builtin\n", 13);
 				exit(0);
+			}
 			if (execve(arg->direction, arg->split, data->myenv_str) < 0)
 				exit(127);
 		}

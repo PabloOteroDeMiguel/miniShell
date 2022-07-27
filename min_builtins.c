@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 13:11:39 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/20 14:53:27 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/26 15:55:43 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	min_builtins(t_argv *arg, t_data *data)
 	else if (ft_strcmp(arg->split[0], "pwd") == 0
 		|| ft_strcmp(arg->split[0], "PWD") == 0)
 		min_pwd(data->myenv);
-	else if (ft_strcmp(arg->arg, "env") == 0 || ft_strcmp(arg->arg, "ENV") == 0)
+	else if (((ft_strcmp(arg->split[0], "env") == 0
+		|| ft_strcmp(arg->split[0], "ENV") == 0)) && !arg->split[1])
 		print_env(data->myenv);
 	else if (ft_strcmp(arg->split[0], "cd") == 0)
 		min_cd(data);
