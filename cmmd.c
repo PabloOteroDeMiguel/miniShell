@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 09:20:12 by potero            #+#    #+#             */
-/*   Updated: 2022/07/27 13:33:04 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/07/27 13:58:00 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	execute_cmmd(t_data *data)
 
 	arg = *data->argv;
 	pid = fork();
-	sign = pid;
+	data->sign = pid;
 	files(arg);
 	if (pid == -1)
 		return (1);

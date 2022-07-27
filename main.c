@@ -6,13 +6,11 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/27 12:49:32 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/07/27 14:37:32 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int sign;
 
 void	leaks(void)
 {
@@ -38,8 +36,19 @@ int	execute(t_data *data)
 	{
 		if (ft_strcmp(arg->split[0], "exit") == 0)
 		{
+			if (arg->split[1])
+			{
+				if (ft_atoi(arg->split[1]))
+				{
+					printf("HOLA\n");
+					data->error_no = ft_atoi(arg->split[1]);
+					update_error(data);
+				}
+				else
+					printf("Minishell: exit: %s: numeric argument required", arg->split[1]);
+			}
 			printf("exit\n");
-			return (0);
+			exit (0);
 		}
 	}
 	command_found(data);
@@ -86,27 +95,26 @@ void	sighandler(int signum)
 
 void	handler_ctrlslash(int sig)
 {
-	if (sign == 0 && sig == SIGQUIT)
+	if (data.sign == 0 && sig == SIGQUIT)
 	{
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	else if (sign > 0 && sig == SIGQUIT)
+	else if (data.sign > 0 && sig == SIGQUIT)
 	{
-		kill(sign, SIGCONT);
+		kill(data.sign, SIGCONT);
 		write(2, "\n^\\Quit: 3\n", 11);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	sign = 0;
+	data.sign = 0;
 }
 
 int	main(int argc, char **argv2, char **envp)
 {
 	char	*str;
-	t_data	data;
 	int		stop;
 	int		std[2];
 
@@ -115,7 +123,7 @@ int	main(int argc, char **argv2, char **envp)
 	argv2 = 0;
 //	atexit(leaks);
 	stop = 1;
-	sign = 0;
+	data.sign = 0;
 	data.argv = malloc(sizeof(t_argv *));
 	data.myenv = malloc(sizeof(t_myenv *));
 	*data.myenv = 0;
@@ -151,6 +159,7 @@ int	main(int argc, char **argv2, char **envp)
 			direction(&data);
 			print_list(data.argv);
 			stop = execute(&data);
+			printf("STOP: %d\n", stop);
 		}
 		free_arg_str(str, *data.argv);
 		dup2(STDIN_FILENO, std[0]);

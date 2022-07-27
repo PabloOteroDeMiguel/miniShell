@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/27 13:09:53 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/07/27 13:55:06 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@
 # include<termios.h>
 # include "libft.h"
 # include "structs.h"
-
-extern  int sign;
 
 void	rl_replace_line(const char *text, int clear_undo);
 /*Main*/

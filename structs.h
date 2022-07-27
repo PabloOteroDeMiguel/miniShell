@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 11:30:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/27 12:14:18 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/27 13:57:03 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ typedef struct s_data
 	char			**myenv_str;
 	int				num_argc;
 	int				error_no;
+	int				sign;
 }	t_data;
+
+t_data	data;
 
 #endif

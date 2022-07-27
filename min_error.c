@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   min_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:37:47 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/27 12:04:04 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/27 14:21:30 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	update_error(t_data *data)
 	t_myenv	*env;
 
 	env = *data->myenv;
+	printf("error %d\n", data->error_no);
 	while (env)
 	{
 		if (ft_strcmp(env->key, "?") == 0)
@@ -82,6 +83,7 @@ void	pipe_error(t_data *data)
 	arg = *data->argv;
 	if (data->error_no == 127)
 		printf("Minishell. %s: No such file or directory\n", arg->split[0]);
+	printf("I´M here ");
 	update_error(data);
 }
 
