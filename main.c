@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/27 12:43:34 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/07/27 12:49:32 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,6 @@ int	main(int argc, char **argv2, char **envp)
 			direction(&data);
 			print_list(data.argv);
 			stop = execute(&data);
-			
 		}
 		free_arg_str(str, *data.argv);
 		dup2(STDIN_FILENO, std[0]);

@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/27 12:13:54 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/27 12:55:45 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	set_initial_files(t_data *data);
 void	clean_split(t_argv *argv, int i, int z);
 
 /*Infiles*/
-void	set_infile(t_argv *argv, int i);
+int	set_infile(t_argv *argv, int i);
 int		check_if_infile(t_argv *argv, int i);
 
 /*Outfiles*/

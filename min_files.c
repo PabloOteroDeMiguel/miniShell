@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:05:04 by pmoreno-          #+#    #+#             */
-/*   Updated: 2022/07/22 13:06:06 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/27 12:57:48 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ static void	check_aux(t_argv *argv)
 	{
 		if (check_if_infile(argv, i) == 1)
 		{
-			set_infile(argv, i);
+			if (set_infile(argv, i))
+				break ;
 			i--;
 		}
 		else if (check_if_outfile(argv, i) == 1)

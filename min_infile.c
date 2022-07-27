@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   min_infile.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 12:30:41 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/22 13:14:20 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/27 13:06:17 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ static void	here_doc(t_argv *argv, int i)
 	}
 }
 
-void	set_infile(t_argv *argv, int i)
+int	set_infile(t_argv *argv, int i)
 {
-	if (argv->split[i][0] == '<' && argv->split[i][1] != '<')
+	if (argv->split[i][0] == '<' && argv->split[i][1] != '<' && (argv->split[i][1] || argv->split[i + 1]))
 	{
 		free(argv->infile);
 		no_here_doc(argv, i);
 	}
-	else
+	else if (argv->split[i][0] == '<' && argv->split[i][1] == '<' && (argv->split[i][2] || argv->split[i + 1]))
 	{
 		free(argv->infile);
 		argv->infile = ft_strdup(".here_doc");
@@ -71,6 +71,12 @@ void	set_infile(t_argv *argv, int i)
 		min_here_doc(argv);
 		free(argv->eof);
 	}
+	else
+	{
+		printf("Minishell: syntax error near unexpected token `newline'");
+		return (1);
+	}
+	return (0);
 }
 
 int	check_if_infile(t_argv *argv, int i)
