@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/27 14:42:56 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/07/27 16:20:55 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ int	execute(t_data *data)
 			{
 				if (ft_atoi(arg->split[1]))
 				{
-					printf("HOLA\n");
 					data->error_no = ft_atoi(arg->split[1]);
 					update_error(data);
+					exit (ft_atoi(arg->split[1]));
 				}
 				else
 					printf("Minishell: exit: %s: numeric argument required", arg->split[1]);
@@ -162,7 +162,6 @@ int	main(int argc, char **argv2, char **envp)
 			direction(&data);
 			print_list(data.argv);
 			stop = execute(&data);
-			printf("STOP: %d\n", stop);
 		}
 		free_arg_str(str, *data.argv);
 		dup2(STDIN_FILENO, std[0]);
