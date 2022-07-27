@@ -6,11 +6,13 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/27 14:37:32 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/07/27 14:42:56 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int sign;
 
 void	leaks(void)
 {
@@ -95,21 +97,21 @@ void	sighandler(int signum)
 
 void	handler_ctrlslash(int sig)
 {
-	if (data.sign == 0 && sig == SIGQUIT)
+	if (sign == 0 && sig == SIGQUIT)
 	{
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	else if (data.sign > 0 && sig == SIGQUIT)
+	else if (sign > 0 && sig == SIGQUIT)
 	{
-		kill(data.sign, SIGCONT);
+		kill(sign, SIGCONT);
 		write(2, "\n^\\Quit: 3\n", 11);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	data.sign = 0;
+	sign = 0;
 }
 
 int	main(int argc, char **argv2, char **envp)
@@ -117,13 +119,14 @@ int	main(int argc, char **argv2, char **envp)
 	char	*str;
 	int		stop;
 	int		std[2];
+	t_data	data;
 
 	if (argc > 1)
 		exit(1);
 	argv2 = 0;
 //	atexit(leaks);
 	stop = 1;
-	data.sign = 0;
+	sign = 0;
 	data.argv = malloc(sizeof(t_argv *));
 	data.myenv = malloc(sizeof(t_myenv *));
 	*data.myenv = 0;
