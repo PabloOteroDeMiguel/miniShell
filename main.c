@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/27 17:34:39 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/27 17:54:28 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	sighandler(int signum)
 		{
 			close(0);
 			write(1, "\n", 1);
+			exit(1);
 		//	rl_on_new_line();
 		//	rl_replace_line("", 0);
 		//	rl_redisplay();
