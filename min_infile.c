@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 12:30:41 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/27 13:31:05 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/07/27 13:36:19 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	set_infile(t_argv *argv, int i)
 	else
 	{
 		printf("Minishell: syntax error near unexpected token `newline'\n");
+		clean_split(argv, i, 1);
 		return (1);
 	}
 	return (0);
