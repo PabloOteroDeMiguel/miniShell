@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   min_argv.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 11:10:35 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/14 13:28:36 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/07/27 10:21:33 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	arguments(t_argv **argv, char *str)
 		len = 0;
 		if (str[i] == 124)
 		{
+			if (str[i + 1] == 124)
+				break ;
 			len++;
 			while (str[i + len] != 124 && str[i + len])
 				len++;
