@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/01 13:50:20 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/01 14:13:18 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,25 @@ void	leaks(void)
 	system("leaks minishell");
 }
 
-void	no_ctrlprint(void)
+void	min_exit(t_argv *arg, t_data *data)
 {
-	struct termios	t;
-
-	tcgetattr(0, &t);
-	t.c_lflag &= ~ECHOCTL;
-	tcsetattr(0, TCSANOW, &t);
+	if (ft_strcmp(arg->split[0], "exit") == 0)
+	{
+		if (arg->split[1])
+		{
+			if (ft_atoi(arg->split[1]))
+			{
+				data->error_no = ft_atoi(arg->split[1]);
+				update_error(data);
+				exit (ft_atoi(arg->split[1]));
+			}
+			else
+				printf("Minishell: exit: %s: numeric argument required",
+					arg->split[1]);
+		}
+		printf("exit\n");
+		exit (0);
+	}
 }
 
 int	execute(t_data *data)
@@ -31,35 +43,16 @@ int	execute(t_data *data)
 	t_argv	*arg;
 
 	arg = *data->argv;
-
-	if (arg->split[0] && arg->next == 0)
-	{
-		if (ft_strcmp(arg->split[0], "exit") == 0)
-		{
-			if (arg->split[1])
-			{
-				if (ft_atoi(arg->split[1]))
-				{
-					data->error_no = ft_atoi(arg->split[1]);
-					update_error(data);
-					exit (ft_atoi(arg->split[1]));
-				}
-				else
-					printf("Minishell: exit: %s: numeric argument required", arg->split[1]);
-			}
-			printf("exit\n");
-			exit (0);
-		}
-	}
 	command_found(data);
 	if (data->num_argc == 1 && data->error_no == 0)
 	{
 		if (exception(arg, data) == 0)
-			return (1);	
+			return (1);
+		min_exit(arg, data);
 		data->error_no = execute_cmmd(data);
 		pipe_error(data);
 	}
-	else if (data->num_argc > 1 && data->error_no == 0) 
+	else if (data->num_argc > 1 && data->error_no == 0)
 	{
 		data->error_no = pipe_execute(data);
 		pipe_error(data);
@@ -80,45 +73,6 @@ int	cont_arg(t_argv **argv)
 		aux = aux->next;
 	}
 	return (cont);
-}
-
-void	sighandler(int signum)
-{
-	if (signum == SIGINT)
-	{
-		if (g_sign == 2)
-		{
-			close(0);
-			write(1, "\n", 1);
-			exit(1);
-		}
-		else
-		{
-			write(1, "\n", 1);
-			rl_on_new_line();
-			rl_replace_line("", 0);
-			rl_redisplay();
-		}
-	}
-}
-
-void	handler_ctrlslash(int sig)
-{
-	if (g_sign == 0 && sig == SIGQUIT)
-	{
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
-	else if (g_sign > 0 && sig == SIGQUIT)
-	{
-		kill(g_sign, SIGCONT);
-		write(2, "\n^\\Quit: 3\n", 11);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
-	g_sign = 0;
 }
 
 int	main(int argc, char **argv2, char **envp)
