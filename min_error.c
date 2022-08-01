@@ -6,13 +6,13 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:37:47 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/01 10:55:45 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/01 11:47:44 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int is_builtin(t_argv *arg)
+static int	is_builtin(t_argv *arg)
 {
 	int	r;
 
