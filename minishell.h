@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/27 16:55:43 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/01 12:46:55 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void	aux_unset(t_myenv **myenv, t_argv *argv);
 /*Expand*/
 void	expand(t_data *data);
 int		change(int i, char c);
+
+/*Expand_two*/
 char	*change_str(char *str, t_myenv **myenv, int *len);
 
 /*Print*/
