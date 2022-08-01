@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/01 12:46:55 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/01 13:51:21 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ char	*shlvl(char *str);
 
 /*Builtins*/
 int		min_builtins(t_argv *argv, t_data *data);
-int		builtins_pipex(t_argv *argv, t_data *data);
+int		exception(t_argv *arg, t_data *data);
 
 /*Here_doc*/
 void	min_here_doc(t_argv *arg);

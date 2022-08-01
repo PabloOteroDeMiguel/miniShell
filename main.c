@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/01 13:00:17 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/01 13:50:20 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	execute(t_data *data)
 	t_argv	*arg;
 
 	arg = *data->argv;
-	
+
 	if (arg->split[0] && arg->next == 0)
 	{
 		if (ft_strcmp(arg->split[0], "exit") == 0)
@@ -54,6 +54,8 @@ int	execute(t_data *data)
 	command_found(data);
 	if (data->num_argc == 1 && data->error_no == 0)
 	{
+		if (exception(arg, data) == 0)
+			return (1);	
 		data->error_no = execute_cmmd(data);
 		pipe_error(data);
 	}
