@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/01 11:56:59 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/01 13:00:17 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,9 +146,7 @@ int	main(int argc, char **argv2, char **envp)
 		std[0] = dup(STDIN_FILENO);
 		std[1] = dup(STDOUT_FILENO);
 		*data.argv = NULL;	
-//		printf("\033[;33m");
 		str = readline("\rMinishell$ ");
-//		printf("\033[0m");
 		if (!str)
 		{
 			printf("exit1\n");
@@ -165,7 +163,7 @@ int	main(int argc, char **argv2, char **envp)
 			data.num_argc = cont_arg(data.argv);
 			check_files(&data);
 			direction(&data);
-	//		print_list(data.argv);
+			print_list(data.argv);
 			stop = execute(&data);
 		}
 		free_arg_str(str, *data.argv);
