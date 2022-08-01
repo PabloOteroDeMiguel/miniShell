@@ -6,13 +6,11 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/01 11:40:19 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/01 11:56:59 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int g_sign;
 
 void	leaks(void)
 {
