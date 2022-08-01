@@ -6,13 +6,13 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/01 11:14:01 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/01 11:40:19 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int sign;
+int g_sign;
 
 void	leaks(void)
 {
@@ -57,7 +57,6 @@ int	execute(t_data *data)
 	if (data->num_argc == 1 && data->error_no == 0)
 	{
 		data->error_no = execute_cmmd(data);
-		//data->error_no = pipe_execute(data);
 		pipe_error(data);
 	}
 	else if (data->num_argc > 1 && data->error_no == 0) 
@@ -87,7 +86,7 @@ void	sighandler(int signum)
 {
 	if (signum == SIGINT)
 	{
-		if (sign == 2)
+		if (g_sign == 2)
 		{
 			close(0);
 			write(1, "\n", 1);
@@ -105,21 +104,21 @@ void	sighandler(int signum)
 
 void	handler_ctrlslash(int sig)
 {
-	if (sign == 0 && sig == SIGQUIT)
+	if (g_sign == 0 && sig == SIGQUIT)
 	{
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	else if (sign > 0 && sig == SIGQUIT)
+	else if (g_sign > 0 && sig == SIGQUIT)
 	{
-		kill(sign, SIGCONT);
+		kill(g_sign, SIGCONT);
 		write(2, "\n^\\Quit: 3\n", 11);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	sign = 0;
+	g_sign = 0;
 }
 
 int	main(int argc, char **argv2, char **envp)
@@ -134,7 +133,7 @@ int	main(int argc, char **argv2, char **envp)
 	argv2 = 0;
 //	atexit(leaks);
 	stop = 1;
-	sign = 0;
+	g_sign = 0;
 	data.argv = malloc(sizeof(t_argv *));
 	data.myenv = malloc(sizeof(t_myenv *));
 	*data.myenv = 0;

@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:57:16 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/27 13:27:39 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/08/01 11:43:04 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	pipe_execute(t_data *data)
 		if (arg->next)
 			pipe(fd);
 		pid = fork();
+		g_sign = pid;
 		if (pid == -1)
 			return (1);
 		else if (pid == 0)

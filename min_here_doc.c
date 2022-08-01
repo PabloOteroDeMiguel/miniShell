@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 12:14:21 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/27 17:54:24 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/01 11:36:17 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void	run_here_doc(t_argv *arg)
 	str = readline("> ");
 	while (ft_strcmp(str, arg->eof) != 0 || !str)
 	{
-		sign = 2;
+		g_sign = 2;
 		write(fd, str, ft_strlen(str));
 		write(fd, "\n", 1);
 		free(str);
 		str = readline("> ");
 	}
-	sign = 0;
+	g_sign = 0;
 	free(str);
 	close(fd);
 }

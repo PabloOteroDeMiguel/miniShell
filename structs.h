@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 11:30:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/27 14:42:22 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/08/01 11:39:25 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@ typedef struct s_data
 	int				error_no;
 }	t_data;
 
-extern int sign;
+extern int			g_sign;
 
 #endif
