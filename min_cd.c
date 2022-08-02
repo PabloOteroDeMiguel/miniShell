@@ -6,11 +6,28 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 10:15:16 by potero-d          #+#    #+#             */
-/*   Updated: 2022/06/23 11:51:50 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/02 11:43:06 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	cd_aux(t_argv *argv, t_myenv *myenv)
+{
+	if (argv->split[1] == 0)
+	{
+		if (ft_strcmp(myenv->key, "HOME") == 0)
+			chdir(myenv->value);
+		else
+			printf("Minishell: cd: HOME not set\n");
+	}
+	else if (argv->split[1] != 0)
+	{
+		if (chdir(argv->split[1]) == -1)
+			printf("Minishell: cd: %s:No such file or directory\n",
+				argv->split[1]);
+	}
+}
 
 void	min_cd(t_data *data)
 {
@@ -18,18 +35,14 @@ void	min_cd(t_data *data)
 	t_myenv	*myenv;
 
 	myenv = *data->myenv;
-	while (ft_strcmp(myenv->key, "HOME") != 0)
-		myenv = myenv->next;
-	argv = *data->argv;
-	if (argv->split[1] == 0 && argv->next == 0)
-		chdir(myenv->value);
-	else if (argv->split[1] != 0)
-		chdir(argv->split[1]);
-	else if (argv->split[1] == 0 && argv->next != 0)
+	while (myenv->next)
 	{
-		argv = argv->next;
-		chdir(argv->split[0]);
+		if (ft_strcmp(myenv->key, "HOME") == 0)
+			break ;
+		myenv = myenv->next;
 	}
+	argv = *data->argv;
+	cd_aux(argv, myenv);
 	change_pwd(data->myenv);
 }
 
