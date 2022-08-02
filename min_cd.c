@@ -6,11 +6,20 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 10:15:16 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/02 11:43:06 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/02 12:01:24 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	cd_error(char *str)
+{
+	write(2, "Minishell: cd: ", 15);
+	ft_putstr_fd(str, 2);
+	write(2, ": ", 2);
+	ft_putstr_fd(strerror(errno), 2);
+	write(2, "\n", 1);
+}
 
 static void	cd_aux(t_argv *argv, t_myenv *myenv)
 {
@@ -24,8 +33,7 @@ static void	cd_aux(t_argv *argv, t_myenv *myenv)
 	else if (argv->split[1] != 0)
 	{
 		if (chdir(argv->split[1]) == -1)
-			printf("Minishell: cd: %s:No such file or directory\n",
-				argv->split[1]);
+			cd_error(argv->split[1]);
 	}
 }
 
