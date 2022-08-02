@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 12:44:20 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/02 16:28:07 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/02 17:19:01 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,40 +79,6 @@ int cont_env(t_myenv *myenv)
 	return (i);
 }
 
-void	min_just_export(t_myenv *myenv)
-{
-	t_myenv	*aux;
-	t_myenv	*aux2;
-	int		cont;
-	int		i;
-
-	cont = cont_env(myenv);
-	printf("cont->%d\n", cont);
-	i = 0;
-	while (i++ < cont - 1)
-	{
-		aux = myenv;
-		while (aux->exp == 1)
-			aux = aux->next;
-		aux2 = aux->next;
-		while (aux2->next && i != cont - 1)
-		{
-			while (aux2->exp == 1)
-				aux2 = aux2->next;
-			if (ft_strcmp(aux->key, aux2->key) < 0)
-				aux2 = aux2->next;
-			else 
-			{
-				aux = aux2;
-				aux2 = aux2->next;
-			}
-		}
-		if (ft_strcmp(aux->key, "?") != 0 && ft_strcmp(aux->key, "_") != 0)
-			printf("declare -x %s=\"%s\"\n", aux->key, aux->value);
-		aux->exp = 1;
-	}
-}
-
 void	min_export(t_data *data)
 {
 	t_myenv	*myenv;
@@ -124,7 +90,6 @@ void	min_export(t_data *data)
 	argv = *data->argv;
 	if (argv->split[1] == 0)
 		min_just_export(myenv);
-
 	while (argv->split[i])
 	{
 		if (ft_strchr(argv->split[i], '=') != 0)
@@ -132,6 +97,12 @@ void	min_export(t_data *data)
 			if (exist_key(argv->split[i], myenv) == 0)
 				env_add_back(&myenv, export_new(argv->split[i]));
 		}
+		else
+		{
+			if (just_exist_key(argv->split[i], myenv) == 0)
+				env_add_back(&myenv, export_just_new(argv->split[i]));
+		}
+		
 		i++;
 	}
 	free_env_char(data->myenv_str);

@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/01 14:14:06 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/02 16:56:46 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,12 @@ void	change_pwd(t_myenv **myenv);
 void	min_export(t_data *data);
 t_myenv	*export_new(char *str);
 int		exist_key(char *key, t_myenv *myenv);
+int		cont_env(t_myenv *myenv);
+
+/*Export_two*/
+void	min_just_export(t_myenv *myenv);
+int		just_exist_key(char *str, t_myenv *myenv);
+t_myenv	*export_just_new(char *str);
 
 /*Unset*/
 void	min_unset(t_data *data);

@@ -6,7 +6,7 @@
 #    By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/07 12:55:48 by potero-d          #+#    #+#              #
-#    Updated: 2022/08/01 14:01:25 by potero-d         ###   ########.fr        #
+#    Updated: 2022/08/02 16:46:30 by potero-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRCS = main.c min_argv.c min_lst.c min_echo.c min_pwd.c\
 	   min_free.c min_env.c min_cd.c min_export.c min_unset.c min_expand.c\
 	   min_remove_quotes.c min_print.c min_error.c min_files.c min_shlvl.c\
 	   cmmd.c cmmd_path.c pipex.c min_builtins.c min_here_doc.c\
-	   min_infile.c min_outfile.c min_expand_two.c min_signal.c
+	   min_infile.c min_outfile.c min_expand_two.c min_signal.c min_export_two.c\
 
 LIBFT_PATH = libft/
 
