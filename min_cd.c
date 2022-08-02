@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 10:15:16 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/02 12:01:24 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/02 13:14:38 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,15 @@ void	min_cd(t_data *data)
 	change_pwd(data->myenv);
 }
 
+static void	pwd_error(char *str)
+{
+	write(2, "cd: error retrieving current directory: ", 40);
+	ft_putstr_fd(str, 2);
+	write(2, ": cannot access parent directories: ", 34);
+	ft_putstr_fd(strerror(errno), 2);
+	write(2, "\n", 1);
+}
+
 void	change_pwd(t_myenv **myenv)
 {
 	char	*buff;
@@ -63,6 +72,11 @@ void	change_pwd(t_myenv **myenv)
 	while (ft_strcmp(aux->key, "PWD") != 0)
 		aux = aux->next;
 	buff = getcwd(NULL, 200);
-	free(aux->value);
-	aux->value = buff;
+	if (buff == 0)
+		pwd_error("getcwd");
+	else
+	{
+		free(aux->value);
+		aux->value = buff;
+	}
 }
