@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 11:30:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/01 11:56:54 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/02 15:03:22 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_myenv
 	char			*value;
 	struct s_myenv	*next;
 	int				shlvl;
+	int				exp;
 }	t_myenv;
 
 typedef struct s_data
