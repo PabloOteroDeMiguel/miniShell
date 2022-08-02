@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:42:58 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/02 17:14:41 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/02 17:36:54 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_myenv	*envnew(char *str)
 		return (NULL);
 	element->key = str;
 	element->value = ft_strdup(aux);
+	element->exp = 0;
 	element->next = NULL;
 	if ((ft_strcmp(str, "PWD") == 0) || (ft_strcmp(str, "SHLVL") == 0))
 		free(aux);

@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 16:33:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/02 17:19:03 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/02 18:54:40 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,37 +48,31 @@ void	min_just_export(t_myenv *myenv)
 	int		i;
 
 	cont = cont_env(myenv);
-	printf("cont->%d\n", cont);
-	i = 0;
-	while (i++ < cont - 1)
+	i = -1;
+	aux = myenv;
+	while (++i < cont - 1)
 	{
 		aux = myenv;
-	//	printf("key->%s\n", aux->key);
-	//	printf("exp->%d\n", aux->exp);
 		while (aux->exp == 1)
 			aux = aux->next;
 		aux2 = aux->next;
-	//	printf("aqui\n");
-		while (aux2->next && i != cont - 1)
+		while (aux2 && i != cont - 1)
 		{
-			while (aux2->exp == 1)
-				aux2 = aux2->next;
-			if (ft_strcmp(aux->key, aux2->key) < 0)
-				aux2 = aux2->next;
-			else
-			{
+			if (ft_strcmp(aux->key, aux2->key) > 0 && aux2->exp != 1) 
 				aux = aux2;
-				aux2 = aux2->next;
-			}
+			aux2 = aux2->next;
 		}
-		if (ft_strcmp(aux->key, "?") != 0 && ft_strcmp(aux->key, "_") != 0)
+		if (ft_strcmp(aux->key, "?") != 0)
 			printf("declare -x %s=\"%s\"\n", aux->key, aux->value);
 		aux->exp = 1;
 	}
 	aux = myenv;
 	while (aux)
 	{
-		aux->exp = 0;
+		if (aux->exp == 1)
+			aux->exp = 0;
+		else
+			printf("declare -x %s=\"%s\"\n", aux->key, aux->value);
 		aux = aux->next;
 	}
 }
