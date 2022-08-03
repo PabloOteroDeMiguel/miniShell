@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/02 18:59:53 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/03 10:56:34 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ int	execute(t_data *data)
 	if (data->num_argc == 1 && data->error_no == 0)
 	{
 		if (exception(arg, data) == 0)
+		{
+			pipe_error(data);
 			return (1);
+		}
 		min_exit(arg, data);
 		data->error_no = execute_cmmd(data);
 		pipe_error(data);

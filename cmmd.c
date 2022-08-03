@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 09:20:12 by potero            #+#    #+#             */
-/*   Updated: 2022/08/02 11:38:08 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/03 10:50:18 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	execute_cmmd(t_data *data)
 		file_des(fd, arg);
 		child(fd);
 		if (min_builtins(arg, data) == 0)
-			exit (0);
+			exit (data->error_no);
 		if (execve(arg->direction, arg->split, data->myenv_str) < 0)
 			exit(127);
 	}
