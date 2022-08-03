@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:37:47 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/03 13:15:34 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/03 14:57:45 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,29 +77,25 @@ void	update_error(t_data *data)
 	}
 }
 
-void	pipe_error(t_data *data)
+int		child_error(t_argv *arg, int error)
 {
-	t_argv	*arg;
 
-	arg = *data->argv;
-	if (data->error_no == 14 && ft_strncmp(arg->split[0], "./", 2) != 0)
+	if (error == 14 && ft_strncmp(arg->split[0], "./", 2) != 0)
 	{
 		printf("Minishell: %s: No such file or directory\n", arg->split[0]);
-		data->error_no = 127;
+		return (127);
 	}
-	else if (data->error_no == 14 && ft_strncmp(arg->split[0], "./", 2) == 0)
+	else if (error == 14 && ft_strncmp(arg->split[0], "./", 2) == 0)
 	{
 		printf("Minishell %s: Permission denied\n", arg->split[0]);
-		data->error_no = 126;
+		return (126);
 	}
-	else if  (data->error_no == 13)
+	else if  (error == 13)
 	{
 		printf("Minishell %s: is a directory\n", arg->split[0]);
-		data->error_no = 126;
+		return (126);
 	}
-	else if (data->error_no == 8)
-		data->error_no = 0;
-	update_error(data);
+	return (0);
 }
 
 void	fd_error(char *str)

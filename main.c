@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/03 11:32:15 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/03 14:59:31 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,17 @@ int	execute(t_data *data)
 	{
 		if (exception(arg, data) == 0)
 		{
-			pipe_error(data);
+			update_error(data);
 			return (1);
 		}
 		min_exit(arg, data);
 		data->error_no = execute_cmmd(data);
-		pipe_error(data);
+		update_error(data);
 	}
 	else if (data->num_argc > 1 && data->error_no == 0)
 	{
 		data->error_no = pipe_execute(data);
-		pipe_error(data);
+		update_error(data);
 	}	
 	return (1);
 }
@@ -123,7 +123,7 @@ int	main(int argc, char **argv2, char **envp)
 			data.num_argc = cont_arg(data.argv);
 			check_files(&data);
 			direction(&data);
-			print_list(data.argv);
+		//	print_list(data.argv);
 			stop = execute(&data);
 		}
 		free_arg_str(str, *data.argv);

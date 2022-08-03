@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/03 11:25:23 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/03 14:53:59 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,8 @@ void	remove_quotes(t_argv **argv);
 /*Error*/
 int		command_found(t_data *data);
 void	update_error(t_data *data);
-void	pipe_error(t_data *data);
+//void	pipe_error(t_data *data);
+int		child_error(t_argv *arg, int error);
 void	fd_error(char *str);
 
 /*Files*/
