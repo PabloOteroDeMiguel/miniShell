@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 09:20:12 by potero            #+#    #+#             */
-/*   Updated: 2022/08/03 12:07:32 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/03 13:15:55 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,8 @@ int	execute_cmmd(t_data *data)
 		child(fd);
 		if (min_builtins(arg, data) == 0)
 			exit (data->error_no);
-		printf("dir->%s\n", arg->direction);
 		if (execve(arg->direction, arg->split, data->myenv_str) < 0)
-			exit(127);
+			exit((int) errno);
 	}
 	wait(&status);
 	return (WEXITSTATUS(status));
