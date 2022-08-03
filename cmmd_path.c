@@ -6,7 +6,7 @@
 /*   By: potero <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 09:27:12 by potero            #+#    #+#             */
-/*   Updated: 2022/07/22 13:50:51 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/03 12:08:27 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,16 @@ char	*cmmd_path(char **path, char *arg)
 	char	*new_path;
 
 	if (path == 0)
-		return (0);
+	{
+		i = access(arg, X_OK);
+		if (i  == 0)
+		{
+			new_path = ft_strdup(arg);
+			return (new_path);
+		}
+		else
+			return (0);
+	}
 	new_path = NULL;
 	i = 0;
 	while (path[i])
@@ -69,6 +78,12 @@ char	*cmmd_path(char **path, char *arg)
 			return (new_path);
 		free(new_path);
 		i++;
+	}
+	if (path == 0)
+	{
+		i = access(arg, X_OK);
+		if (i  == 0)
+			new_path = ft_strdup(arg);
 	}
 	new_path = 0;
 	return (new_path);
