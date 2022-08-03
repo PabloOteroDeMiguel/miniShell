@@ -6,7 +6,7 @@
 /*   By: potero <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 16:22:29 by potero            #+#    #+#             */
-/*   Updated: 2022/07/21 14:52:19 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/03 11:00:31 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	print_env(t_myenv **myenv)
 			aux = aux->next;
 		else
 		{
-			printf("%s=%s\n", aux->key, aux->value);
+			if (aux->value != 0)
+				printf("%s=%s\n", aux->key, aux->value);
 			aux = aux->next;
 		}
 	}

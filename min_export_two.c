@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 16:33:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/02 18:54:40 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/03 11:18:32 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,12 @@ void	min_just_export(t_myenv *myenv)
 			aux2 = aux2->next;
 		}
 		if (ft_strcmp(aux->key, "?") != 0)
-			printf("declare -x %s=\"%s\"\n", aux->key, aux->value);
+		{
+			if (aux->value == NULL)
+				printf("declare -x %s\n", aux->key);
+			else
+				printf("declare -x %s=\"%s\"\n", aux->key, aux->value);
+		}
 		aux->exp = 1;
 	}
 	aux = myenv;
@@ -72,7 +77,12 @@ void	min_just_export(t_myenv *myenv)
 		if (aux->exp == 1)
 			aux->exp = 0;
 		else
-			printf("declare -x %s=\"%s\"\n", aux->key, aux->value);
+		{
+			if (aux->value == NULL)
+				printf("declare -x %s\n", aux->key);
+			else
+				printf("declare -x %s=\"%s\"\n", aux->key, aux->value);
+		}
 		aux = aux->next;
 	}
 }
