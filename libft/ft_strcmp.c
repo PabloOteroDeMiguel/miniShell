@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 10:53:24 by potero-d          #+#    #+#             */
-/*   Updated: 2022/03/30 12:01:05 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/03 17:28:11 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ int	ft_strcmp(const char *s1, const char *s2)
 	unsigned char	*str1;
 	unsigned char	*str2;
 
+	if (!s1)
+		return (-(unsigned char)s2[0]);
+	if (!s2)
+		return ((unsigned char)s1[0]);
 	i = 0;
 	str1 = (unsigned char *)s1;
 	str2 = (unsigned char *)s2;

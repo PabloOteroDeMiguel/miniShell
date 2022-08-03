@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 12:44:20 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/20 14:32:47 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/02 18:54:52 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_myenv	*export_new(char *str)
 			i++;
 		element->key = ft_substr(str, 0, i);
 		element->value = (ft_strdup(aux));
+		element->exp = 0;
 		element->next = NULL;
 	}
 	else
@@ -63,6 +64,21 @@ int	exist_key(char *str, t_myenv *myenv)
 	return (0);
 }
 
+int cont_env(t_myenv *myenv)
+{
+	t_myenv *aux;
+	int		i;
+
+	i = 0;
+	aux = myenv;
+	while (aux)
+	{
+		i++;
+		aux = aux->next;
+	}
+	return (i);
+}
+
 void	min_export(t_data *data)
 {
 	t_myenv	*myenv;
@@ -72,6 +88,8 @@ void	min_export(t_data *data)
 	i = 1;
 	myenv = *data->myenv;
 	argv = *data->argv;
+	if (argv->split[1] == 0)
+		min_just_export(myenv);
 	while (argv->split[i])
 	{
 		if (ft_strchr(argv->split[i], '=') != 0)
@@ -79,6 +97,12 @@ void	min_export(t_data *data)
 			if (exist_key(argv->split[i], myenv) == 0)
 				env_add_back(&myenv, export_new(argv->split[i]));
 		}
+		else
+		{
+			if (just_exist_key(argv->split[i], myenv) == 0)
+				env_add_back(&myenv, export_just_new(argv->split[i]));
+		}
+		
 		i++;
 	}
 	free_env_char(data->myenv_str);

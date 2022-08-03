@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:13:18 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/20 14:32:04 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/02 18:50:09 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,14 @@ void	min_echo(t_argv **argv)
 
 	n = 0;
 	aux = *argv;
-	if (aux->split[1])
+	i = 1;
+	if (aux->split[i])
 	{
-		if (check_flags(aux->split[1]) == 0)
+		while (check_flags(aux->split[i]) == 0)
 		{
 			n = 1;
-			i = 2;
+			i++;
 		}
-		else
-			i = 1;
 		while (aux->split[i])
 		{
 			printf("%s", aux->split[i]);

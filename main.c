@@ -6,26 +6,36 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/27 17:54:28 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/03 17:48:31 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int sign;
 
 void	leaks(void)
 {
 	system("leaks minishell");
 }
 
-void	no_ctrlprint(void)
+void	min_exit(t_argv *arg, t_data *data)
 {
-	struct termios	t;
-
-	tcgetattr(0, &t);
-	t.c_lflag &= ~ECHOCTL;
-	tcsetattr(0, TCSANOW, &t);
+	if (ft_strcmp(arg->split[0], "exit") == 0)
+	{
+		if (arg->split[1])
+		{
+			if (ft_atoi(arg->split[1]))
+			{
+				data->error_no = ft_atoi(arg->split[1]);
+				update_error(data);
+				exit (ft_atoi(arg->split[1]));
+			}
+			else
+				printf("Minishell: exit: %s: numeric argument required",
+					arg->split[1]);
+		}
+		printf("exit\n");
+		exit (0);
+	}
 }
 
 int	execute(t_data *data)
@@ -33,37 +43,22 @@ int	execute(t_data *data)
 	t_argv	*arg;
 
 	arg = *data->argv;
-	
-	if (arg->split[0] && arg->next == 0)
-	{
-		if (ft_strcmp(arg->split[0], "exit") == 0)
-		{
-			if (arg->split[1])
-			{
-				if (ft_atoi(arg->split[1]))
-				{
-					data->error_no = ft_atoi(arg->split[1]);
-					update_error(data);
-					exit (ft_atoi(arg->split[1]));
-				}
-				else
-					printf("Minishell: exit: %s: numeric argument required", arg->split[1]);
-			}
-			printf("exit\n");
-			exit (0);
-		}
-	}
 	command_found(data);
 	if (data->num_argc == 1 && data->error_no == 0)
 	{
+		if (exception(arg, data) == 0)
+		{
+			update_error(data);
+			return (1);
+		}
+		min_exit(arg, data);
 		data->error_no = execute_cmmd(data);
-		//data->error_no = pipe_execute(data);
-		pipe_error(data);
+		update_error(data);
 	}
-	else if (data->num_argc > 1 && data->error_no == 0) 
+	else if (data->num_argc > 1 && data->error_no == 0)
 	{
 		data->error_no = pipe_execute(data);
-		pipe_error(data);
+		update_error(data);
 	}	
 	return (1);
 }
@@ -83,48 +78,6 @@ int	cont_arg(t_argv **argv)
 	return (cont);
 }
 
-void	sighandler(int signum)
-{
-	if (signum == SIGINT)
-	{
-		if (sign == 2)
-		{
-			close(0);
-			write(1, "\n", 1);
-			exit(1);
-		//	rl_on_new_line();
-		//	rl_replace_line("", 0);
-		//	rl_redisplay();
-		}
-		else
-		{
-			write(1, "\n", 1);
-			rl_on_new_line();
-			rl_replace_line("", 0);
-			rl_redisplay();
-		}
-	}
-}
-
-void	handler_ctrlslash(int sig)
-{
-	if (sign == 0 && sig == SIGQUIT)
-	{
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
-	else if (sign > 0 && sig == SIGQUIT)
-	{
-		kill(sign, SIGCONT);
-		write(2, "\n^\\Quit: 3\n", 11);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
-	sign = 0;
-}
-
 int	main(int argc, char **argv2, char **envp)
 {
 	char	*str;
@@ -135,9 +88,9 @@ int	main(int argc, char **argv2, char **envp)
 	if (argc > 1)
 		exit(1);
 	argv2 = 0;
-//	atexit(leaks);
+	//atexit(leaks);
 	stop = 1;
-	sign = 0;
+	g_sign = 0;
 	data.argv = malloc(sizeof(t_argv *));
 	data.myenv = malloc(sizeof(t_myenv *));
 	*data.myenv = 0;
@@ -146,15 +99,14 @@ int	main(int argc, char **argv2, char **envp)
 	data.myenv_str = env_to_char(data.myenv);
 	while (stop != 0)
 	{
-		signal(SIGINT, sighandler);
-		signal(SIGQUIT, handler_ctrlslash);
 		no_ctrlprint();
 		std[0] = dup(STDIN_FILENO);
 		std[1] = dup(STDOUT_FILENO);
-		*data.argv = NULL;	
-//		printf("\033[;33m");
-		str = readline("\rMinishell$ ");
-//		printf("\033[0m");
+		*data.argv = NULL;
+		signal(SIGINT, sighandler);
+		signal(SIGQUIT, SIG_IGN);
+		//str = readline("\rMinishell$ ");
+		str = readline("Minishell$ ");
 		if (!str)
 		{
 			printf("exit1\n");
@@ -162,6 +114,8 @@ int	main(int argc, char **argv2, char **envp)
 		}
 		if (str && ft_strlen(str) > 0)
 		{
+			
+			signal(SIGQUIT, handler_ctrlslash);
 			add_history(str);
 			arguments(data.argv, str);
 			set_initial_files(&data);
@@ -171,7 +125,7 @@ int	main(int argc, char **argv2, char **envp)
 			data.num_argc = cont_arg(data.argv);
 			check_files(&data);
 			direction(&data);
-	//		print_list(data.argv);
+		//	print_list(data.argv);
 			stop = execute(&data);
 		}
 		free_arg_str(str, *data.argv);

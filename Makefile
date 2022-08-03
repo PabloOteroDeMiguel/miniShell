@@ -6,7 +6,7 @@
 #    By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/07 12:55:48 by potero-d          #+#    #+#              #
-#    Updated: 2022/07/26 11:38:11 by pmoreno-         ###   ########.fr        #
+#    Updated: 2022/08/03 17:29:08 by pmoreno-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRCS = main.c min_argv.c min_lst.c min_echo.c min_pwd.c\
 	   min_free.c min_env.c min_cd.c min_export.c min_unset.c min_expand.c\
 	   min_remove_quotes.c min_print.c min_error.c min_files.c min_shlvl.c\
 	   cmmd.c cmmd_path.c pipex.c min_builtins.c min_here_doc.c\
-	   min_infile.c min_outfile.c
+	   min_infile.c min_outfile.c min_expand_two.c min_signal.c min_export_two.c\
 
 LIBFT_PATH = libft/
 
@@ -30,7 +30,7 @@ NAME = minishell
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror
 
 %.o:%.c
 		@$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I$(LIBFT_PATH) -I$(INCS) -I/Users/$(USER)/.brew/opt/readline/include 
@@ -39,7 +39,7 @@ RM = rm -f
 
 $(NAME): $(OBJS)
 		@make -C $(LIBFT_PATH) --silent
-		@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -I$(INCS) -I./$(LIBFT_PATH) -L./$(LIBFT_PATH) -lft  -I/Users/$(USER)/.brew/opt/readline/include -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
+		@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -I$(INCS) -I./$(LIBFT_PATH) -L./$(LIBFT_PATH) -lft  -I/Users/$(USER)/.brew/opt/readline/include -L/Users/$(USER)/.brew/opt/readline/lib -lreadline # -fsanitize=address
 		@echo $(GREEN)$(NAME)": ready to be executed"$(NONE)
 
 all: $(NAME)  

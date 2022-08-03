@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 09:20:12 by potero            #+#    #+#             */
-/*   Updated: 2022/07/27 16:16:47 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/03 14:53:21 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	direction(t_data *data)
 	while (aux)
 	{	
 		aux->direction = cmmd_path(path, aux->split[0]);
-		if (aux->direction == NULL)
+		if (aux->direction == NULL && path != 0)
 			aux->error_code = 127;
 		else
 			aux->error_code = 100;
@@ -75,7 +75,7 @@ int	execute_cmmd(t_data *data)
 
 	arg = *data->argv;
 	pid = fork();
-	sign = pid;
+	g_sign = pid;
 	files(arg);
 	if (pid == -1)
 		return (1);
@@ -84,9 +84,10 @@ int	execute_cmmd(t_data *data)
 		file_des(fd, arg);
 		child(fd);
 		if (min_builtins(arg, data) == 0)
-			exit (0);
+			exit (data->error_no);
 		if (execve(arg->direction, arg->split, data->myenv_str) < 0)
-			exit(127);
+			exit(child_error(arg, (int) errno));
+		//	exit((int) errno);
 	}
 	wait(&status);
 	return (WEXITSTATUS(status));

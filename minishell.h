@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/27 16:55:43 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/03 14:53:59 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	rl_replace_line(const char *text, int clear_undo);
 int		execute(t_data *data);
 int		main(int argc, char **argv2, char **envp);
 int		cont_arg(t_argv **argv);
-void	sighandler(int signum);
+//void	sighandler(int signum);
 
 /*Argv*/
 void	read_str(t_argv *argv, char *str);
@@ -72,6 +72,12 @@ void	change_pwd(t_myenv **myenv);
 void	min_export(t_data *data);
 t_myenv	*export_new(char *str);
 int		exist_key(char *key, t_myenv *myenv);
+int		cont_env(t_myenv *myenv);
+
+/*Export_two*/
+void	min_just_export(t_myenv *myenv);
+int		just_exist_key(char *str, t_myenv *myenv);
+t_myenv	*export_just_new(char *str);
 
 /*Unset*/
 void	min_unset(t_data *data);
@@ -80,6 +86,8 @@ void	aux_unset(t_myenv **myenv, t_argv *argv);
 /*Expand*/
 void	expand(t_data *data);
 int		change(int i, char c);
+
+/*Expand_two*/
 char	*change_str(char *str, t_myenv **myenv, int *len);
 
 /*Print*/
@@ -107,7 +115,8 @@ void	remove_quotes(t_argv **argv);
 /*Error*/
 int		command_found(t_data *data);
 void	update_error(t_data *data);
-void	pipe_error(t_data *data);
+//void	pipe_error(t_data *data);
+int		child_error(t_argv *arg, int error);
 void	fd_error(char *str);
 
 /*Files*/
@@ -128,9 +137,14 @@ char	*shlvl(char *str);
 
 /*Builtins*/
 int		min_builtins(t_argv *argv, t_data *data);
-int		builtins_pipex(t_argv *argv, t_data *data);
+int		exception(t_argv *arg, t_data *data);
 
 /*Here_doc*/
 void	min_here_doc(t_argv *arg);
+
+/*Signal*/
+void	no_ctrlprint(void);
+void	sighandler(int signum);
+void	handler_ctrlslash(int sig);
 
 #endif

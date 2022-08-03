@@ -6,13 +6,13 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:37:47 by potero-d          #+#    #+#             */
-/*   Updated: 2022/07/27 16:18:08 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/03 14:57:45 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int is_builtin(t_argv *arg)
+static int	is_builtin(t_argv *arg)
 {
 	int	r;
 
@@ -25,7 +25,9 @@ static int is_builtin(t_argv *arg)
 		|| (ft_strcmp(arg->arg, "ENV") == 0)
 		|| (ft_strcmp(arg->split[0], "cd") == 0)
 		|| (ft_strcmp(arg->split[0], "export") == 0)
-		|| (ft_strcmp(arg->split[0], "unset") == 0))
+		|| (ft_strcmp(arg->split[0], "unset") == 0)
+		|| (ft_strcmp(arg->split[0], "exit") == 0)
+		|| (ft_strncmp(arg->split[0], "./", 2) == 0))
 			r = 1;
 	return (r);
 }
@@ -75,14 +77,25 @@ void	update_error(t_data *data)
 	}
 }
 
-void	pipe_error(t_data *data)
+int		child_error(t_argv *arg, int error)
 {
-	t_argv	*arg;
 
-	arg = *data->argv;
-	if (data->error_no == 127)
-		printf("Minishell. %s: No such file or directory\n", arg->split[0]);
-	update_error(data);
+	if (error == 14 && ft_strncmp(arg->split[0], "./", 2) != 0)
+	{
+		printf("Minishell: %s: No such file or directory\n", arg->split[0]);
+		return (127);
+	}
+	else if (error == 14 && ft_strncmp(arg->split[0], "./", 2) == 0)
+	{
+		printf("Minishell %s: Permission denied\n", arg->split[0]);
+		return (126);
+	}
+	else if  (error == 13)
+	{
+		printf("Minishell %s: is a directory\n", arg->split[0]);
+		return (126);
+	}
+	return (0);
 }
 
 void	fd_error(char *str)
