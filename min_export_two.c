@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 16:33:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/03 11:18:32 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/04 11:57:52 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,20 @@ int	just_exist_key(char *str, t_myenv *myenv)
 	return (0);
 }
 
-void	min_just_export(t_myenv *myenv)
+static void	print_export(t_myenv *aux)
+{
+	if (aux->value == NULL)
+		printf("declare -x %s\n", aux->key);
+	else
+		printf("declare -x %s=\"%s\"\n", aux->key, aux->value);
+}
+
+static void	aux_just_export(int cont, t_myenv *myenv)
 {
 	t_myenv	*aux;
 	t_myenv	*aux2;
-	int		cont;
 	int		i;
 
-	cont = cont_env(myenv);
 	i = -1;
 	aux = myenv;
 	while (++i < cont - 1)
@@ -58,31 +64,30 @@ void	min_just_export(t_myenv *myenv)
 		aux2 = aux->next;
 		while (aux2 && i != cont - 1)
 		{
-			if (ft_strcmp(aux->key, aux2->key) > 0 && aux2->exp != 1) 
+			if (ft_strcmp(aux->key, aux2->key) > 0 && aux2->exp != 1)
 				aux = aux2;
 			aux2 = aux2->next;
 		}
 		if (ft_strcmp(aux->key, "?") != 0)
-		{
-			if (aux->value == NULL)
-				printf("declare -x %s\n", aux->key);
-			else
-				printf("declare -x %s=\"%s\"\n", aux->key, aux->value);
-		}
+			print_export(aux);
 		aux->exp = 1;
 	}
+}
+
+void	min_just_export(t_myenv *myenv)
+{
+	t_myenv	*aux;
+	int		cont;
+
+	cont = cont_env(myenv);
+	aux_just_export(cont, myenv);
 	aux = myenv;
 	while (aux)
 	{
 		if (aux->exp == 1)
 			aux->exp = 0;
 		else
-		{
-			if (aux->value == NULL)
-				printf("declare -x %s\n", aux->key);
-			else
-				printf("declare -x %s=\"%s\"\n", aux->key, aux->value);
-		}
+			print_export(aux);
 		aux = aux->next;
 	}
 }
