@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:37:47 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/04 11:22:06 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/04 12:24:34 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,8 @@ void	update_error(t_data *data)
 	}
 }
 
-int		child_error(t_argv *arg, int error)
+int	child_error(t_argv *arg, int error)
 {
-
 	if (error == 14 && ft_strncmp(arg->split[0], "./", 2) != 0)
 	{
 		printf("Minishell: %s: No such file or directory\n", arg->split[0]);
@@ -90,7 +89,7 @@ int		child_error(t_argv *arg, int error)
 		printf("Minishell %s: Permission denied\n", arg->split[0]);
 		return (126);
 	}
-	else if  (error == 13)
+	else if (error == 13)
 	{
 		printf("Minishell %s: is a directory\n", arg->split[0]);
 		return (126);
