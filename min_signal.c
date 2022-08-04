@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 14:01:11 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/03 18:15:27 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/08/04 11:29:36 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	handler_ctrlslash(int sig)
 	{
 		rl_on_new_line();
 		rl_replace_line("", 0);
-		// rl_redisplay();
 	}
 	else if (g_sign > 0 && sig == SIGQUIT)
 	{
@@ -62,6 +61,7 @@ void	handler_ctrlslash(int sig)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		printf("\r");
 	}
 	g_sign = 0;
 }

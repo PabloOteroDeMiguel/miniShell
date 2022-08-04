@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 09:20:12 by potero            #+#    #+#             */
-/*   Updated: 2022/08/03 14:53:21 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/04 11:13:34 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ int	execute_cmmd(t_data *data)
 			exit (data->error_no);
 		if (execve(arg->direction, arg->split, data->myenv_str) < 0)
 			exit(child_error(arg, (int) errno));
-		//	exit((int) errno);
 	}
 	wait(&status);
 	return (WEXITSTATUS(status));

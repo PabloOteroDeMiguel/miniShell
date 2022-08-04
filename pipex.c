@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:57:16 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/03 15:08:08 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/04 11:18:17 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static void	child(int fd[2], t_argv *arg, t_data *data)
 	}
 	dup2(fd[1], STDOUT_FILENO);
 	close(fd[1]);
+	if (arg->error_code == 127)
+		exit (127);
 	if (min_builtins(arg, data) == 0)
 		exit(data->error_no);
 	if (execve(arg->direction, arg->split, data->myenv_str) < 0)

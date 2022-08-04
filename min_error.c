@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:37:47 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/03 14:57:45 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/04 11:22:06 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ int		child_error(t_argv *arg, int error)
 		printf("Minishell %s: is a directory\n", arg->split[0]);
 		return (126);
 	}
+	else if (error == 127)
+		return (127);
 	return (0);
 }
 
