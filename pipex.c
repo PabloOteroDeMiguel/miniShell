@@ -6,15 +6,14 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:57:16 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/04 11:18:17 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/04 12:15:42 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	child(int fd[2], t_argv *arg, t_data *data)
+static void	open_files(t_argv *arg, int fd[2])
 {
-	close(fd[0]);
 	if (arg->infile != 0)
 	{
 		fd[0] = open(arg->infile, O_RDONLY);
@@ -32,6 +31,12 @@ static void	child(int fd[2], t_argv *arg, t_data *data)
 		if (fd[1] < 0)
 			fd_error(arg->outfile);
 	}
+}
+
+static void	child(int fd[2], t_argv *arg, t_data *data)
+{
+	close(fd[0]);
+	open_files(arg, fd);
 	dup2(fd[1], STDOUT_FILENO);
 	close(fd[1]);
 	if (arg->error_code == 127)
