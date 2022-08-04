@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 12:44:20 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/02 18:54:52 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/04 12:20:28 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ int	exist_key(char *str, t_myenv *myenv)
 	return (0);
 }
 
-int cont_env(t_myenv *myenv)
+int	cont_env(t_myenv *myenv)
 {
-	t_myenv *aux;
+	t_myenv	*aux;
 	int		i;
 
 	i = 0;
@@ -102,7 +102,6 @@ void	min_export(t_data *data)
 			if (just_exist_key(argv->split[i], myenv) == 0)
 				env_add_back(&myenv, export_just_new(argv->split[i]));
 		}
-		
 		i++;
 	}
 	free_env_char(data->myenv_str);
