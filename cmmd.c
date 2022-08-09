@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 09:20:12 by potero            #+#    #+#             */
-/*   Updated: 2022/08/09 11:01:27 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/09 11:17:33 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	direction(t_data *data)
 	while (aux)
 	{	
 		aux->direction = cmmd_path(path, aux->split[0]);
-		if (aux->direction == NULL && path != 0)
+		if ((aux->direction == NULL && path != 0)
+			|| (ft_strcmp(aux->split[0], "minishell") == 0))
 			aux->error_code = 127;
 		else
 			aux->error_code = 100;
