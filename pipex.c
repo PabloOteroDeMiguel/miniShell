@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:57:16 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/09 11:06:19 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/09 11:59:38 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	pipe_execute(t_data *data)
 		else if (pid == 0)
 			child(fd, arg, data);
 		dup2(fd[0], STDIN_FILENO);
+	//	close(STDIN_FILENO); cat | cat | cat | ls
 		close(fd[0]);
 		close(fd[1]);
 		wait(&status);
