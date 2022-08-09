@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/04 13:07:50 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/09 11:09:44 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ static void	main_part(char *str, t_data *data, int *stop)
 		set_initial_files(data);
 		expand(data);
 		min_split(data);
-		remove_quotes(data->argv);
 		data->num_argc = cont_arg(data->argv);
 		check_files(data);
 		direction(data);
+		first_chr_pipe(str, *data->argv);
 		*stop = execute(data);
 	}
 	free_arg_str(str, *data->argv);

@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:37:47 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/04 12:24:34 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/09 11:07:51 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static int	is_builtin(t_argv *arg)
 		|| (ft_strcmp(arg->split[0], "export") == 0)
 		|| (ft_strcmp(arg->split[0], "unset") == 0)
 		|| (ft_strcmp(arg->split[0], "exit") == 0)
-		|| (ft_strncmp(arg->split[0], "./", 2) == 0))
+		|| (ft_strncmp(arg->split[0], "./", 2) == 0)
+		|| (ft_strcmp(arg->split[0], "|") == 0))
 			r = 1;
 	return (r);
 }
