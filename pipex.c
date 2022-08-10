@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:57:16 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/09 11:59:38 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/10 14:18:30 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ static void	open_files(t_argv *arg, int fd[2])
 
 static void	child(int fd[2], t_argv *arg, t_data *data)
 {
-	close(fd[0]);
+	g_sign = 3;
+	// close(fd[0]);
 	open_files(arg, fd);
 	dup2(fd[1], STDOUT_FILENO);
 	close(fd[1]);
@@ -66,9 +67,14 @@ int	pipe_execute(t_data *data)
 		else if (pid == 0)
 			child(fd, arg, data);
 		dup2(fd[0], STDIN_FILENO);
-	//	close(STDIN_FILENO); cat | cat | cat | ls
+		//close(STDIN_FILENO); //cat | cat | cat | ls
 		close(fd[0]);
 		close(fd[1]);
+		arg = arg->next;
+	}
+	arg = *data->argv;
+	while (arg)
+	{
 		wait(&status);
 		arg = arg->next;
 	}

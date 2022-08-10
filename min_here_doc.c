@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 12:14:21 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/03 18:15:40 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/08/10 13:58:19 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	run_here_doc(t_argv *arg)
 	str = readline("> ");
 	while (ft_strcmp(str, arg->eof) != 0 || !str)
 	{
-		g_sign = 3;
 		write(fd, str, ft_strlen(str));
 		write(fd, "\n", 1);
 		free(str);
@@ -40,7 +39,10 @@ void	min_here_doc(t_argv *argv)
 
 	pipe(fd);
 	pid = fork();
-	if (pid == 0)
+	g_sign = pid;
+	if (pid == -1)
+		return ;
+	else if (pid == 0)
 	{
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_IGN);
@@ -49,10 +51,10 @@ void	min_here_doc(t_argv *argv)
 		run_here_doc(argv);
 		exit(0);
 	}
-	signal(SIGINT, sighandler);
-	signal(SIGQUIT, SIG_IGN);
 	close(fd[0]);
 	close(fd[1]);
-	g_sign = 0;
+	signal(SIGINT, sighandlerhd);
+	signal(SIGQUIT, SIG_IGN);
+	g_sign = 3;
 	wait(&status);
 }

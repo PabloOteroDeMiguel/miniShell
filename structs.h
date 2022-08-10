@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 11:30:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/09 10:54:35 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/10 13:56:44 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_argv
 	int				out;
 	int				fd_hd;
 	char			*eof;
+	int				is_hd;
 	struct s_argv	*next;
 }	t_argv;
 

@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/09 11:17:04 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/10 14:18:57 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,9 @@ int	cont_arg(t_argv **argv)
 static void	main_part(char *str, t_data *data, int *stop)
 {
 	if (str && ft_strlen(str) > 0)
-	{			
-		signal(SIGQUIT, handler_ctrlslash);
+	{
+		signal(SIGQUIT, ctrlslash);
+		g_sign = 0;
 		add_history(str);
 		arguments(data->argv, str);
 		set_initial_files(data);

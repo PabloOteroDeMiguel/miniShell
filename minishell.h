@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/09 10:40:33 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/10 13:51:19 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,9 +145,12 @@ void	min_here_doc(t_argv *arg);
 /*Signal*/
 void	no_ctrlprint(void);
 void	sighandler(int signum);
-void	handler_ctrlslash(int sig);
+void	ctrlslash(int sig);
 
 /*Exit*/
 void	min_exit(t_argv *arg, t_data *data);
+
+void	sighandlerhd(int signum);
+void	sigctrlc(int signum);
 
 #endif
