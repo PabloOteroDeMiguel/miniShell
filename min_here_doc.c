@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 12:14:21 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/10 13:58:19 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/08/10 14:51:42 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	min_here_doc(t_argv *argv)
 
 	pipe(fd);
 	pid = fork();
-	g_sign = pid;
+	g_sign[0] = pid;
+	g_sign[1] = 1;
 	if (pid == -1)
 		return ;
 	else if (pid == 0)
@@ -49,12 +50,13 @@ void	min_here_doc(t_argv *argv)
 		close(fd[1]);
 		close(fd[0]);
 		run_here_doc(argv);
+		signal(SIGINT, sighandler);
+		signal(SIGQUIT, SIG_IGN);
 		exit(0);
 	}
 	close(fd[0]);
 	close(fd[1]);
-	signal(SIGINT, sighandlerhd);
-	signal(SIGQUIT, SIG_IGN);
-	g_sign = 3;
 	wait(&status);
+	signal(SIGINT, sighandler);
+	signal(SIGQUIT, SIG_IGN);
 }

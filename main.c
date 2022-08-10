@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/10 14:18:57 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/08/10 15:01:53 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ void	leaks(void)
 	system("leaks minishell");
 }
 */
+
+int g_sign[2];
+
 int	execute(t_data *data)
 {
 	t_argv	*arg;
@@ -65,7 +68,7 @@ static void	main_part(char *str, t_data *data, int *stop)
 	if (str && ft_strlen(str) > 0)
 	{
 		signal(SIGQUIT, ctrlslash);
-		g_sign = 0;
+		g_sign[0] = 0;
 		add_history(str);
 		arguments(data->argv, str);
 		set_initial_files(data);
@@ -76,6 +79,8 @@ static void	main_part(char *str, t_data *data, int *stop)
 		direction(data);
 		first_chr_pipe(str, *data->argv);
 		*stop = execute(data);
+		g_sign[0] = 0;
+		g_sign[1] = 0;
 	}
 	free_arg_str(str, *data->argv);
 	unlink(".here_doc");
@@ -115,7 +120,8 @@ int	main(int argc, char **argv2, char **envp)
 		exit(1);
 	argv2 = 0;
 	stop = 1;
-	g_sign = 0;
+	g_sign[0] = 0;
+	g_sign[1] = 0;
 	data.argv = malloc(sizeof(t_argv *));
 	data.myenv = malloc(sizeof(t_myenv *));
 	*data.myenv = 0;
