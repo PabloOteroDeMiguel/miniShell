@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 14:01:11 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/11 10:25:36 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/08/11 11:13:07 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,29 @@ void	no_ctrlprint(void)
 	tcgetattr(0, &t);
 	t.c_lflag &= ~ECHOCTL;
 	tcsetattr(0, TCSANOW, &t);
+}
+
+void	aux_sighandler(void)
+{
+	if (g_sign[1] == 0)
+	{
+		kill(g_sign[0], SIGCONT);
+		write(1, "^C\n", 3);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		printf("\r");
+		g_sign[0] = 0;
+	}
+	else
+	{
+		kill(g_sign[0], SIGCONT);
+		write(1, "\n", 3);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		printf("\r");
+		g_sign[1] = 2;
+		g_sign[0] = 0;
+	}
 }
 
 void	sighandler(int signum)
@@ -42,27 +65,7 @@ void	sighandler(int signum)
 			g_sign[0] = 0;
 		}
 		else
-		{
-			if (g_sign[1] == 0)
-			{
-				kill(g_sign[0], SIGCONT);
-				write(1, "^C\n", 3);
-				rl_on_new_line();
-				rl_replace_line("", 0);
-				printf("\r");
-				g_sign[0] = 0;
-			}
-			else
-			{
-				kill(g_sign[0], SIGCONT);
-				write(1, "\n", 3);
-				rl_on_new_line();
-				rl_replace_line("", 0);
-				printf("\r");
-				g_sign[1] = 2;
-				g_sign[0] = 0;
-			}
-		}
+			aux_sighandler();
 	}
 }
 
