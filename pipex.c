@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:57:16 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/10 14:54:26 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/08/11 10:59:58 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ static void	open_files(t_argv *arg, int fd[2])
 
 static void	child(int fd[2], t_argv *arg, t_data *data)
 {
-	// close(fd[0]);
+	if (g_sign[1] == 2)
+		exit (0);
+	close(fd[0]);
 	open_files(arg, fd);
 	dup2(fd[1], STDOUT_FILENO);
 	close(fd[1]);
@@ -45,14 +47,30 @@ static void	child(int fd[2], t_argv *arg, t_data *data)
 		exit(data->error_no);
 	if (execve(arg->direction, arg->split, data->myenv_str) < 0)
 		exit(child_error(arg, (int) errno));
+	close(fd[0]);
+	close(fd[1]);
+}
+
+static int	wait_status(t_data *data)
+{
+	t_argv	*arg;
+	int		status;
+
+	arg = *data->argv;
+	while (arg)
+	{
+		wait(&status);
+		arg = arg->next;
+	}
+	return (status);
 }
 
 int	pipe_execute(t_data *data)
 {
 	int		fd[2];
-	int		status;
 	pid_t	pid;
 	t_argv	*arg;
+	int		status;
 
 	arg = *data->argv;
 	while (arg)
@@ -66,17 +84,13 @@ int	pipe_execute(t_data *data)
 		else if (pid == 0)
 			child(fd, arg, data);
 		dup2(fd[0], STDIN_FILENO);
-		// close(STDIN_FILENO); //cat | cat | cat | ls
 		close(fd[0]);
 		close(fd[1]);
 		arg = arg->next;
 	}
-	arg = *data->argv;
-	while (arg)
-	{
-		wait(&status);
-		arg = arg->next;
-	}
+	close(fd[0]);
+	close(fd[1]);
+	status = wait_status(data);
 	close(STDIN_FILENO);
 	return (WEXITSTATUS(status));
 }

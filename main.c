@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/10 15:01:53 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/08/11 10:10:51 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ void	leaks(void)
 	system("leaks minishell");
 }
 */
-
-int g_sign[2];
 
 int	execute(t_data *data)
 {
@@ -74,6 +72,7 @@ static void	main_part(char *str, t_data *data, int *stop)
 		set_initial_files(data);
 		expand(data);
 		min_split(data);
+		remove_quotes(data->argv);
 		data->num_argc = cont_arg(data->argv);
 		check_files(data);
 		direction(data);

@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 12:14:21 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/10 14:51:42 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/08/11 10:17:32 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,18 @@ void	run_here_doc(t_argv *arg)
 	close(fd);
 }
 
+static void	aux_here_doc(int fd[2], t_argv *argv)
+{
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_IGN);
+	close(fd[1]);
+	close(fd[0]);
+	run_here_doc(argv);
+	signal(SIGINT, sighandler);
+	signal(SIGQUIT, SIG_IGN);
+	exit(0);
+}
+
 void	min_here_doc(t_argv *argv)
 {
 	int		fd[2];
@@ -44,19 +56,8 @@ void	min_here_doc(t_argv *argv)
 	if (pid == -1)
 		return ;
 	else if (pid == 0)
-	{
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_IGN);
-		close(fd[1]);
-		close(fd[0]);
-		run_here_doc(argv);
-		signal(SIGINT, sighandler);
-		signal(SIGQUIT, SIG_IGN);
-		exit(0);
-	}
+		aux_here_doc(fd, argv);
 	close(fd[0]);
 	close(fd[1]);
 	wait(&status);
-	signal(SIGINT, sighandler);
-	signal(SIGQUIT, SIG_IGN);
 }

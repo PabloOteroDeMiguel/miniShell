@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 14:01:11 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/10 15:01:07 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/08/11 10:25:36 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,12 @@ void	no_ctrlprint(void)
 	tcsetattr(0, TCSANOW, &t);
 }
 
-void	sighandlerhd(int signum)
-{
-	if (signum == SIGINT)
-	{
-		printf("%d\n", g_sign[0]);
-		kill(g_sign[0], SIGCONT);
-		write(1, "\n", 3);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		printf("\r");
-		g_sign[0] = 3;
-	}
-	g_sign[0] = 3;
-}
-
 void	sighandler(int signum)
 {
 	if (signum == SIGINT)
 	{
 		if (g_sign[0] == 2)
 		{
-			printf("%d\n", g_sign[0]);
 			close(0);
 			write(1, "\n", 1);
 			g_sign[0] = 0;
@@ -61,7 +45,6 @@ void	sighandler(int signum)
 		{
 			if (g_sign[1] == 0)
 			{
-				printf("%d\n", g_sign[0]);
 				kill(g_sign[0], SIGCONT);
 				write(1, "^C\n", 3);
 				rl_on_new_line();
@@ -71,12 +54,12 @@ void	sighandler(int signum)
 			}
 			else
 			{
-				printf("%d\n", g_sign[0]);
 				kill(g_sign[0], SIGCONT);
 				write(1, "\n", 3);
 				rl_on_new_line();
 				rl_replace_line("", 0);
 				printf("\r");
+				g_sign[1] = 2;
 				g_sign[0] = 0;
 			}
 		}

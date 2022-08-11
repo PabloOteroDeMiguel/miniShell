@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 09:20:12 by potero            #+#    #+#             */
-/*   Updated: 2022/08/10 14:47:03 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/08/11 10:32:30 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ int	execute_cmmd(t_data *data)
 		return (1);
 	else if (pid == 0)
 	{
+		if (g_sign[1] == 2)
+			exit (0);
 		file_des(fd, arg);
 		child(fd);
 		if (min_builtins(arg, data) == 0)

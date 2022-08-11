@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 12:30:41 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/10 13:44:31 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/08/11 10:11:35 by pmoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,52 +28,11 @@ static char	*ft_strchar(const char *str, int c)
 	return (0);
 }
 
-static int	where_is(char c, int pos, char *str)
-{
-	while (str[pos])
-	{
-		if (str[pos] == c)
-			return (pos);
-		pos++;
-	}
-	return (-1);
-}
-
-static char	*no_quotes_file(char *str)
-{
-	char	*aux;
-	int		i;
-	int		pos;
-	int		j;
-
-	i = 0;
-	j = 0;
-	aux = 0;
-	if (str[i] == 34 || str[i] == 39)
-	{
-		while (str[i] == 32)
-			i++;
-		pos = where_is(32, i, str);
-		if (pos != -1)
-		{
-			aux = malloc(pos - i + 1);
-			while (i <= pos)
-			{
-				aux[0] = str[i];
-				j++;
-				i++;
-			}
-			aux[j] = '\0';
-		}
-	}
-	return (str);
-}
-
 static void	no_here_doc(t_argv *argv, int i)
 {
 	if (argv->split[i][1])
 	{
-		argv->infile = ft_strdup(no_quotes_file(ft_strchar(argv->split[i], '<')));
+		argv->infile = ft_strdup(ft_strchar(argv->split[i], '<'));
 		clean_split(argv, i, 1);
 	}
 	else
