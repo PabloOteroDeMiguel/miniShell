@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 11:13:41 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/01 12:47:51 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/11 12:41:12 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,44 @@ void	expand(t_data *data)
 			i[0]++;
 		}
 		argv = argv->next;
+	}
+}
+
+static void	aux_home(t_argv *arg, t_myenv *env)
+{
+	int	i;
+
+	i = 0;
+	while (arg->split[i])
+	{
+		if (ft_strcmp(arg->split[i], "~") == 0)
+		{
+			free(arg->split[i]);
+			if (env != 0)
+				arg->split[i] = ft_strdup(env->value);
+			else
+				arg->split[i] = 0;
+		}
+		i++;
+	}
+}
+
+void	min_home(t_data *data)
+{
+	t_argv	*arg;
+	t_myenv	*env;
+
+	arg = *data->argv;
+	env = *data->myenv;
+	while (env)
+	{
+		if (ft_strcmp(env->key, "HOME") == 0)
+			break ;
+		env = env->next;
+	}
+	while (arg)
+	{
+		aux_home(arg, env);
+		arg = arg->next;
 	}
 }
