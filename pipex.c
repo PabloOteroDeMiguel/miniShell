@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:57:16 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/11 10:59:58 by pmoreno-         ###   ########.fr       */
+/*   Updated: 2022/08/11 11:59:13 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ static void	open_files(t_argv *arg, int fd[2])
 		fd[0] = open(arg->infile, O_RDONLY);
 		if (fd[0] < 0)
 			fd_error(arg->infile);
-		dup2(fd[0], STDIN_FILENO);
-		close(fd[0]);
+	//	dup2(fd[0], STDIN_FILENO);
+	//	close(fd[0]);
 	}
+	dup2(fd[0], STDIN_FILENO);
+	close(fd[0]);
 	if (arg->outfile != 0)
 	{
 		if (arg->out == 2)
@@ -86,10 +88,11 @@ int	pipe_execute(t_data *data)
 		dup2(fd[0], STDIN_FILENO);
 		close(fd[0]);
 		close(fd[1]);
+		close(STDIN_FILENO);
 		arg = arg->next;
 	}
-	close(fd[0]);
-	close(fd[1]);
+//	close(fd[0]);
+//	close(fd[1]);
 	status = wait_status(data);
 	close(STDIN_FILENO);
 	return (WEXITSTATUS(status));
