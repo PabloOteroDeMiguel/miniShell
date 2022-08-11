@@ -6,39 +6,11 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 11:10:35 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/11 12:29:02 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/11 14:55:27 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	arguments(t_argv **argv, char *str)
-{
-	int		i;
-	int		len;
-
-	i = 0;
-	while (str[i] != 0)
-	{
-		len = 0;
-		if (str[i] == 124)
-		{
-			len++;
-			while (str[i + len] != 124 && str[i + len])
-				len++;
-			lst_add_back(argv, lstnew(ft_substr(str, i + 1, len - 1)));
-			i = i + len - 1 ;
-		}
-		else
-		{
-			while (str[i + len] != 124 && str[i + len])
-				len++;
-			lst_add_back(argv, lstnew(ft_substr(str, i, len)));
-			i = i + len - 1;
-		}
-		i++;
-	}
-}
 
 static int	change_quote(int q, char c)
 {
@@ -58,6 +30,38 @@ static int	change_quote(int q, char c)
 	else if ((c == 34) && (q == 2))
 		r = 0;
 	return (r);
+}
+
+void	arguments(t_argv **argv, char *str)
+{
+	int		i;
+	int		len;
+	int		quote;
+
+	i = 0;
+	quote = 0;
+	while (str[i] != 0)
+	{
+		len = 0;
+		if (str[i] == 39 || str[i] == 34)
+			quote = change_quote(quote, str[i]);
+		if (str[i] == 124 && quote == 0)
+		{
+			len++;
+			while (str[i + len] != 124 && str[i + len])
+				len++;
+			lst_add_back(argv, lstnew(ft_substr(str, i + 1, len - 1)));
+			i = i + len - 1 ;
+		}
+		else
+		{
+			while ((str[i + len] != 124 && str[i + len]) || (str[i + len] == 124 && quote != 0) )
+				len++;
+			lst_add_back(argv, lstnew(ft_substr(str, i, len)));
+			i = i + len - 1;
+		}
+		i++;
+	}
 }
 
 static int	min_words(char *s)

@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:56:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/11 12:37:32 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/11 14:55:28 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ static void	main_part(char *str, t_data *data, int *stop)
 		check_files(data);
 		direction(data);
 		first_chr_pipe(str, *data->argv);
+		print_list(data->argv);
 		*stop = execute(data);
 		g_sign[0] = 0;
 		g_sign[1] = 0;
