@@ -6,7 +6,7 @@
 /*   By: pmoreno- <pmoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 11:10:35 by potero-d          #+#    #+#             */
-/*   Updated: 2022/08/11 14:55:27 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/08/11 15:08:26 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void	arguments(t_argv **argv, char *str)
 		}
 		else
 		{
-			while ((str[i + len] != 124 && str[i + len]) || (str[i + len] == 124 && quote != 0) )
+			while ((str[i + len] != 124 && str[i + len])
+				|| (str[i + len] == 124 && quote != 0))
 				len++;
 			lst_add_back(argv, lstnew(ft_substr(str, i, len)));
 			i = i + len - 1;
